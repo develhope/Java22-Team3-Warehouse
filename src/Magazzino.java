@@ -1,5 +1,5 @@
 import java.util.*;
-public class Archivio {
+public class Magazzino {
     private List<Notebook> notebooks = new ArrayList<>();
     private List<Tablet> tablets  = new ArrayList<>();
     private List<Smartphone> smartphones = new ArrayList<>();
@@ -15,5 +15,12 @@ public class Archivio {
         this.smartphones.add(smartphone);
     }
 
-
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Notebook notebooks : notebooks) {
+            sb.append(notebooks).append("\n");
+            sb.append("----------\n");
+        }
+        return sb.toString().trim();
+    }
 }

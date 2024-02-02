@@ -2,6 +2,9 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
 
+        Magazzino magazzino = caricaMagazzino();
+        magazzino = caricaMagazzino();
+
         while(true) {
             int scelta = schermoMenu();
             if(scelta == 0) {
@@ -48,5 +51,14 @@ public class Main {
             valore = scanner.nextInt();
         }
         return valore;
+    }
+
+    private static Magazzino caricaMagazzino() {
+        Magazzino magazzino = new Magazzino();
+        Notebook n1 = new Notebook("Apple", "MacBook", "notebook carino", "16'", "16 GB", 2000, 1800, 987658);
+        //Smartphone s1 = new Smartphone();
+        //Tablet t1 = new Tablet();
+        return magazzino;
+
     }
 }
