@@ -17,8 +17,8 @@ public class Magazzino {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Notebook notebooks : notebooks) {
-            sb.append(notebooks).append("\n");
+        for (Notebook notebook : notebooks) {
+            sb.append(notebook).append("\n");
             sb.append("----------\n");
         }
         return sb.toString().trim();
