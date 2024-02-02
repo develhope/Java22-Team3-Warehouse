@@ -12,7 +12,7 @@ public class Main {
 
             }
             if(scelta == 2) {
-
+                //ricercaTipo()
             }
             if(scelta == 3) {
 
@@ -53,10 +53,16 @@ public class Main {
 
     private static Magazzino caricaMagazzino() {
         Magazzino magazzino = new Magazzino();
+        //aggiungi elementi al magazzino
         Notebook n1 = new Notebook("Apple", "MacBook", "notebook carino", "16'", "16 GB", 1800, 2000, 987658);
         magazzino.addNotebook(n1);
-        //Smartphone s1 = new Smartphone();
-        //Tablet t1 = new Tablet();
+
+        Smartphone s1 = new Smartphone("Samsung" , "s21", "telefono carino", "4,5'", "8 GB", 700, 800, 678345);
+        magazzino.addSmartphone(s1);
+
+        Tablet t1 = new Tablet("Samsung", "galaxy tab s8", "tablet carino", "11'", "128 GB", 499, 549, 765432);
+        magazzino.addTablet(t1);
+
         return magazzino;
 
     }

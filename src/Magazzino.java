@@ -21,6 +21,15 @@ public class Magazzino {
             sb.append(notebook).append("\n");
             sb.append("----------\n");
         }
+        for (Tablet tablet: tablets) {
+            sb.append(tablet).append("\n");
+            sb.append("----------\n");
+        }
+        for (Smartphone smartphone : smartphones) {
+            sb.append(smartphone).append("\n");
+            sb.append("----------\n");
+        }
+
         return sb.toString().trim();
     }
 }
