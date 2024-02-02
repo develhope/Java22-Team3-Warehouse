@@ -1,27 +1,29 @@
-import java.sql.SQLOutput;
 import java.util.*;
 public class Main {
     public static void main(String[] args) {
-        while(true) {
-            int scelta = schermoMenu();
-            if(scelta == 0) {
-                break;
-            }
-            if(scelta == 1) {
-                System.out.println(caricaMagazzino());
-
-            }
-            if(scelta == 2) {
-                //ricercaTipo()
-            }
-            if(scelta == 3) {
+        Magazzino magazzino = null;
+        magazzino = caricaMagazzino();
+        if(magazzino == null) {
+            System.out.println("Magazzino vuoto.");
+        } else {
+            while (true) {
+                int scelta = schermoMenu();
+                if (scelta == 0) {
+                    break;
+                }
+                if (scelta == 1) {
+                    System.out.println(caricaMagazzino());
+                }
+                if (scelta == 2) {
+                    //ricercaPerTipo();
+                }
 
             }
         }
     }
 
     private static int schermoMenu() {
-        System.out.println("-----Benvenuto nel magazzino.-----");
+        System.out.println("\n-----Benvenuto nel magazzino.-----\n");
         System.out.println(" 0. Esci.");
         System.out.println(" 1. Stampa contenuti magazzino.");
         System.out.println(" 2. Ricerca per tipo.");
@@ -43,7 +45,7 @@ public class Main {
         System.out.println(messaggio);
         Scanner scanner = new Scanner(System.in);
         int valore = scanner.nextInt();
-        while(valore < min || valore > max) {
+        while (valore < min || valore > max) {
             System.out.println("Errore, inserire un valore compreso tra " + min + " e " + max);
             System.out.println(messaggio);
             valore = scanner.nextInt();
@@ -64,6 +66,5 @@ public class Main {
         magazzino.addTablet(t1);
 
         return magazzino;
-
     }
 }

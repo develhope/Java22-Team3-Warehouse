@@ -27,7 +27,7 @@ public class Magazzino {
         }
         for (Smartphone smartphone : smartphones) {
             sb.append(smartphone).append("\n");
-            sb.append("----------\n");
+            sb.append("----------");
         }
 
         return sb.toString().trim();
