@@ -5,11 +5,11 @@ public class Tablet {
     private String descrizione;
     private String pollici;
     private String spazioArchiviazione;
-    private float prezzoAcquisto;
-    private float prezzoVendita;
+    private double prezzoAcquisto;
+    private double prezzoVendita;
     private int id;
 
-    public Tablet(String produttore, String modello, String descrizione, String pollici, String spazioArchiviazione, float prezzoAcquisto, float prezzoVendita, int id) {
+    public Tablet(String produttore, String modello, String descrizione, String pollici, String spazioArchiviazione, double prezzoAcquisto, double prezzoVendita, int id) {
         this.produttore = produttore;
         this.modello = modello;
         this.descrizione = descrizione;
@@ -31,5 +31,13 @@ public class Tablet {
         sb.append("Prezzo vendita: ").append(this.prezzoVendita).append("\n");
         sb.append("ID: ").append(this.id).append("\n");
         return sb.toString();
+    }
+
+    public double getPrezzoVendita() {
+        return prezzoVendita;
+    }
+
+    public double getPrezzoAcquisto() {
+        return prezzoAcquisto;
     }
 }

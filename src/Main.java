@@ -17,7 +17,19 @@ public class Main {
                 if (scelta == 2) {
                     //ricercaPerTipo();
                 }
-
+                if (scelta == 5) {
+                    double prezzo = leggiRangeIntero(0, 10000, "Inserisci il prezzo di Vendita: ");
+                    System.out.println(magazzino.ricercaPrezzoVendita(prezzo));
+                }
+                if (scelta == 6) {
+                    double prezzo = leggiRangeIntero(0, 10000, "Inserisci il prezzo di Acquisto: ");
+                    System.out.println(magazzino.ricercaPrezzoAcquisto(prezzo));
+                }
+                if (scelta == 7) {
+                    double min = leggiRangeIntero(0, 10000, "Inserisci il prezzo minimo: ");
+                    double max = leggiRangeIntero((int) min, 10000, "Inserisci il prezzo massimo: ");
+                    System.out.println(magazzino.ricercaInRangeDiPrezzo(min, max));
+                }
             }
         }
     }
@@ -61,6 +73,9 @@ public class Main {
 
         Smartphone s1 = new Smartphone("Samsung" , "s21", "telefono carino", "4,5'", "8 GB", 700, 800, 678345);
         magazzino.addSmartphone(s1);
+
+        Smartphone s2 = new Smartphone("Samsung" , "s22", "telefono carino", "4,5'", "8 GB", 1800, 2000, 678345);
+        magazzino.addSmartphone(s2);
 
         Tablet t1 = new Tablet("Samsung", "galaxy tab s8", "tablet carino", "11'", "128 GB", 499, 549, 765432);
         magazzino.addTablet(t1);
