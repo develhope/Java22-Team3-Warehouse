@@ -1,18 +1,18 @@
 import java.util.*;
 public class Magazzino {
-    private static List<Notebook> notebooks = new ArrayList<>();
-    private static List<Tablet> tablets  = new ArrayList<>();
-    private static List<Smartphone> smartphones = new ArrayList<>();
+    private static final List<Notebook> notebooks = new ArrayList<>();
+    private static final List<Tablet> tablets  = new ArrayList<>();
+    private static final List<Smartphone> smartphones = new ArrayList<>();
 
     public void addNotebook(Notebook notebook) {
-        this.notebooks.add(notebook);
+        notebooks.add(notebook);
     }
 
     public void addTablet(Tablet tablet) {
-        this.tablets.add(tablet);
+        tablets.add(tablet);
     }
     public void addSmartphone(Smartphone smartphone) {
-        this.smartphones.add(smartphone);
+        smartphones.add(smartphone);
     }
 
     public String toString() {
@@ -33,78 +33,78 @@ public class Magazzino {
         return sb.toString().trim();
     }
 
-    public String ricercaPrezzoVendita(double prezzo) {
+    public void ricercaPrezzoVendita(double prezzo) {
+        boolean trovato = false;
         for (Notebook notebook : notebooks) {
             if (notebook.getPrezzoVendita() == prezzo) {
                 System.out.println(notebook);
-            } else {
-                System.out.println("Non abbiamo un notebook a questo prezzo: " + prezzo + "\n");
+                trovato = true;
             }
         }
         for (Tablet tablet : tablets) {
             if (tablet.getPrezzoVendita() == prezzo) {
                 System.out.println(tablet);
-            } else {
-                System.out.println("Non abbiamo un tablet a questo prezzo: " + prezzo + "\n");
+                trovato = true;
             }
         }
         for (Smartphone smartphone : smartphones) {
             if (smartphone.getPrezzoVendita() == prezzo) {
                 System.out.println(smartphone);
-            } else {
-                System.out.println("Non abbiamo uno smartphone a questo prezzo: " + prezzo + "\n");
+                trovato = true;
             }
         }
-        return "";
+        if (!trovato) {
+            System.out.println("\nNon abbiamo nessun oggetto con questo prezzo di Vendita: " + prezzo);
+        }
     }
 
-    public String ricercaPrezzoAcquisto(double prezzo) {
+    public void ricercaPrezzoAcquisto(double prezzo) {
+        boolean trovato = false;
         for (Notebook notebook : notebooks) {
             if (notebook.getPrezzoAcquisto() == prezzo) {
                 System.out.println(notebook);
-            } else {
-                System.out.println("Non abbiamo un notebook a questo prezzo: " + prezzo + "\n");
+                trovato = true;
             }
         }
         for (Tablet tablet : tablets) {
             if (tablet.getPrezzoAcquisto() == prezzo) {
                 System.out.println(tablet);
-            } else {
-                System.out.println("Non abbiamo un tablet a questo prezzo: " + prezzo + "\n");
+                trovato = true;
             }
         }
         for (Smartphone smartphone : smartphones) {
             if (smartphone.getPrezzoAcquisto() == prezzo) {
                 System.out.println(smartphone);
-            } else {
-                System.out.println("Non abbiamo uno smartphone a questo prezzo: " + prezzo + "\n");
+                trovato = true;
             }
         }
-        return "";
+        if (!trovato) {
+            System.out.println("\nNon abbiamo nessun oggetto con questo prezzo di Acquisto: " + prezzo);
+        }
     }
 
-    public String ricercaInRangeDiPrezzo(double min, double max) {
+    public void ricercaInRangeDiPrezzo(double min, double max) {
+        boolean trovato = false;
         for (Notebook notebook : notebooks) {
             if (notebook.getPrezzoVendita() >= min && notebook.getPrezzoVendita() <= max) {
-                    System.out.println(notebook);
-            } else {
-                System.out.println("Non abbiamo un notebook in questo range di prezzo: " + min + "-" + max + "\n");
+                System.out.println(notebook);
+                trovato = true;
             }
         }
         for (Tablet tablet : tablets) {
             if (tablet.getPrezzoVendita() >= min && tablet.getPrezzoVendita() <= max) {
-                    System.out.println(tablet);
-            } else {
-                System.out.println("Non abbiamo un tablet in questo range di prezzo: " + min + "-" + max + "\n");
+                System.out.println(tablet);
+                trovato = true;
             }
         }
         for (Smartphone smartphone : smartphones) {
             if (smartphone.getPrezzoVendita() >= min && smartphone.getPrezzoVendita() <= max) {
-                    System.out.println(smartphone);
-            } else {
-                System.out.println("Non abbiamo uno smartphone in questo range di prezzo: " + min + "-" + max + "\n");
+                System.out.println(smartphone);
+                trovato = true;
             }
         }
-        return "";
+        if (!trovato) {
+            System.out.println("\nNon abbiamo nessun oggetto in questo Range di Prezzo: " + min + "-" + max);
+        }
     }
 }

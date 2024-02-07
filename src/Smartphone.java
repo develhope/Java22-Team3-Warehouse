@@ -1,15 +1,17 @@
+import java.util.UUID;
+
 public class Smartphone {
 
-    private String produttore;
-    private String modello;
-    private String descrizione;
-    private String pollici;
-    private String spazioArchiviazione;
-    private double prezzoAcquisto;
-    private double prezzoVendita;
-    private int id;
+    private final String produttore;
+    private final String modello;
+    private final String descrizione;
+    private final String pollici;
+    private final String spazioArchiviazione;
+    private final double prezzoAcquisto;
+    private final double prezzoVendita;
+    private final String id;
 
-    public Smartphone(String produttore, String modello, String descrizione, String pollici, String spazioArchiviazione, double prezzoAcquisto, double prezzoVendita, int id) {
+    public Smartphone(String produttore, String modello, String descrizione, String pollici, String spazioArchiviazione, double prezzoAcquisto, double prezzoVendita) {
         this.produttore = produttore;
         this.modello = modello;
         this.descrizione = descrizione;
@@ -17,7 +19,7 @@ public class Smartphone {
         this.spazioArchiviazione = spazioArchiviazione;
         this.prezzoAcquisto = prezzoAcquisto;
         this.prezzoVendita = prezzoVendita;
-        this.id = id;
+        this.id = UUID.randomUUID().toString();
     }
 
     public String toString() {
