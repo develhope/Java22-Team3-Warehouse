@@ -1,35 +1,32 @@
 import java.util.*;
 public class Magazzino {
-    private List<Notebook> notebooks = new ArrayList<>();
-    private List<Tablet> tablets  = new ArrayList<>();
-    private List<Smartphone> smartphones = new ArrayList<>();
 
-    public void addNotebook(Notebook notebook) {
-        this.notebooks.add(notebook);
+    private List<Dispositivo> dispositivi = new ArrayList<>();
+
+
+    public void addDispositivo(Dispositivo dispositivo) {
+        this.dispositivi.add(dispositivo);
     }
 
-    public void addTablet(Tablet tablet) {
-        this.tablets.add(tablet);
-    }
-    public void addSmartphone(Smartphone smartphone) {
-        this.smartphones.add(smartphone);
-    }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Notebook notebook : notebooks) {
-            sb.append(notebook).append("\n");
+        for (Dispositivo dispositivo : dispositivi) {
+            sb.append(dispositivo).append("\n");
             sb.append("----------\n");
         }
-        for (Tablet tablet: tablets) {
-            sb.append(tablet).append("\n");
-            sb.append("----------\n");
-        }
-        for (Smartphone smartphone : smartphones) {
-            sb.append(smartphone).append("\n");
-            sb.append("----------");
-        }
-
         return sb.toString().trim();
+    }
+    //Un metodo che permetta di fare la ricerca per tipo di dispositivo.
+    //
+    //Dovrà resitutire la lista di dispositivi frutto della ricerca o un errore nel caso in cui la ricerca non produca risultati.
+    public List<Dispositivo> searchByTipoDispositivo(TipoDispositivo tipoDispositivo){
+        List<Dispositivo> listaFiltrata = new ArrayList<>();
+        for (Dispositivo dispositivo : dispositivi) {
+           if(dispositivo.getTipoDispositivo() == tipoDispositivo){
+               listaFiltrata.add(dispositivo);
+           }
+        }
+        return listaFiltrata;
     }
 }
