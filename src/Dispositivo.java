@@ -1,5 +1,7 @@
+import java.util.UUID;
+
 public class Dispositivo {
-    private int id;
+    private UUID id;
     private String produttore;
     private String modello;
     private String descrizione;
@@ -9,8 +11,8 @@ public class Dispositivo {
     private float prezzoVendita;
     private TipoDispositivo tipoDispositivo;
 
-    public Dispositivo(int id, String produttore, String modello, String descrizione, String pollici, String spazioArchiviazione, float prezzoAcquisto, float prezzoVendita, TipoDispositivo tipoDispositivo) {
-        this.id = id;
+    public Dispositivo(String produttore, String modello, String descrizione, String pollici, String spazioArchiviazione, float prezzoAcquisto, float prezzoVendita, TipoDispositivo tipoDispositivo) {
+        this.id = UUID.randomUUID();
         this.produttore = produttore;
         this.modello = modello;
         this.descrizione = descrizione;
@@ -19,14 +21,6 @@ public class Dispositivo {
         this.prezzoAcquisto = prezzoAcquisto;
         this.prezzoVendita = prezzoVendita;
         this.tipoDispositivo = tipoDispositivo;
-    }
-
-        public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getProduttore() {
