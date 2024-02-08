@@ -22,6 +22,10 @@ public class Main {
 
                     }
                 }
+                if (scelta == 5) {
+                    double prezzo = leggiRangeIntero(0, 10000, "Inserisci il prezzo di Vendita: ");
+                    magazzino.ricercaPrezzoVendita(prezzo);
+                }
             }
         }
     }
@@ -38,7 +42,7 @@ public class Main {
         System.out.println(" 7. Ricerca per range di prezzo.");
         System.out.println(" 8. Calcolo spesa media.");
         System.out.println(" 9. Aggiungi al carrello.");
-        System.out.println("10. Rimuiovi dal carrello.");
+        System.out.println("10. Rimuovi dal carrello.");
         System.out.println("11. Calcola spesa totale carrello.");
         System.out.println("12. Finalizza spesa.");
         int scelta = leggiRangeIntero(0, 12, "Scelta--> ");
@@ -59,15 +63,14 @@ public class Main {
 
     private static Magazzino caricaMagazzino() {
         Magazzino magazzino = new Magazzino();
-        
-        Notebook n1 = new Notebook(987658, "Apple", "MacBook", "notebook carino", "16'", "16 GB", 1800,2000, TipoDispositivo.NOTEBOOK);
-        magazzino.addDispositivo(n1);
 
-        Smartphone s1 = new Smartphone(678345 , "Samsung", "s21", "telefono carino", "4,5'", "8 GB", 700, 800, TipoDispositivo.SMARTPHONE);
-        magazzino.addDispositivo(s1);
+        magazzino.addDispositivo(new Notebook("Apple", "MacBook", "notebook carino", "16'", "16 GB", 1800,2000, TipoDispositivo.NOTEBOOK));
 
-        Tablet t1 = new Tablet(765432, "Samsung", "galaxy tab s8", "tablet carino", "11'", "128 GB", 499, 549, TipoDispositivo.TABLET);
-        magazzino.addDispositivo(t1);
+        magazzino.addDispositivo(new Smartphone("Samsung", "s21", "telefono carino", "4,5'", "8 GB", 700, 800, TipoDispositivo.SMARTPHONE));
+
+        magazzino.addDispositivo(new Smartphone("Samsung", "s21", "telefono carino", "4,5'", "8 GB", 700, 800, TipoDispositivo.SMARTPHONE));
+
+        magazzino.addDispositivo(new Tablet("Samsung", "galaxy tab s8", "tablet carino", "11'", "128 GB", 499, 549, TipoDispositivo.TABLET));
 
         return magazzino;
     }

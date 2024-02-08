@@ -17,14 +17,27 @@ public class Magazzino {
         }
         return sb.toString().trim();
     }
-   
+
     public List<Dispositivo> searchByTipoDispositivo(TipoDispositivo tipoDispositivo){
         List<Dispositivo> listaFiltrata = new ArrayList<>();
         for (Dispositivo dispositivo : dispositivi) {
-           if(dispositivo.getTipoDispositivo() == tipoDispositivo){
-               listaFiltrata.add(dispositivo);
-           }
+            if(dispositivo.getTipoDispositivo() == tipoDispositivo){
+                listaFiltrata.add(dispositivo);
+            }
         }
         return listaFiltrata;
+    }
+
+    public void ricercaPrezzoVendita(double prezzo) {
+        boolean trovato = false;
+        for (Dispositivo dispositivo : dispositivi) {
+            if (dispositivo.getPrezzoVendita() == prezzo) {
+                System.out.println(dispositivo);
+                trovato = true;
+            }
+        }
+        if (!trovato) {
+            System.out.println("\nNon abbiamo nessun oggetto con questo prezzo di Vendita: " + prezzo);
+        }
     }
 }
