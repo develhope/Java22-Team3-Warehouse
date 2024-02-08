@@ -17,9 +17,7 @@ public class Magazzino {
         }
         return sb.toString().trim();
     }
-    //Un metodo che permetta di fare la ricerca per tipo di dispositivo.
-    //
-    //Dovrà resitutire la lista di dispositivi frutto della ricerca o un errore nel caso in cui la ricerca non produca risultati.
+   
     public List<Dispositivo> searchByTipoDispositivo(TipoDispositivo tipoDispositivo){
         List<Dispositivo> listaFiltrata = new ArrayList<>();
         for (Dispositivo dispositivo : dispositivi) {

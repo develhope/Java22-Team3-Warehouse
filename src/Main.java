@@ -21,9 +21,7 @@ public class Main {
                         System.out.println(provum);
 
                     }
-
                 }
-
             }
         }
     }
@@ -61,7 +59,7 @@ public class Main {
 
     private static Magazzino caricaMagazzino() {
         Magazzino magazzino = new Magazzino();
-        //aggiungi elementi al magazzino
+        
         Notebook n1 = new Notebook(987658, "Apple", "MacBook", "notebook carino", "16'", "16 GB", 1800,2000, TipoDispositivo.NOTEBOOK);
         magazzino.addDispositivo(n1);
 
