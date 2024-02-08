@@ -15,20 +15,12 @@ public class Main {
                     System.out.println(caricaMagazzino());
                 }
                 if (scelta == 2) {
-                    //ricercaPerTipo();
-                }
-                if (scelta == 5) {
-                    double prezzo = leggiRangeIntero(0, 10000, "Inserisci il prezzo di Vendita: ");
-                    magazzino.ricercaPrezzoVendita(prezzo);
-                }
-                if (scelta == 6) {
-                    double prezzo = leggiRangeIntero(0, 10000, "Inserisci il prezzo di Acquisto: ");
-                    magazzino.ricercaPrezzoAcquisto(prezzo);
-                }
-                if (scelta == 7) {
-                    double min = leggiRangeIntero(0, 10000, "Inserisci il prezzo minimo: ");
-                    double max = leggiRangeIntero((int) min, 10000, "Inserisci il prezzo massimo: ");
-                    magazzino.ricercaInRangeDiPrezzo(min, max);
+                    // TODO da ricontrollare
+                    List<Dispositivo> prova = magazzino.searchByTipoDispositivo(TipoDispositivo.NOTEBOOK);
+                    for (Dispositivo provum : prova) {
+                        System.out.println(provum);
+
+                    }
                 }
             }
         }
@@ -67,18 +59,15 @@ public class Main {
 
     private static Magazzino caricaMagazzino() {
         Magazzino magazzino = new Magazzino();
-        //aggiungi elementi al magazzino
-        Notebook n1 = new Notebook("Apple", "MacBook", "notebook carino", "16'", "16 GB", 1800, 2000);
-        magazzino.addNotebook(n1);
+        
+        Notebook n1 = new Notebook(987658, "Apple", "MacBook", "notebook carino", "16'", "16 GB", 1800,2000, TipoDispositivo.NOTEBOOK);
+        magazzino.addDispositivo(n1);
 
-        Smartphone s1 = new Smartphone("Samsung" , "s21", "telefono carino", "4,5'", "8 GB", 700, 800);
-        magazzino.addSmartphone(s1);
+        Smartphone s1 = new Smartphone(678345 , "Samsung", "s21", "telefono carino", "4,5'", "8 GB", 700, 800, TipoDispositivo.SMARTPHONE);
+        magazzino.addDispositivo(s1);
 
-        Smartphone s2 = new Smartphone("Samsung" , "s22", "telefono carino", "4,5'", "8 GB", 1800, 2000);
-        magazzino.addSmartphone(s2);
-
-        Tablet t1 = new Tablet("Samsung", "galaxy tab s8", "tablet carino", "11'", "128 GB", 499, 549);
-        magazzino.addTablet(t1);
+        Tablet t1 = new Tablet(765432, "Samsung", "galaxy tab s8", "tablet carino", "11'", "128 GB", 499, 549, TipoDispositivo.TABLET);
+        magazzino.addDispositivo(t1);
 
         return magazzino;
     }
