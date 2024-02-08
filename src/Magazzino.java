@@ -40,4 +40,17 @@ public class Magazzino {
             System.out.println("\nNon abbiamo nessun oggetto con questo prezzo di Vendita: " + prezzo);
         }
     }
+
+    public void ricercaPrezzoAcquisto(double prezzo) {
+        boolean trovato = false;
+        for (Dispositivo dispositivo : dispositivi) {
+            if (dispositivo.getPrezzoAcquisto() == prezzo) {
+                System.out.println(dispositivo);
+                trovato = true;
+            }
+        }
+        if (!trovato) {
+            System.out.println("\nNon abbiamo nessun oggetto con questo prezzo di Acquisto: " + prezzo);
+        }
+    }
 }
