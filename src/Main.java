@@ -1,9 +1,10 @@
 import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
         Magazzino magazzino = null;
         magazzino = caricaMagazzino();
-        if(magazzino == null) {
+        if (magazzino == null) {
             System.out.println("Magazzino vuoto.");
         } else {
             while (true) {
@@ -25,6 +26,16 @@ public class Main {
                 if (scelta == 5) {
                     double prezzo = leggiRangeIntero(0, 10000, "Inserisci il prezzo di Vendita: ");
                     magazzino.ricercaPrezzoVendita(prezzo);
+                }
+                if (scelta == 9) {
+                    magazzino.aggiungiAlCarrello();
+                }
+
+                if (scelta == 11) {
+                    magazzino.calcolaTotaleCarrello();
+                }
+                if (scelta == 12) {
+                    magazzino.chiudiTransazione();
                 }
             }
         }
@@ -64,13 +75,13 @@ public class Main {
     private static Magazzino caricaMagazzino() {
         Magazzino magazzino = new Magazzino();
 
-        magazzino.addDispositivo(new Notebook("Apple", "MacBook", "notebook carino", "16'", "16 GB", 1800,2000, TipoDispositivo.NOTEBOOK));
+        magazzino.addDispositivo(new Notebook(564389, "Apple", "MacBook", "notebook carino", "16'", "16 GB", 1800, 2000, TipoDispositivo.NOTEBOOK));
 
-        magazzino.addDispositivo(new Smartphone("Samsung", "s21", "telefono carino", "4,5'", "8 GB", 700, 800, TipoDispositivo.SMARTPHONE));
+        magazzino.addDispositivo(new Smartphone(230783, "Samsung", "s21", "telefono carino", "4,5'", "8 GB", 700, 800, TipoDispositivo.SMARTPHONE));
 
-        magazzino.addDispositivo(new Smartphone("Samsung", "s21", "telefono carino", "4,5'", "8 GB", 700, 800, TipoDispositivo.SMARTPHONE));
+        magazzino.addDispositivo(new Smartphone(409281, "Samsung", "s22", "telefono carino", "4,9'", "32 GB", 750, 999, TipoDispositivo.SMARTPHONE));
 
-        magazzino.addDispositivo(new Tablet("Samsung", "galaxy tab s8", "tablet carino", "11'", "128 GB", 499, 549, TipoDispositivo.TABLET));
+        magazzino.addDispositivo(new Tablet(215832, "Samsung", "galaxy tab s8", "tablet carino", "11'", "128 GB", 499, 549, TipoDispositivo.TABLET));
 
         return magazzino;
     }
