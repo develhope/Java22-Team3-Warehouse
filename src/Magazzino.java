@@ -53,4 +53,17 @@ public class Magazzino {
             System.out.println("\nNon abbiamo nessun oggetto con questo prezzo di Acquisto: " + prezzo);
         }
     }
+
+    public void ricercaInRangeDiPrezzo(double min, double max) {
+        boolean trovato = false;
+        for (Dispositivo dispositivo : dispositivi) {
+            if (dispositivo.getPrezzoVendita() >= min && dispositivo.getPrezzoVendita() <= max) {
+                System.out.println(dispositivo);
+                trovato = true;
+            }
+        }
+        if (!trovato) {
+            System.out.println("\nNon abbiamo nessun oggetto in questo Range di Prezzo: " + min + "-" + max);
+        }
+    }
 }

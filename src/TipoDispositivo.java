@@ -2,6 +2,7 @@ public enum TipoDispositivo {
     NOTEBOOK("Notebook"),
     SMARTPHONE("Smartphone"),
     TABLET("Tablet");
+
     private String descrizione;
 
 
