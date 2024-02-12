@@ -10,11 +10,25 @@ public class Magazzino {
         this.carrello = new ArrayList<>();
     }
 
-
     public void addDispositivo(Dispositivo dispositivo) {
         this.dispositivi.add(dispositivo);
     }
 
+    public List<Dispositivo> getDispositivi() {
+        return dispositivi;
+    }
+
+    public void setDispositivi(List<Dispositivo> dispositivi) {
+        this.dispositivi = dispositivi;
+    }
+
+    public List<Dispositivo> getCarrello() {
+        return carrello;
+    }
+
+    public void setCarrello(List<Dispositivo> carrello) {
+        this.carrello = carrello;
+    }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -48,22 +62,32 @@ public class Magazzino {
         }
     }
 
-    public List<Dispositivo> getDispositivi() {
-        return dispositivi;
+    public void ricercaPrezzoAcquisto(double prezzo) {
+        boolean trovato = false;
+        for (Dispositivo dispositivo : dispositivi) {
+            if (dispositivo.getPrezzoAcquisto() == prezzo) {
+                System.out.println(dispositivo);
+                trovato = true;
+            }
+        }
+        if (!trovato) {
+            System.out.println("\nNon abbiamo nessun oggetto con questo prezzo di Acquisto: " + prezzo);
+        }
     }
 
-    public void setDispositivi(List<Dispositivo> dispositivi) {
-        this.dispositivi = dispositivi;
+    public void ricercaInRangeDiPrezzo(double min, double max) {
+        boolean trovato = false;
+        for (Dispositivo dispositivo : dispositivi) {
+            if (dispositivo.getPrezzoVendita() >= min && dispositivo.getPrezzoVendita() <= max) {
+                System.out.println(dispositivo);
+                trovato = true;
+            }
+        }
+        if (!trovato) {
+            System.out.println("\nNon abbiamo nessun oggetto in questo Range di Prezzo: " + min + "-" + max);
+        }
     }
-
-    public List<Dispositivo> getCarrello() {
-        return carrello;
-    }
-
-    public void setCarrello(List<Dispositivo> carrello) {
-        this.carrello = carrello;
-    }
-
+  
     public void aggiungiAlCarrello() {
         Scanner scanner = new Scanner(System.in);
 
@@ -88,17 +112,17 @@ public class Magazzino {
 
                     // Richiesta di aggiunta di un altro prodotto
                     while (true) {
-                        System.out.println("Vuole aggiungere un altro prodotto? (s/n)");
+                        System.out.println("Vuole aggiungere un altro prodotto? (si/no)");
                         String risposta = scanner.next();
 
                         // Gestione della risposta dell'utente
-                        if (risposta.equalsIgnoreCase("n")) {
+                        if (risposta.equalsIgnoreCase("no")) {
                             return;
-                        } else if (risposta.equalsIgnoreCase("s")) {
+                        } else if (risposta.equalsIgnoreCase("si")) {
                             prodottoAggiunto = true;
                             break;
                         } else {
-                            System.out.println("Inserimento non valido. Per favore, rispondere con 's' per sì o 'n' per no.");
+                            System.out.println("Inserimento non valido. Per favore, rispondere con 'si' o 'no' ");
                         }
                     }
                     if (prodottoAggiunto) {
@@ -112,7 +136,6 @@ public class Magazzino {
             }
         }
     }
-
 
     public double calcolaTotaleCarrello() {
         double totale = 0;

@@ -8,13 +8,17 @@ public class Main {
             System.out.println("Magazzino vuoto.");
         } else {
             while (true) {
+              
                 int scelta = schermoMenu();
+              
                 if (scelta == 0) {
                     break;
                 }
+              
                 if (scelta == 1) {
                     System.out.println(caricaMagazzino());
                 }
+              
                 if (scelta == 2) {
                     // TODO da ricontrollare
                     List<Dispositivo> prova = magazzino.searchByTipoDispositivo(TipoDispositivo.NOTEBOOK);
@@ -23,10 +27,23 @@ public class Main {
 
                     }
                 }
+              
                 if (scelta == 5) {
                     double prezzo = leggiRangeIntero(0, 10000, "Inserisci il prezzo di Vendita: ");
                     magazzino.ricercaPrezzoVendita(prezzo);
                 }
+                
+                if (scelta == 6) {
+                    double prezzo = leggiRangeIntero(0, 10000, "Inserisci il prezzo di Acquisto: ");
+                    magazzino.ricercaPrezzoAcquisto(prezzo);
+                }
+              
+                if (scelta == 7) {
+                    double min = leggiRangeIntero(0, 10000, "Inserisci il prezzo minimo: ");
+                    double max = leggiRangeIntero((int) min, 10000, "Inserisci il prezzo massimo: ");
+                    magazzino.ricercaInRangeDiPrezzo(min, max);
+                }
+              
                 if (scelta == 9) {
                     magazzino.aggiungiAlCarrello();
                 }
@@ -34,6 +51,7 @@ public class Main {
                 if (scelta == 11) {
                     magazzino.calcolaTotaleCarrello();
                 }
+              
                 if (scelta == 12) {
                     magazzino.chiudiTransazione();
                 }
@@ -65,7 +83,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int valore = scanner.nextInt();
         while (valore < min || valore > max) {
-            System.out.println("Errore, inserire un valore compreso tra " + min + " e " + max);
+            System.out.println("\nErrore, inserire un valore compreso tra " + min + " e " + max + "\n");
             System.out.println(messaggio);
             valore = scanner.nextInt();
         }
