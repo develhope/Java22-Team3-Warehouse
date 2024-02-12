@@ -43,6 +43,18 @@ public class Main {
                         System.out.println(provum);
                     }
                 }
+
+                if (scelta == 4){
+                    try {
+                        prova = magazzino.searchByModello("s22");
+                    } catch (ListaIsEmptyException e) {
+                        System.out.println(e);
+                    }
+                    for (Dispositivo provum : prova) {
+                        System.out.println(provum);
+
+                    }
+                }
               
                 if (scelta == 5) {
                     double prezzo = leggiRangeIntero(0, 10000, "Inserisci il prezzo di Vendita: ");
