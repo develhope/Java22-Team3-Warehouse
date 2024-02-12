@@ -1,7 +1,4 @@
 import java.util.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 
 public class Magazzino {
 
@@ -169,45 +166,16 @@ public class Magazzino {
             }
         }
     }
-
-    Scanner scanner = new Scanner(System.in);
-    Map<String, Double> spesaTotalePerDispositivo = new HashMap<>();
-    Map<String, Integer> conteggioDispositivi = new HashMap<>();
-
-        System.out.println("Inserisci le informazioni di acquisto. Digita 'fine' per terminare l'inserimento.");
-
-        while(true)
-
-    {
-        System.out.print("Inserisci il nome del dispositivo: ");
-        String dispositivo = scanner.nextLine();
-
-        if ("fine".equalsIgnoreCase(dispositivo)) {
-            break;
+    public double calcolaSpesaMediaAcquisto() throws Exception {
+        if (dispositivi.isEmpty()) {
+            throw new Exception("Non ci sono dispositivi nel magazzino.");
         }
 
-        System.out.print("Inserisci la spesa per questo dispositivo: ");
-        double spesa = scanner.nextDouble();
-        scanner.nextLine(); // Consuma la nuova linea
-
-        spesaTotalePerDispositivo.merge(dispositivo, spesa, Double::sum);
-        conteggioDispositivi.merge(dispositivo, 1, Integer::sum);
-    }
-
-        if(spesaTotalePerDispositivo.isEmpty())
-
-    {
-        System.out.println("Errore: nessun dispositivo inserito.");
-    } else
-
-    {
-        double spesaMediaComplessiva = 0;
-        System.out.println("Spesa media per dispositivo:");
-        for (String dispositivo : spesaTotalePerDispositivo.keySet()) {
-            double media = spesaTotalePerDispositivo.get(dispositivo) / conteggioDispositivi.get(dispositivo);
-            spesaMediaComplessiva += media;
-            System.out.println(dispositivo + ": " + media);
+        double somma = 0;
+        for (Dispositivo dispositivo : dispositivi) {
+            somma += dispositivo.getPrezzoAcquisto();
         }
-        System.out.println("Spesa media complessiva: " + (spesaMediaComplessiva / spesaTotalePerDispositivo.size()));
+
+        return somma / dispositivi.size();
     }
 }
