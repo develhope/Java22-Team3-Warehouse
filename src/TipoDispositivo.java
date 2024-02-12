@@ -9,7 +9,8 @@ public enum TipoDispositivo {
     TipoDispositivo(String descrizione) {
         this.descrizione = descrizione;
     }
-    public String getDescrizione(){
+
+    public String getDescrizione() {
         return descrizione;
     }
 }

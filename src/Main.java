@@ -1,19 +1,24 @@
 import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
         Magazzino magazzino = null;
         magazzino = caricaMagazzino();
-        if(magazzino == null) {
+        if (magazzino == null) {
             System.out.println("Magazzino vuoto.");
         } else {
             while (true) {
+              
                 int scelta = schermoMenu();
+              
                 if (scelta == 0) {
                     break;
                 }
+              
                 if (scelta == 1) {
                     System.out.println(caricaMagazzino());
                 }
+              
                 if (scelta == 2) {
                     // TODO da ricontrollare
                     List<Dispositivo> prova = magazzino.searchByTipoDispositivo(TipoDispositivo.NOTEBOOK);
@@ -22,18 +27,33 @@ public class Main {
 
                     }
                 }
+              
                 if (scelta == 5) {
                     double prezzo = leggiRangeIntero(0, 10000, "Inserisci il prezzo di Vendita: ");
                     magazzino.ricercaPrezzoVendita(prezzo);
                 }
+                
                 if (scelta == 6) {
                     double prezzo = leggiRangeIntero(0, 10000, "Inserisci il prezzo di Acquisto: ");
                     magazzino.ricercaPrezzoAcquisto(prezzo);
                 }
+              
                 if (scelta == 7) {
                     double min = leggiRangeIntero(0, 10000, "Inserisci il prezzo minimo: ");
                     double max = leggiRangeIntero((int) min, 10000, "Inserisci il prezzo massimo: ");
                     magazzino.ricercaInRangeDiPrezzo(min, max);
+                }
+              
+                if (scelta == 9) {
+                    magazzino.aggiungiAlCarrello();
+                }
+
+                if (scelta == 11) {
+                    magazzino.calcolaTotaleCarrello();
+                }
+              
+                if (scelta == 12) {
+                    magazzino.chiudiTransazione();
                 }
             }
         }
@@ -73,13 +93,13 @@ public class Main {
     private static Magazzino caricaMagazzino() {
         Magazzino magazzino = new Magazzino();
 
-        magazzino.addDispositivo(new Notebook(TipoDispositivo.NOTEBOOK, "MacBook", "Apple", "notebook carino", "16 GB", "16'",1800,2000));
+        magazzino.addDispositivo(new Notebook(564389, "Apple", "MacBook", "notebook carino", "16'", "16 GB", 1800, 2000, TipoDispositivo.NOTEBOOK));
 
-        magazzino.addDispositivo(new Smartphone( TipoDispositivo.SMARTPHONE, "s21", "Samsung", "telefono carino", "8 GB", "4,5'",700, 800));
+        magazzino.addDispositivo(new Smartphone(230783, "Samsung", "s21", "telefono carino", "4,5'", "8 GB", 700, 800, TipoDispositivo.SMARTPHONE));
 
-        magazzino.addDispositivo(new Smartphone( TipoDispositivo.SMARTPHONE, "s21", "Samsung", "telefono carino", "8 GB", "4,5'", 700, 800));
+        magazzino.addDispositivo(new Smartphone(409281, "Samsung", "s22", "telefono carino", "4,9'", "32 GB", 750, 999, TipoDispositivo.SMARTPHONE));
 
-        magazzino.addDispositivo(new Tablet( TipoDispositivo.TABLET, "galaxy tab s8", "Samsung", "tablet carino", "128 GB", "11'", 499, 549));
+        magazzino.addDispositivo(new Tablet(215832, "Samsung", "galaxy tab s8", "tablet carino", "11'", "128 GB", 499, 549, TipoDispositivo.TABLET));
 
         return magazzino;
     }
