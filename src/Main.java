@@ -43,6 +43,14 @@ public class Main {
                     double max = leggiRangeIntero((int) min, 10000, "Inserisci il prezzo massimo: ");
                     magazzino.ricercaInRangeDiPrezzo(min, max);
                 }
+
+                if (scelta==8){
+                    try {
+                        magazzino.calcolaSpesaMediaAcquisto();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
               
                 if (scelta == 9) {
                     magazzino.aggiungiAlCarrello();
@@ -103,7 +111,5 @@ public class Main {
 
         return magazzino;
     }
-
-
 
 }
