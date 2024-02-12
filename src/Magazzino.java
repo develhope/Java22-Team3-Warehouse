@@ -51,6 +51,18 @@ public class Magazzino {
         }
         return listaFiltrata;
     }
+    public List<Dispositivo> searchByProduttore(String produttore) throws ListaIsEmptyException {
+        List<Dispositivo> listaFiltrata = new ArrayList<>();
+        for (Dispositivo dispositivo : dispositivi) {
+            if (Objects.equals(dispositivo.getProduttore(), produttore)) {
+                listaFiltrata.add(dispositivo);
+            }
+        }
+        if (listaFiltrata.isEmpty()) {
+            throw new ListaIsEmptyException("Nessun " + produttore + " trovato");
+        }
+        return listaFiltrata;
+    }
 
     public void ricercaPrezzoVendita(double prezzo) {
         boolean trovato = false;
