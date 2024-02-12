@@ -1,5 +1,5 @@
 public class Notebook extends Dispositivo {
-    public Notebook(String produttore, String modello, String descrizione, String pollici, String spazioArchiviazione, float prezzoAcquisto, float prezzoVendita, TipoDispositivo tipoDispositivo) {
-        super(produttore, modello, descrizione, pollici, spazioArchiviazione, prezzoAcquisto, prezzoVendita, tipoDispositivo);
+    public Notebook(TipoDispositivo tipoDispositivo, String modello, String produttore, String descrizione, String spazioArchiviazione, String pollici, float prezzoAcquisto, float prezzoVendita) {
+        super(tipoDispositivo, modello, produttore, descrizione, spazioArchiviazione, pollici, prezzoAcquisto, prezzoVendita);
     }
 }
