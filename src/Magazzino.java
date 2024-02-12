@@ -39,12 +39,15 @@ public class Magazzino {
         return sb.toString().trim();
     }
 
-    public List<Dispositivo> searchByTipoDispositivo(TipoDispositivo tipoDispositivo) {
+    public List<Dispositivo> searchByTipoDispositivo(TipoDispositivo tipoDispositivo) throws ListaIsEmptyException {
         List<Dispositivo> listaFiltrata = new ArrayList<>();
         for (Dispositivo dispositivo : dispositivi) {
             if (dispositivo.getTipoDispositivo() == tipoDispositivo) {
                 listaFiltrata.add(dispositivo);
             }
+        }
+        if (listaFiltrata.isEmpty()) {
+            throw new ListaIsEmptyException("Nessun " + tipoDispositivo.getDescrizione() + " trovato");
         }
         return listaFiltrata;
     }
