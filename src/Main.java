@@ -9,7 +9,7 @@ public class Main {
             System.out.println("Magazzino vuoto.");
         } else {
             while (true) {
-              
+                List<Dispositivo> prova = new ArrayList<>();
                 int scelta = schermoMenu();
               
                 if (scelta == 0) {
@@ -21,7 +21,7 @@ public class Main {
                 }
               
                 if (scelta == 2) {
-                    List<Dispositivo> prova = new ArrayList<>();
+
                     try {
                         prova = magazzino.searchByTipoDispositivo(TipoDispositivo.NOTEBOOK);
                     } catch (ListaIsEmptyException e) {
@@ -30,6 +30,18 @@ public class Main {
                     for (Dispositivo provum : prova) {
                         System.out.println(provum);
 
+                    }
+                }
+
+                if (scelta == 3){
+
+                    try {
+                        prova =  magazzino.searchByProduttore("Samsung");
+                    } catch (ListaIsEmptyException e) {
+                        System.out.println(e);
+                    }
+                    for (Dispositivo provum : prova){
+                        System.out.println(provum);
                     }
                 }
               
@@ -117,7 +129,7 @@ public class Main {
     private static Magazzino caricaMagazzino() {
         Magazzino magazzino = new Magazzino();
 
-        // magazzino.addDispositivo(new Notebook(564389, "Apple", "MacBook", "notebook carino", "16'", "16 GB", 1800, 2000, TipoDispositivo.NOTEBOOK));
+         magazzino.addDispositivo(new Notebook(564389, "Apple", "MacBook", "notebook carino", "16'", "16 GB", 1800, 2000, TipoDispositivo.NOTEBOOK));
 
         magazzino.addDispositivo(new Smartphone(230783, "Samsung", "s21", "telefono carino", "4,5'", "8 GB", 700, 800, TipoDispositivo.SMARTPHONE));
 

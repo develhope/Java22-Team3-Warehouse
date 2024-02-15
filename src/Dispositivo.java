@@ -19,6 +19,7 @@ public class Dispositivo {
         this.pollici = pollici;
         this.prezzoAcquisto = prezzoAcquisto;
         this.prezzoVendita = prezzoVendita;
+        this.tipoDispositivo = tipoDispositivo;
     }
 
     public void setId(int id) {
