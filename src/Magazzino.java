@@ -87,7 +87,7 @@ public class Magazzino {
             System.out.println("\nNon abbiamo nessun oggetto in questo Range di Prezzo: " + min + "-" + max);
         }
     }
-  
+
     public void aggiungiAlCarrello() {
         Scanner scanner = new Scanner(System.in);
 
@@ -165,5 +165,17 @@ public class Magazzino {
                 break;
             }
         }
+    }
+    public double calcolaSpesaMediaAcquisto() throws Exception {
+        if (dispositivi.isEmpty()) {
+            throw new Exception("Non ci sono dispositivi nel magazzino.");
+        }
+
+        double somma = 0;
+        for (Dispositivo dispositivo : dispositivi) {
+            somma += dispositivo.getPrezzoAcquisto();
+        }
+
+        return somma / dispositivi.size();
     }
 }
