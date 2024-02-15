@@ -178,4 +178,20 @@ public class Magazzino {
 
         return somma / dispositivi.size();
     }
+    public boolean rimuoviDalCarrello(int id) {
+        // Iterazione attraverso il carrello per trovare il dispositivo con l'ID specificato
+        Iterator<Dispositivo> carrelloIterator = carrello.iterator();
+        while(carrelloIterator.hasNext()){
+            Dispositivo dispositivo = carrelloIterator.next();
+            if(dispositivo.getId() == id){
+                carrelloIterator.remove();// Rimozione del dispositivo dal carrello
+                System.out.println(dispositivo.getModello() + " con ID " + id + " è stato rimosso dal carrello.");
+                return true; // Restituisce true se il dispositivo è stato trovato e rimosso
+            }
+        }
+        System.out.println("Nessun dispositivo trovato con l'ID " + id + " nel carrello.");
+        return false; // Restituisce false se nessun dispositivo con l'ID specificato è stato trovato nel carrello
+    }
+
+
 }

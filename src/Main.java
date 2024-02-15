@@ -1,7 +1,8 @@
+import java.io.IOException;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Magazzino magazzino = null;
         magazzino = caricaMagazzino();
         if (magazzino == null) {
@@ -46,14 +47,25 @@ public class Main {
 
                 if (scelta==8){
                     try {
-                        magazzino.calcolaSpesaMediaAcquisto();
+                        System.out.println(magazzino.calcolaSpesaMediaAcquisto());
+                        System.out.println("Premere invio per tornare al menù");
+                        System.in.read(); //serve per dare tempo all'utente di leggere la media
+
                     } catch (Exception e) {
-                        throw new RuntimeException(e);
+                        throw new RuntimeException(e); //eccezione se il deposito è vuoto
                     }
                 }
               
                 if (scelta == 9) {
                     magazzino.aggiungiAlCarrello();
+                }
+
+                if (scelta == 10){
+
+                    int id = leggiRangeIntero(0, Integer.MAX_VALUE, "Inserire l'ID del dispositivo che si vuole rimuovere");
+                    magazzino.rimuoviDalCarrello(id);
+                    System.out.println("Premere invio per tornare al menù");
+                    System.in.read(); //serve per dare tempo all'utente di leggere la media
                 }
 
                 if (scelta == 11) {
