@@ -21,8 +21,12 @@ public class Main {
                 }
               
                 if (scelta == 2) {
-                    // TODO da ricontrollare
-                    List<Dispositivo> prova = magazzino.searchByTipoDispositivo(TipoDispositivo.NOTEBOOK);
+                    List<Dispositivo> prova = new ArrayList<>();
+                    try {
+                        prova = magazzino.searchByTipoDispositivo(TipoDispositivo.NOTEBOOK);
+                    } catch (ListaIsEmptyException e) {
+                        System.out.println(e);
+                    }
                     for (Dispositivo provum : prova) {
                         System.out.println(provum);
 
@@ -113,7 +117,7 @@ public class Main {
     private static Magazzino caricaMagazzino() {
         Magazzino magazzino = new Magazzino();
 
-        magazzino.addDispositivo(new Notebook(564389, "Apple", "MacBook", "notebook carino", "16'", "16 GB", 1800, 2000, TipoDispositivo.NOTEBOOK));
+        // magazzino.addDispositivo(new Notebook(564389, "Apple", "MacBook", "notebook carino", "16'", "16 GB", 1800, 2000, TipoDispositivo.NOTEBOOK));
 
         magazzino.addDispositivo(new Smartphone(230783, "Samsung", "s21", "telefono carino", "4,5'", "8 GB", 700, 800, TipoDispositivo.SMARTPHONE));
 
