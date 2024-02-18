@@ -36,7 +36,8 @@ public class Main {
                 if (scelta == 3){
 
                     try {
-                        prova =  magazzino.searchByProduttore("Samsung");
+                        String produttore = preparaInputTastiera("Inserisci produttore: ");
+                        prova =  magazzino.searchByProduttore(produttore);
                     } catch (ListaIsEmptyException e) {
                         System.out.println(e);
                     }
@@ -47,7 +48,8 @@ public class Main {
 
                 if (scelta == 4){
                     try {
-                        prova = magazzino.searchByModello("s22");
+                        String modello = preparaInputTastiera("Inserisci modello: ");
+                        prova = magazzino.searchByModello(modello);
                     } catch (ListaIsEmptyException e) {
                         System.out.println(e);
                     }
@@ -136,6 +138,12 @@ public class Main {
             valore = scanner.nextInt();
         }
         return valore;
+    }
+
+    public static String preparaInputTastiera(String messaggio){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(messaggio);
+        return scanner.nextLine();
     }
 
     private static Magazzino caricaMagazzino() {
