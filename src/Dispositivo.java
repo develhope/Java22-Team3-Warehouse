@@ -1,16 +1,20 @@
 public class Dispositivo {
 
+    public static final String NOTEBOOK = "notebook";
+    public static final String TABLET = "tablet";
+    public static final String SMARTPHONE = "smartphone";
+
     private int id;
     private String produttore;
-    private TipoDispositivo tipoDispositivo;
+    private String tipoDispositivo;
     private String modello;
     private String descrizione;
     private String spazioArchiviazione;
     private String pollici;
-    private float prezzoAcquisto;
-    private float prezzoVendita;
+    private double prezzoAcquisto;
+    private double prezzoVendita;
 
-    public Dispositivo(int id, String produttore, String modello, String descrizione, String pollici, String spazioArchiviazione, float prezzoAcquisto, float prezzoVendita, TipoDispositivo tipoDispositivo) {
+    public Dispositivo(int id, String produttore, String modello, String descrizione, String pollici, String spazioArchiviazione, double prezzoAcquisto, double prezzoVendita, String tipoDispositivo) {
         this.id = id;
         this.produttore = produttore;
         this.modello = modello;
@@ -70,27 +74,27 @@ public class Dispositivo {
         this.spazioArchiviazione = spazioArchiviazione;
     }
 
-    public float getPrezzoAcquisto() {
+    public double getPrezzoAcquisto() {
         return prezzoAcquisto;
     }
 
-    public void setPrezzoAcquisto(float prezzoAcquisto) {
+    public void setPrezzoAcquisto(double prezzoAcquisto) {
         this.prezzoAcquisto = prezzoAcquisto;
     }
 
-    public float getPrezzoVendita() {
+    public double getPrezzoVendita() {
         return prezzoVendita;
     }
 
-    public void setPrezzoVendita(float prezzoVendita) {
+    public void setPrezzoVendita(double prezzoVendita) {
         this.prezzoVendita = prezzoVendita;
     }
 
-    public TipoDispositivo getTipoDispositivo() {
+    public String getTipoDispositivo() {
         return tipoDispositivo;
     }
 
-    public void setTipoDispositivo(TipoDispositivo tipoDispositivo) {
+    public void setTipoDispositivo(String tipoDispositivo) {
         this.tipoDispositivo = tipoDispositivo;
     }
 
