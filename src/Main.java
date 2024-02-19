@@ -23,7 +23,8 @@ public class Main {
                 if (scelta == 2) {
 
                     try {
-                        prova = magazzino.searchByTipoDispositivo(TipoDispositivo.NOTEBOOK);
+                        String dispositivo = preparaInputTastiera("Inserisci tipo Dispositivo: ");
+                        prova =  magazzino.searchByTipoDispositivo(TipoDispositivo.valueOf(dispositivo));
                     } catch (ListaIsEmptyException e) {
                         System.out.println(e);
                     }
@@ -33,7 +34,7 @@ public class Main {
                     }
                 }
 
-                if (scelta == 3){
+                if (scelta == 3) {
 
                     try {
                         String produttore = preparaInputTastiera("Inserisci produttore: ");
@@ -46,7 +47,8 @@ public class Main {
                     }
                 }
 
-                if (scelta == 4){
+                if (scelta == 4) {
+
                     try {
                         String modello = preparaInputTastiera("Inserisci modello: ");
                         prova = magazzino.searchByModello(modello);
@@ -113,7 +115,7 @@ public class Main {
         System.out.println("\n-----Benvenuto nel magazzino.-----\n");
         System.out.println(" 0. Esci.");
         System.out.println(" 1. Stampa contenuti magazzino.");
-        System.out.println(" 2. Ricerca per tipo.");
+        System.out.println(" 2. Ricerca per tipo dispositivo.");
         System.out.println(" 3. Ricerca per produttore.");
         System.out.println(" 4. Ricerca per modello.");
         System.out.println(" 5. Ricerca per prezzo di vendita.");
@@ -149,7 +151,7 @@ public class Main {
     private static Magazzino caricaMagazzino() {
         Magazzino magazzino = new Magazzino();
 
-         magazzino.addDispositivo(new Notebook(564389, "Apple", "MacBook", "notebook carino", "16'", "16 GB", 1800, 2000, TipoDispositivo.NOTEBOOK));
+        magazzino.addDispositivo(new Notebook(564389, "Apple", "MacBook", "notebook carino", "16'", "16 GB", 1800, 2000, TipoDispositivo.NOTEBOOK));
 
         magazzino.addDispositivo(new Smartphone(230783, "Samsung", "s21", "telefono carino", "4,5'", "8 GB", 700, 800, TipoDispositivo.SMARTPHONE));
 

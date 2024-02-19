@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Magazzino {
 
-    private List<Dispositivo> dispositivi = new ArrayList<>();
+    private List<Dispositivo> dispositivi;
     private List<Dispositivo> carrello;
 
     public Magazzino() {
