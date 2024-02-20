@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Magazzino {
 
+
     private List<Dispositivo> dispositivi = new ArrayList<>();
     private List<Dispositivo> carrello;
 
@@ -32,6 +33,9 @@ public class Magazzino {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        if(dispositivi.isEmpty()) {
+            System.out.println("Magazzino vuoto, aggiungi prima un prodotto.");
+        }
         for (Dispositivo dispositivo : dispositivi) {
             sb.append(dispositivo).append("\n");
             sb.append("----------\n");
@@ -39,40 +43,31 @@ public class Magazzino {
         return sb.toString().trim();
     }
 
-    public List<Dispositivo> searchByTipoDispositivo(TipoDispositivo tipoDispositivo) throws ListaIsEmptyException {
+    public List<Dispositivo> searchByTipoDispositivo(String descrizione) {
         List<Dispositivo> listaFiltrata = new ArrayList<>();
         for (Dispositivo dispositivo : dispositivi) {
-            if (dispositivo.getTipoDispositivo() == tipoDispositivo) {
+            if (dispositivo.getTipoDispositivo().equalsIgnoreCase(descrizione)) {
                 listaFiltrata.add(dispositivo);
             }
-        }
-        if (listaFiltrata.isEmpty()) {
-            throw new ListaIsEmptyException("Nessun " + tipoDispositivo.getDescrizione() + " trovato");
         }
         return listaFiltrata;
     }
-    public List<Dispositivo> searchByProduttore(String produttore) throws ListaIsEmptyException {
+    public List<Dispositivo> searchByProduttore(String produttore) {
         List<Dispositivo> listaFiltrata = new ArrayList<>();
         for (Dispositivo dispositivo : dispositivi) {
-            if (Objects.equals(dispositivo.getProduttore(), produttore)) {
+            if (dispositivo.getProduttore().equalsIgnoreCase(produttore)) {
                 listaFiltrata.add(dispositivo);
             }
-        }
-        if (listaFiltrata.isEmpty()) {
-            throw new ListaIsEmptyException("Nessun " + produttore + " trovato");
         }
         return listaFiltrata;
     }
 
-    public List<Dispositivo> searchByModello(String modello) throws ListaIsEmptyException {
+    public List<Dispositivo> searchByModello(String modello) {
         List<Dispositivo> listaFiltrata = new ArrayList<>();
         for (Dispositivo dispositivo : dispositivi) {
-            if (Objects.equals(dispositivo.getModello(), modello)) {
+            if (dispositivo.getModello().equalsIgnoreCase(modello)) {
                 listaFiltrata.add(dispositivo);
             }
-        }
-        if (listaFiltrata.isEmpty()) {
-            throw new ListaIsEmptyException("Nessun " + modello + " trovato");
         }
         return listaFiltrata;
     }
@@ -220,6 +215,4 @@ public class Magazzino {
         System.out.println("Nessun dispositivo trovato con l'ID " + id + " nel carrello.");
         return false; // Restituisce false se nessun dispositivo con l'ID specificato è stato trovato nel carrello
     }
-
-
 }
