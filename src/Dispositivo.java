@@ -1,10 +1,12 @@
+import java.util.UUID;
+
 public class Dispositivo {
 
     public static final String NOTEBOOK = "notebook";
     public static final String TABLET = "tablet";
     public static final String SMARTPHONE = "smartphone";
 
-    private int id;
+    private String id;
     private String produttore;
     private String tipoDispositivo;
     private String modello;
@@ -14,8 +16,8 @@ public class Dispositivo {
     private double prezzoAcquisto;
     private double prezzoVendita;
 
-    public Dispositivo(int id, String produttore, String modello, String descrizione, String pollici, String spazioArchiviazione, double prezzoAcquisto, double prezzoVendita, String tipoDispositivo) {
-        this.id = id;
+    public Dispositivo(String produttore, String modello, String descrizione, String pollici, String spazioArchiviazione, double prezzoAcquisto, double prezzoVendita, String tipoDispositivo) {
+        this.id = UUID.randomUUID().toString();
         this.produttore = produttore;
         this.modello = modello;
         this.descrizione = descrizione;
@@ -26,12 +28,12 @@ public class Dispositivo {
         this.tipoDispositivo = tipoDispositivo;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getId() {
+        return id;
     }
 
-    public int getId() {
-        return id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getProduttore() {

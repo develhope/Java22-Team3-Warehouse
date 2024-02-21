@@ -3,7 +3,7 @@ import java.util.*;
 public class Magazzino {
 
 
-    private List<Dispositivo> dispositivi = new ArrayList<>();
+    private List<Dispositivo> dispositivi;
     private List<Dispositivo> carrello;
 
     public Magazzino() {
@@ -111,104 +111,53 @@ public class Magazzino {
         }
     }
 
-    public void aggiungiAlCarrello() {
-        Scanner scanner = new Scanner(System.in);
-
-        // Ciclo principale per l'aggiunta dei prodotti al carrello
-        while (true) {
-            System.out.println("Inserisci l'ID del prodotto da aggiungere al carrello:");
-
-            while (!scanner.hasNextInt()) {
-                System.out.println("Inserimento non valido. Per favore, inserisci un numero intero.");
-                scanner.next();
-            }
-
-            int id = scanner.nextInt();
-
-            boolean prodottoAggiunto = false;
-
-            // Ricerca del prodotto nell'elenco dei dispositivi
-            for (Dispositivo dispositivo : this.dispositivi) {
-                if (dispositivo.getId() == id) {
-                    this.carrello.add(dispositivo);
-                    System.out.println(dispositivo.getModello() + " con ID " + id + " è stato aggiunto al carrello.");
-
-                    // Richiesta di aggiunta di un altro prodotto
-                    while (true) {
-                        System.out.println("Vuole aggiungere un altro prodotto? (si/no)");
-                        String risposta = scanner.next();
-
-                        // Gestione della risposta dell'utente
-                        if (risposta.equalsIgnoreCase("no")) {
-                            return;
-                        } else if (risposta.equalsIgnoreCase("si")) {
-                            prodottoAggiunto = true;
-                            break;
-                        } else {
-                            System.out.println("Inserimento non valido. Per favore, rispondere con 'si' o 'no' ");
-                        }
-                    }
-                    if (prodottoAggiunto) {
-                        break;
-                    }
-                }
-            }
-
-            if (!prodottoAggiunto) {
-                System.out.println("Nessun prodotto trovato con l'ID " + id + ". Riprova.");
+    public Optional<Dispositivo> aggiungiAlCarrello(String id) {
+        for (Dispositivo dispositivo : this.dispositivi) {
+            if (dispositivo.getId().equals(id)) {
+                this.carrello.add(dispositivo);
+                return Optional.of(dispositivo);
             }
         }
+        return Optional.empty();
     }
+
 
     public double calcolaTotaleCarrello() {
         double totale = 0;
-        System.out.println("Prodotti nel carrello:");
         for (Dispositivo dispositivo : this.carrello) {
-            System.out.println("Prodotto: " + dispositivo.getModello() + ", Prezzo: " + dispositivo.getPrezzoVendita() + "€");
             totale += dispositivo.getPrezzoVendita();
         }
-        System.out.println("Totale del carrello: " + totale + "€");
         return totale;
     }
 
-    public void chiudiTransazione() {
+    public double chiudiTransazione(double somma) {
         double totale = calcolaTotaleCarrello();
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            System.out.println("Il totale è: " + totale + "€, inserire l'importo corretto");
-            double somma = scanner.nextDouble();
-            if (somma < totale) {
-                System.out.println("La somma inserita è non è corretta. Riprovare.");
-            } else {
-                if (somma > totale) {
-                    System.out.println("Grazie, l'importo inserito è: " + somma + "€ il resto è: " + (somma - totale) + "€");
-                }
-                System.out.println("Transazione completata con successo!");
-                this.carrello.clear();
-                break;
-            }
+        if (somma >= totale) {
+            this.carrello.clear();
+            return totale;
+        } else {
+            return -1;
         }
     }
     public double calcolaSpesaMediaAcquisto() throws Exception {
         if (dispositivi.isEmpty()) {
             throw new Exception("Non ci sono dispositivi nel magazzino.");
         }
-
         double somma = 0;
         for (Dispositivo dispositivo : dispositivi) {
             somma += dispositivo.getPrezzoAcquisto();
         }
-
         return somma / dispositivi.size();
     }
-    public boolean rimuoviDalCarrello(int id) {
+
+    public boolean rimuoviDalCarrello(String id) {
         // Iterazione attraverso il carrello per trovare il dispositivo con l'ID specificato
         Iterator<Dispositivo> carrelloIterator = carrello.iterator();
         while(carrelloIterator.hasNext()){
             Dispositivo dispositivo = carrelloIterator.next();
-            if(dispositivo.getId() == id){
+            if(dispositivo.getId().equals(id)) {
                 carrelloIterator.remove();// Rimozione del dispositivo dal carrello
-                System.out.println(dispositivo.getModello() + " con ID " + id + " è stato rimosso dal carrello.");
+                System.out.println("Il dispositivo con ID: " + id + " è stato rimosso dal carrello.");
                 return true; // Restituisce true se il dispositivo è stato trovato e rimosso
             }
         }
