@@ -4,6 +4,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         Magazzino magazzino = new Magazzino();
+        Carrello carrello = new Carrello();
 
         while (true) {
             int scelta = schermoMenu();
@@ -16,7 +17,11 @@ public class Main {
                 magazzino.addDispositivo(dispositivo);
             }
             if (scelta == 2) {
-                System.out.println(magazzino);
+                if(magazzino.getDispositivi().isEmpty()) {
+                    System.out.println("Magazzino vuoto, aggiungi prima un prodotto.");
+                }else {
+                    System.out.println(magazzino);
+                }
             }
 
             if (scelta == 3) {
@@ -59,59 +64,38 @@ public class Main {
             }
 
             if (scelta == 10) {
-                Scanner scanner = new Scanner(System.in);
-                while (true) {
-                    System.out.println("Inserisci l'ID del prodotto da aggiungere al carrello:");
-                    String id;
-                    while (!scanner.hasNextLine()) {
-                        System.out.println("Inserimento non valido. Per favore, inserisci un ID valido.");
-                        scanner.next();
-                    }
-                    id = scanner.nextLine();
-                    Optional<Dispositivo> dispositivo = magazzino.aggiungiAlCarrello(String.valueOf(id));
-                    if (dispositivo.isPresent()) {
-                        System.out.println("Il prodotto con ID: " + id + " è stato aggiunto al carrello.");
-                    } else {
-                        System.out.println("Nessun prodotto trovato con l'ID " + id + ". Riprova.");
-                    }
-
-                    System.out.println("Vuoi aggiungere un altro prodotto? (si/no)");
-                    String risposta = scanner.next();
-                    if (risposta.equalsIgnoreCase("no")) {
-                        break;
-                    }
-                }
+                aggiungiAlCarrallelo(magazzino, carrello);
             }
 
             if (scelta == 11) {
                 String id = leggiStringaNonVuota("Inserire l'ID del dispositivo che si vuole rimuovere");
-                magazzino.rimuoviDalCarrello(id);
+                carrello.rimuoviDalCarrello(id);
                 System.out.println("Premere invio per tornare al menù");
                 System.in.read(); //serve per dare tempo all'utente di leggere la media
             }
 
             if (scelta == 12) {
                 System.out.println("Prodotti nel carrello:");
-                for (Dispositivo dispositivo : magazzino.getCarrello()) {
+                for (Dispositivo dispositivo : carrello.getCarrello()) {
                     System.out.println("Prodotto: " + dispositivo.getModello() + ", Prezzo: " + dispositivo.getPrezzoVendita() + "€");
                 }
-                double totale = magazzino.calcolaTotaleCarrello();
+                double totale = carrello.calcolaTotaleCarrello();
                 System.out.println("Totale del carrello: " + totale + "€");
 
             }
 
             if (scelta == 13) {
-                if (magazzino.calcolaTotaleCarrello() == 0) {
+                if (carrello.calcolaTotaleCarrello() == 0) {
                     System.out.println("il carrello è vuoto");
                     break;
                 } else {
                     Scanner scanner = new Scanner(System.in);
-                    double totale = magazzino.calcolaTotaleCarrello();
+                    double totale = carrello.calcolaTotaleCarrello();
                     double somma = 0;
                     while (true) {
                         System.out.println("Il totale è: " + totale + "€, inserire l'importo corretto");
                         somma = scanner.nextDouble();
-                        double totaleTransazione = magazzino.chiudiTransazione(somma);
+                        double totaleTransazione = carrello.chiudiTransazione(somma);
                         if (totaleTransazione != -1) {
                             if (somma > totale) {
                                 System.out.println("Grazie, l'importo inserito è: " + somma + "€ il resto è: " + (somma - totale) + "€");
@@ -255,6 +239,29 @@ public class Main {
         System.out.println("Dispositivo aggiunto correttamente.");
 
         return new Dispositivo(produttore, modello, descrizione, pollici, spazioDiArchiviazione, prezzoAcquisto, prezzoVendita, tipoDispositivo);
+    }
+    private static void aggiungiAlCarrallelo(Magazzino magazzinoDaControllare, Carrello carreloSuCuiAggProdotti){
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("Inserisci l'ID del prodotto da aggiungere al carrello:");
+            String id;
+            while (!scanner.hasNextLine()) {
+                System.out.println("Inserimento non valido. Per favore, inserisci un ID valido.");
+                scanner.next();
+            }
+            id = scanner.nextLine();
+            Optional<Dispositivo> dispositivo = carreloSuCuiAggProdotti.aggiungiAlCarrello(String.valueOf(id), magazzinoDaControllare.getDispositivi());
+            if (dispositivo.isPresent()) {
+                System.out.println("Il prodotto con ID: " + id + " è stato aggiunto al carrello.");
+            } else {
+                System.out.println("Nessun prodotto trovato con l'ID " + id + ". Riprova.");
+            }
+            System.out.println("Vuoi aggiungere un altro prodotto? (si/no)");
+            String risposta = scanner.next();
+            if (risposta.equalsIgnoreCase("no")) {
+                break;
+            }
+        }
     }
 }
 

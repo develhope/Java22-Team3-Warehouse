@@ -4,11 +4,9 @@ public class Magazzino {
 
 
     private List<Dispositivo> dispositivi;
-    private List<Dispositivo> carrello;
 
     public Magazzino() {
         this.dispositivi = new ArrayList<>();
-        this.carrello = new ArrayList<>();
     }
 
     public void addDispositivo(Dispositivo dispositivo) {
@@ -23,19 +21,8 @@ public class Magazzino {
         this.dispositivi = dispositivi;
     }
 
-    public List<Dispositivo> getCarrello() {
-        return carrello;
-    }
-
-    public void setCarrello(List<Dispositivo> carrello) {
-        this.carrello = carrello;
-    }
-
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        if(dispositivi.isEmpty()) {
-            System.out.println("Magazzino vuoto, aggiungi prima un prodotto.");
-        }
         for (Dispositivo dispositivo : dispositivi) {
             sb.append(dispositivo).append("\n");
             sb.append("----------\n");
@@ -72,6 +59,7 @@ public class Magazzino {
         return listaFiltrata;
     }
 
+    //TODO spostare i messaggi nel main
     public void ricercaPrezzoVendita(double prezzo) {
         boolean trovato = false;
         for (Dispositivo dispositivo : dispositivi) {
@@ -84,7 +72,7 @@ public class Magazzino {
             System.out.println("\nNon abbiamo nessun oggetto con questo prezzo di Vendita: " + prezzo);
         }
     }
-
+    //TODO spostare i messaggi nel main
     public void ricercaPrezzoAcquisto(double prezzo) {
         boolean trovato = false;
         for (Dispositivo dispositivo : dispositivi) {
@@ -97,7 +85,7 @@ public class Magazzino {
             System.out.println("\nNon abbiamo nessun oggetto con questo prezzo di Acquisto: " + prezzo);
         }
     }
-
+    //TODO spostare i messaggi nel main
     public void ricercaInRangeDiPrezzo(double min, double max) {
         boolean trovato = false;
         for (Dispositivo dispositivo : dispositivi) {
@@ -110,35 +98,7 @@ public class Magazzino {
             System.out.println("\nNon abbiamo nessun oggetto in questo Range di Prezzo: " + min + "-" + max);
         }
     }
-
-    public Optional<Dispositivo> aggiungiAlCarrello(String id) {
-        for (Dispositivo dispositivo : this.dispositivi) {
-            if (dispositivo.getId().equals(id)) {
-                this.carrello.add(dispositivo);
-                return Optional.of(dispositivo);
-            }
-        }
-        return Optional.empty();
-    }
-
-
-    public double calcolaTotaleCarrello() {
-        double totale = 0;
-        for (Dispositivo dispositivo : this.carrello) {
-            totale += dispositivo.getPrezzoVendita();
-        }
-        return totale;
-    }
-
-    public double chiudiTransazione(double somma) {
-        double totale = calcolaTotaleCarrello();
-        if (somma >= totale) {
-            this.carrello.clear();
-            return totale;
-        } else {
-            return -1;
-        }
-    }
+    //TODO spostare i messaggi nel main
     public double calcolaSpesaMediaAcquisto() throws Exception {
         if (dispositivi.isEmpty()) {
             throw new Exception("Non ci sono dispositivi nel magazzino.");
@@ -148,20 +108,5 @@ public class Magazzino {
             somma += dispositivo.getPrezzoAcquisto();
         }
         return somma / dispositivi.size();
-    }
-
-    public boolean rimuoviDalCarrello(String id) {
-        // Iterazione attraverso il carrello per trovare il dispositivo con l'ID specificato
-        Iterator<Dispositivo> carrelloIterator = carrello.iterator();
-        while(carrelloIterator.hasNext()){
-            Dispositivo dispositivo = carrelloIterator.next();
-            if(dispositivo.getId().equals(id)) {
-                carrelloIterator.remove();// Rimozione del dispositivo dal carrello
-                System.out.println("Il dispositivo con ID: " + id + " è stato rimosso dal carrello.");
-                return true; // Restituisce true se il dispositivo è stato trovato e rimosso
-            }
-        }
-        System.out.println("Nessun dispositivo trovato con l'ID " + id + " nel carrello.");
-        return false; // Restituisce false se nessun dispositivo con l'ID specificato è stato trovato nel carrello
     }
 }
