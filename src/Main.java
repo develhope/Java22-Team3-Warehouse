@@ -21,7 +21,6 @@ public class Main {
 
             if (scelta == 3) {
                 cercaTipologia(magazzino);
-
             }
 
             if (scelta == 4) {
@@ -60,23 +59,70 @@ public class Main {
             }
 
             if (scelta == 10) {
-                magazzino.aggiungiAlCarrello();
+                Scanner scanner = new Scanner(System.in);
+                while (true) {
+                    System.out.println("Inserisci l'ID del prodotto da aggiungere al carrello:");
+                    String id;
+                    while (!scanner.hasNextLine()) {
+                        System.out.println("Inserimento non valido. Per favore, inserisci un ID valido.");
+                        scanner.next();
+                    }
+                    id = scanner.nextLine();
+                    Optional<Dispositivo> dispositivo = magazzino.aggiungiAlCarrello(String.valueOf(id));
+                    if (dispositivo.isPresent()) {
+                        System.out.println("Il prodotto con ID: " + id + " è stato aggiunto al carrello.");
+                    } else {
+                        System.out.println("Nessun prodotto trovato con l'ID " + id + ". Riprova.");
+                    }
+
+                    System.out.println("Vuoi aggiungere un altro prodotto? (si/no)");
+                    String risposta = scanner.next();
+                    if (risposta.equalsIgnoreCase("no")) {
+                        break;
+                    }
+                }
             }
 
             if (scelta == 11) {
-
-                int id = leggiRangeIntero(0, Integer.MAX_VALUE, "Inserire l'ID del dispositivo che si vuole rimuovere");
+                String id = leggiStringaNonVuota("Inserire l'ID del dispositivo che si vuole rimuovere");
                 magazzino.rimuoviDalCarrello(id);
                 System.out.println("Premere invio per tornare al menù");
                 System.in.read(); //serve per dare tempo all'utente di leggere la media
             }
 
             if (scelta == 12) {
-                magazzino.calcolaTotaleCarrello();
+                System.out.println("Prodotti nel carrello:");
+                for (Dispositivo dispositivo : magazzino.getCarrello()) {
+                    System.out.println("Prodotto: " + dispositivo.getModello() + ", Prezzo: " + dispositivo.getPrezzoVendita() + "€");
+                }
+                double totale = magazzino.calcolaTotaleCarrello();
+                System.out.println("Totale del carrello: " + totale + "€");
+
             }
 
             if (scelta == 13) {
-                magazzino.chiudiTransazione();
+                if (magazzino.calcolaTotaleCarrello() == 0) {
+                    System.out.println("il carrello è vuoto");
+                    break;
+                } else {
+                    Scanner scanner = new Scanner(System.in);
+                    double totale = magazzino.calcolaTotaleCarrello();
+                    double somma = 0;
+                    while (true) {
+                        System.out.println("Il totale è: " + totale + "€, inserire l'importo corretto");
+                        somma = scanner.nextDouble();
+                        double totaleTransazione = magazzino.chiudiTransazione(somma);
+                        if (totaleTransazione != -1) {
+                            if (somma > totale) {
+                                System.out.println("Grazie, l'importo inserito è: " + somma + "€ il resto è: " + (somma - totale) + "€");
+                            }
+                            System.out.println("Transazione completata con successo!");
+                            break;
+                        } else {
+                            System.out.println("La somma inserita è non è corretta. Riprovare.");
+                        }
+                    }
+                }
             }
         }
     }
@@ -99,18 +145,25 @@ public class Main {
         System.out.println("11. Rimuovi dal carrello.");
         System.out.println("12. Calcola spesa totale carrello.");
         System.out.println("13. Finalizza spesa.");
-        int scelta = leggiRangeIntero(0, 13, "Scelta--> ");
-        return scelta;
+        return leggiRangeIntero(0, 13, "Scelta--> ");
     }
 
     public static int leggiRangeIntero(int min, int max, String messaggio) {
-        System.out.println(messaggio);
         Scanner scanner = new Scanner(System.in);
-        int valore = scanner.nextInt();
-        while (valore < min || valore > max) {
-            System.out.println("\nErrore, inserire un valore compreso tra " + min + " e " + max + "\n");
+        int valore = 0;
+        while (true) {
             System.out.println(messaggio);
-            valore = scanner.nextInt();
+            if (scanner.hasNextInt()) {
+                valore = scanner.nextInt();
+                if (valore >= min && valore <= max) {
+                    break;
+                } else {
+                    System.out.println("Errore, inserire un valore compreso tra " + min + " e " + max);
+                }
+            } else {
+                System.out.println("Inserire un numero intero valido");
+                scanner.next();
+            }
         }
         return valore;
     }
@@ -128,13 +181,21 @@ public class Main {
     }
 
     private static double leggiDouble(double min, double max, String messaggio) {
-        System.out.println(messaggio);
         Scanner scanner = new Scanner(System.in);
-        double valore = scanner.nextDouble();
-        while (valore < min || valore > max) {
-            System.out.println("\nErrore, inserire un valore compreso tra " + min + " e " + max + "\n");
+        double valore = 0;
+        while (true) {
             System.out.println(messaggio);
-            valore = scanner.nextDouble();
+            if (scanner.hasNextDouble()) {
+                valore = scanner.nextDouble();
+                if (valore >= min && valore <= max) {
+                    break;
+                } else {
+                    System.out.println("Errore, inserire un valore compreso tra " + min + " e " + max);
+                }
+            } else {
+                System.out.println("Inserire un numero con virgola.");
+                scanner.next();
+            }
         }
         return valore;
     }
@@ -174,9 +235,8 @@ public class Main {
             }
         }
     }
-
     private static Dispositivo aggiungiMerce() {
-        int id = leggiRangeIntero(1, 100000000, "ID: ");
+        System.out.println("L'ID verrà aggiunto automaticamente");
         String produttore = leggiStringaNonVuota("Produttore: ");
         String modello = leggiStringaNonVuota("Modello: ");
         String descrizione = leggiStringaNonVuota("Descrizione:");
@@ -194,7 +254,7 @@ public class Main {
         }
         System.out.println("Dispositivo aggiunto correttamente.");
 
-        return new Dispositivo(id, produttore, modello, descrizione, pollici, spazioDiArchiviazione, prezzoAcquisto, prezzoVendita, tipoDispositivo);
+        return new Dispositivo(produttore, modello, descrizione, pollici, spazioDiArchiviazione, prezzoAcquisto, prezzoVendita, tipoDispositivo);
     }
 }
 
