@@ -7,6 +7,7 @@ public class Magazzino {
 
     public Magazzino() {
         this.dispositivi = new ArrayList<>();
+        listaMerce(this);
     }
 
     public void addDispositivo(Dispositivo dispositivo) {
@@ -95,10 +96,9 @@ public class Magazzino {
             }
         }
         if (!trovato) {
-            System.out.println("\nNon abbiamo nessun oggetto in questo Range di Prezzo: " + min + "-" + max);
+            System.out.println("\nNon abbiamo nessun oggetto in questo Range di Prezzo: " + min + " - " + max);
         }
     }
-    //TODO spostare i messaggi nel main
     public double calcolaSpesaMediaAcquisto() throws Exception {
         if (dispositivi.isEmpty()) {
             throw new Exception("Non ci sono dispositivi nel magazzino.");
@@ -108,5 +108,23 @@ public class Magazzino {
             somma += dispositivo.getPrezzoAcquisto();
         }
         return somma / dispositivi.size();
+    }
+
+    private static void listaMerce(Magazzino magazzino) {
+
+        Dispositivo s1 = new Dispositivo("Samsung", "S21","Grigio","8.5","16gb",1299.99, 1400, Dispositivo.SMARTPHONE);
+        Dispositivo s2 = new Dispositivo("Samsung", "S21","Grigio","8.5","16gb",1299.99, 1400, Dispositivo.SMARTPHONE);
+        magazzino.addDispositivo(s1);
+        magazzino.addDispositivo(s2);
+
+        Dispositivo t1 = new Dispositivo("Samsung", "S21","Grigio","8.5","16gb",1299.99, 1400, Dispositivo.TABLET);
+        Dispositivo t2 = new Dispositivo("Samsung", "S21","Grigio","8.5","16gb",1299.99, 1400, Dispositivo.TABLET);
+        magazzino.addDispositivo(t1);
+        magazzino.addDispositivo(t2);
+
+        Dispositivo n1 = new Dispositivo("Samsung", "S21","Grigio","8.5","16gb",1299.99, 1400, Dispositivo.NOTEBOOK);
+        Dispositivo n2 = new Dispositivo("Samsung", "S21","Grigio","8.5","16gb",1299.99, 1400, Dispositivo.NOTEBOOK);
+        magazzino.addDispositivo(n1);
+        magazzino.addDispositivo(n2);
     }
 }
