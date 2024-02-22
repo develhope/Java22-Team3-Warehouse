@@ -44,19 +44,13 @@ public class Carrello{
             return -1;
         }
     }
-    //TODO spostare i messaggi nel main
-    public boolean rimuoviDalCarrello(String id) {
-        // Iterazione attraverso il carrello per trovare il dispositivo con l'ID specificato
-        Iterator<Dispositivo> carrelloIterator = carrello.iterator();
-        while(carrelloIterator.hasNext()){
-            Dispositivo dispositivo = carrelloIterator.next();
-            if(dispositivo.getId().equals(id)) {
-                carrelloIterator.remove();// Rimozione del dispositivo dal carrello
-                System.out.println("Il dispositivo con ID: " + id + " è stato rimosso dal carrello.");
-                return true; // Restituisce true se il dispositivo è stato trovato e rimosso
+    public Optional<Dispositivo> rimuoviDalCarrello(String id, List<Dispositivo> dispositivi) {
+        for (Dispositivo dispositivo : dispositivi) {
+            if (dispositivo.getId().equals(id)) {
+                this.carrello.remove(dispositivo);
+                return Optional.of(dispositivo);
             }
         }
-        System.out.println("Nessun dispositivo trovato con l'ID " + id + " nel carrello.");
-        return false; // Restituisce false se nessun dispositivo con l'ID specificato è stato trovato nel carrello
+        return Optional.empty();
     }
 }
