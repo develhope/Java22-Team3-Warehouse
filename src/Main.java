@@ -37,18 +37,18 @@ public class Main {
             }
 
             if (scelta == 6) {
-                double prezzo = leggiRangeIntero(0, 10000, "Inserisci il prezzo di Vendita: ");
+                double prezzo = leggiDouble(0, 10000, "Inserisci il prezzo di Vendita: ");
                 magazzino.ricercaPrezzoVendita(prezzo);
             }
 
             if (scelta == 7) {
-                double prezzo = leggiRangeIntero(0, 10000, "Inserisci il prezzo di Acquisto: ");
+                double prezzo = leggiDouble(0, 10000, "Inserisci il prezzo di Acquisto: ");
                 magazzino.ricercaPrezzoAcquisto(prezzo);
             }
 
             if (scelta == 8) {
-                double min = leggiRangeIntero(0, 10000, "Inserisci il prezzo minimo: ");
-                double max = leggiRangeIntero((int) min, 10000, "Inserisci il prezzo massimo: ");
+                double min = leggiDouble(0, 10000, "Inserisci il prezzo minimo: ");
+                double max = leggiDouble(min, 10000, "Inserisci il prezzo massimo: ");
                 magazzino.ricercaInRangeDiPrezzo(min, max);
             }
 
