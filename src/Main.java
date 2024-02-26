@@ -10,55 +10,55 @@ public class Main {
         while (continuaLoop) {
             int scelta = schermoMenu();
 
-            switch (scelta){
-                case 0 : {
+            switch (scelta) {
+                case 0: {
                     continuaLoop = false;
                     break;
                 }
-                case 1 : {
+                case 1: {
                     Dispositivo dispositivo = aggiungiMerce();
                     magazzino.addDispositivo(dispositivo);
                     break;
                 }
-                case 2 : {
-                    if(magazzino.getDispositivi().isEmpty()) {
+                case 2: {
+                    if (magazzino.getDispositivi().isEmpty()) {
                         System.out.println("Magazzino vuoto, aggiungi prima un prodotto.");
-                    }else {
+                    } else {
                         for (Dispositivo dispositivo : magazzino.getDispositivi()) {
                             System.out.println(dispositivo);
                         }
                     }
                     break;
                 }
-                case 3 : {
+                case 3: {
                     cercaTipologia(magazzino);
                     break;
                 }
-                case  4 : {
+                case 4: {
                     cercaProduttorte(magazzino);
                     break;
                 }
-                case 5 :{
+                case 5: {
                     cercaModello(magazzino);
                     break;
                 }
-                case 6 : {
+                case 6: {
                     double prezzo = leggiDouble(0, 10000, "Inserisci il prezzo di Vendita: ");
                     magazzino.ricercaPrezzoVendita(prezzo);
                     break;
                 }
-                case 7 :  {
+                case 7: {
                     double prezzo = leggiDouble(0, 10000, "Inserisci il prezzo di Acquisto: ");
                     magazzino.ricercaPrezzoAcquisto(prezzo);
                     break;
                 }
-                case 8 : {
+                case 8: {
                     double min = leggiDouble(0, 10000, "Inserisci il prezzo minimo: ");
                     double max = leggiDouble(min, 10000, "Inserisci il prezzo massimo: ");
                     magazzino.ricercaInRangeDiPrezzo(min, max);
                     break;
                 }
-                case 9 : {
+                case 9: {
                     try {
                         System.out.println(magazzino.calcolaSpesaMediaAcquisto());
                         System.out.println("Premere invio per tornare al menù");
@@ -69,15 +69,15 @@ public class Main {
                     }
                     break;
                 }
-                case 10 : {
+                case 10: {
                     aggiungiAlCarrello(magazzino, carrello);
                     break;
                 }
-                case 11 : {
+                case 11: {
                     rimuoviDalCarrello(magazzino, carrello);
                     break;
                 }
-                case 12 : {
+                case 12: {
                     System.out.println("Prodotti nel carrello:");
                     for (Dispositivo dispositivo : carrello.getCarrello()) {
                         System.out.println("Prodotto: " + dispositivo.getModello() + ", Prezzo: " + dispositivo.getPrezzoVendita() + "€");
@@ -86,7 +86,7 @@ public class Main {
                     System.out.println("Totale del carrello: " + totale + "€");
                     break;
                 }
-                case 13 : {
+                case 13: {
                     if (carrello.calcolaTotaleCarrello() == 0) {
                         System.out.println("il carrello è vuoto");
                         break;
@@ -224,6 +224,7 @@ public class Main {
             }
         }
     }
+
     private static Dispositivo aggiungiMerce() {
         System.out.println("L'ID verrà aggiunto automaticamente");
         String produttore = leggiStringaNonVuota("Produttore: ");
@@ -245,7 +246,8 @@ public class Main {
 
         return new Dispositivo(produttore, modello, descrizione, pollici, spazioDiArchiviazione, prezzoAcquisto, prezzoVendita, tipoDispositivo);
     }
-    private static void aggiungiAlCarrello(Magazzino magazzinoDaControllare, Carrello carreloSuCuiAggProdotti){
+
+    private static void aggiungiAlCarrello(Magazzino magazzinoDaControllare, Carrello carreloSuCuiAggProdotti) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Inserisci l'ID del prodotto da aggiungere al carrello:");
@@ -269,7 +271,7 @@ public class Main {
         }
     }
 
-    private static void rimuoviDalCarrello(Magazzino magazzinoDaControllare, Carrello carreloSuCuiAggProdotti){
+    private static void rimuoviDalCarrello(Magazzino magazzinoDaControllare, Carrello carreloSuCuiAggProdotti) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Inserisci l'ID del prodotto da rimuovere dal carrello:");
@@ -286,7 +288,6 @@ public class Main {
             } else {
                 System.out.println("Nessun prodotto trovato con l'ID " + id + ". Riprova.");
             }
-
         }
     }
 }
