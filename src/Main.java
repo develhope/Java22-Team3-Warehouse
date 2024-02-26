@@ -1,11 +1,32 @@
+import java.awt.*;
 import java.io.IOException;
 import java.util.*;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         boolean continuaLoop = true;
         Magazzino magazzino = new Magazzino();
         Carrello carrello = new Carrello();
+
+        while(true) {
+            int scelta;
+            scelta = leggiRangeIntero(0, 2, "0. Esci.\n1. Per Admin.\n2. Per User.");
+            if(scelta == 0) {
+                break;
+            }
+            if (scelta == 1) {
+                MenuComandi.stampaMenuAdmin();
+                 leggiRangeIntero(0, 4, "Scelta-->");// sostituirlo con switch
+
+            }
+            if (scelta == 2) {
+                MenuComandi.stampaMenuUser();
+                leggiRangeIntero(0, 11, "Scelta-->"); // sostituirlo con switch
+
+            }
+        }
+    }
 
         while (continuaLoop) {
             int scelta = schermoMenu();
@@ -113,28 +134,6 @@ public class Main {
                 }
             }
         }
-    }
-
-    private static int schermoMenu() {
-        System.out.println("\n ------ Benvenuto nel magazzino ------\n");
-        System.out.println("**************************************");
-        System.out.println("* 0. Esci.                           *");
-        System.out.println("*                                    *");
-        System.out.println("* 1. Aggiungi prodotto al magazzino. *"); //admin
-        System.out.println("* 2. Stampa contenuti magazzino.     *"); //user
-        System.out.println("* 3. Ricerca per tipo.               *"); //user
-        System.out.println("* 4. Ricerca per produttore.         *"); //user
-        System.out.println("* 5. Ricerca per modello.            *"); //user
-        System.out.println("* 6. Ricerca per prezzo di vendita.  *"); //user
-        System.out.println("* 7. Ricerca per prezzo di acquisto. *"); //admin
-        System.out.println("* 8. Ricerca per range di prezzo.    *"); //user
-        System.out.println("* 9. Calcolo spesa media.            *"); //admnin
-        System.out.println("*10. Aggiungi al carrello.           *"); //user
-        System.out.println("*11. Rimuovi dal carrello.           *"); //user
-        System.out.println("*12. Calcola spesa totale carrello.  *"); //user
-        System.out.println("*13. Finalizza spesa.                *"); //user
-        System.out.println("**************************************");
-        return leggiRangeIntero(0, 13, "Scelta--> ");
     }
 
     public static int leggiRangeIntero(int min, int max, String messaggio) {
