@@ -21,8 +21,8 @@ public class MenuComandi {
         RICERCA_PER_TIPO("Ricerca per tipologia."),
         RICERCA_PER_PRODUTTORE("Ricerca per produttore."),
         RICERCA_PER_MODELLO("Ricerca per modello."),
-        RICERCA_PER_RANGE("Ricerca per range di prezzo."),
         RICERCA_PER_VENDITA("Ricerca per prezzo di vendita"),
+        RICERCA_PER_RANGE("Ricerca per range di prezzo."),
         AGGIUNGI_AL_CARRELLO("Aggiungi al carrello."),
         RIMUOVI_DAL_CARRELLO("Rimuovi dal carrello"),
         CALCOLO_SPESA_TOTALE("Calcolo spesa totale carrello."),
@@ -36,6 +36,29 @@ public class MenuComandi {
 
         public String getStringa() {
             return stringa;
+        }
+    }
+
+    public enum ComandiScelta {
+        ESCI("Esci"),
+        ADMIN("Menu admin"),
+        USER("Menu user");
+
+        private String stringa;
+
+        ComandiScelta(String stringa) {
+            this.stringa = stringa;
+        }
+
+        public String getStringa() {
+            return stringa;
+        }
+    }
+
+    public static void stampaMenuScelte() {
+        System.out.println("Benvenuto nel menu principale: ");
+        for (ComandiScelta comando : ComandiScelta.values()) {
+            System.out.println(comando.ordinal() + ". " + comando.getStringa());
         }
     }
 
