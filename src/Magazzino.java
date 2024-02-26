@@ -1,8 +1,6 @@
 import java.util.*;
 
 public class Magazzino {
-
-
     private List<Dispositivo> dispositivi;
 
     public Magazzino() {
@@ -46,6 +44,7 @@ public class Magazzino {
         }
         return listaFiltrata;
     }
+
     public List<Dispositivo> searchByProduttore(String produttore) {
         List<Dispositivo> listaFiltrata = new ArrayList<>();
         if (produttore == null) {
@@ -146,7 +145,7 @@ public class Magazzino {
         }
         return dispositiviTrovati;
     }
-  
+
     //TODO spostare i messaggi nel main
     public double calcolaSpesaMediaAcquisto() throws Exception {
         if (dispositivi.isEmpty()) {
@@ -161,18 +160,18 @@ public class Magazzino {
 
     private static void listaMerce(Magazzino magazzino) {
 
-        Dispositivo s1 = new Dispositivo("Samsung", "S21","Grigio","8.5","16gb",1299.99, 1400, Dispositivo.SMARTPHONE);
-        Dispositivo s2 = new Dispositivo("Samsung", "S21","Grigio","8.5","16gb",1299.99, 1400, Dispositivo.SMARTPHONE);
+        Dispositivo s1 = new Dispositivo("Samsung", "S21", "Grigio", "8.5", "16gb", 1299.99, 1400, Dispositivo.SMARTPHONE);
+        Dispositivo s2 = new Dispositivo("Samsung", "S21", "Grigio", "8.5", "16gb", 1299.99, 1400, Dispositivo.SMARTPHONE);
         magazzino.addDispositivo(s1);
         magazzino.addDispositivo(s2);
 
-        Dispositivo t1 = new Dispositivo("Samsung", "S21","Grigio","8.5","16gb",1299.99, 1400, Dispositivo.TABLET);
-        Dispositivo t2 = new Dispositivo("Samsung", "S21","Grigio","8.5","16gb",1299.99, 1400, Dispositivo.TABLET);
+        Dispositivo t1 = new Dispositivo("Samsung", "S21", "Grigio", "8.5", "16gb", 1299.99, 1400, Dispositivo.TABLET);
+        Dispositivo t2 = new Dispositivo("Samsung", "S21", "Grigio", "8.5", "16gb", 1299.99, 1400, Dispositivo.TABLET);
         magazzino.addDispositivo(t1);
         magazzino.addDispositivo(t2);
 
-        Dispositivo n1 = new Dispositivo("Samsung", "S21","Grigio","8.5","16gb",1299.99, 1400, Dispositivo.NOTEBOOK);
-        Dispositivo n2 = new Dispositivo("Samsung", "S21","Grigio","8.5","16gb",1299.99, 1400, Dispositivo.NOTEBOOK);
+        Dispositivo n1 = new Dispositivo("Samsung", "S21", "Grigio", "8.5", "16gb", 1299.99, 1400, Dispositivo.NOTEBOOK);
+        Dispositivo n2 = new Dispositivo("Samsung", "S21", "Grigio", "8.5", "16gb", 1299.99, 1400, Dispositivo.NOTEBOOK);
         magazzino.addDispositivo(n1);
         magazzino.addDispositivo(n2);
     }
