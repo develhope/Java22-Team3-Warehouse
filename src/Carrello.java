@@ -3,7 +3,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-public class Carrello{
+public class Carrello {
     private List<Dispositivo> carrello;
 
     public Carrello() {
@@ -19,7 +19,8 @@ public class Carrello{
     public void setCarrello(List<Dispositivo> carrello) {
         this.carrello = carrello;
     }
-    public Optional<Dispositivo> aggiungiAlCarrello(String id, List<Dispositivo>dispositivos) {
+
+    public Optional<Dispositivo> aggiungiAlCarrello(String id, List<Dispositivo> dispositivos) {
         for (Dispositivo dispositivo : dispositivos) {
             if (dispositivo.getId().equals(id)) {
                 this.carrello.add(dispositivo);
@@ -28,6 +29,7 @@ public class Carrello{
         }
         return Optional.empty();
     }
+
     public double calcolaTotaleCarrello() {
         double totale = 0;
         for (Dispositivo dispositivo : this.carrello) {
@@ -35,6 +37,7 @@ public class Carrello{
         }
         return totale;
     }
+
     public double chiudiTransazione(double somma) {
         double totale = calcolaTotaleCarrello();
         if (somma >= totale) {
@@ -44,6 +47,7 @@ public class Carrello{
             return -1;
         }
     }
+
     public Optional<Dispositivo> rimuoviDalCarrello(String id, List<Dispositivo> dispositivi) {
         for (Dispositivo dispositivo : dispositivi) {
             if (dispositivo.getId().equals(id)) {

@@ -28,6 +28,9 @@ public class Dispositivo {
         this.tipoDispositivo = tipoDispositivo;
     }
 
+    public Dispositivo(String number, String modello, double v) {
+    }
+
     public String getId() {
         return id;
     }
