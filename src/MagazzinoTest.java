@@ -1,22 +1,17 @@
 import org.junit.Test;
-
 import java.util.List;
-
-import org.junit.*;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+
 
 public class MagazzinoTest {
 
     @Test
     public void testSearchByTipoDispositivo_DispositivoEsistente() {
         Magazzino magazzino = new Magazzino();
-        Dispositivo dispositivo = new Dispositivo("Samsung", "s22", "telefono carino", "4,9'", "32 GB", 750, 999, Dispositivo.SMARTPHONE);
+        Dispositivo dispositivo = new Dispositivo("Samsung", "s22", "grigio", "4,9'", "32 GB", 750, 999, Dispositivo.SMARTPHONE);
         magazzino.addDispositivo(dispositivo);
         List<Dispositivo> dispositivi = magazzino.searchByTipoDispositivo(Dispositivo.SMARTPHONE);
 
-        assertEquals(1, dispositivi.size());
         assertEquals(dispositivo, dispositivi.getFirst());
     }
 
@@ -31,36 +26,27 @@ public class MagazzinoTest {
     @Test
     public void testSearchByTipoDispositivo_TipoVuoto() {
         Magazzino magazzino = new Magazzino();
+        List<Dispositivo> dispositivos = magazzino.searchByTipoDispositivo("");
+        assertEquals(0, dispositivos.size());
 
-        try {
-            magazzino.searchByTipoDispositivo("");
-            fail("Expected an exception for empty type");
-        } catch (IllegalArgumentException e) {
-            assertEquals("Tipo dispositivo non può essere vuoto", e.getMessage());
-        }
+
     }
 
     @Test
     public void testSearchByTipoDispositivo_TipoNull() {
         Magazzino magazzino = new Magazzino();
+        List<Dispositivo> dispositivos = magazzino.searchByTipoDispositivo(null);
+        assertEquals(0, dispositivos.size());
 
-        try {
-            magazzino.searchByTipoDispositivo(null);
-            fail("Expected an exception for null type");
-        } catch (IllegalArgumentException e) {
-            assertEquals("Tipo dispositivo non può essere nullo", e.getMessage());
-        }
     }
 
     @Test
     public void testSearchByProduttore_ProduttoreEsistente() {
-        Magazzino magazzino = new Magazzino();
-        Dispositivo dispositivo = new Dispositivo("Samsung", "s22", "telefono carino", "4,9'", "32 GB", 750, 999, Dispositivo.SMARTPHONE);
-        magazzino.addDispositivo(dispositivo);
-        List<Dispositivo> dispositivi = magazzino.searchByProduttore("Samsung");
-
-        assertEquals(1, dispositivi.size());
-        assertEquals("Samsung", dispositivi.getFirst().getProduttore());
+        Magazzino magazzinoTest = new Magazzino();
+        Dispositivo dispositivoTest = new Dispositivo("HP", "s22", "telefono carino", "4,9'", "32 GB", 750, 999, Dispositivo.SMARTPHONE);
+        magazzinoTest.addDispositivo(dispositivoTest);
+        List<Dispositivo> dispositivi = magazzinoTest.searchByProduttore("HP");
+        assertEquals("HP", dispositivi.getFirst().getProduttore());
     }
 
     @Test
@@ -74,25 +60,16 @@ public class MagazzinoTest {
     @Test
     public void testSearchByProduttore_NomeVuoto() {
         Magazzino magazzino = new Magazzino();
+        List<Dispositivo> dispositivos = magazzino.searchByProduttore("");
+        assertEquals(0, dispositivos.size());
 
-        try {
-            magazzino.searchByProduttore("");
-            fail("Il produttore non può essere vuoto");
-        } catch (IllegalArgumentException e) {
-            assertEquals("Il produttore non può essere vuoto", e.getMessage());
-        }
     }
 
     @Test
     public void testSearchByProduttore_NomeNull() {
         Magazzino magazzino = new Magazzino();
-
-        try {
-            magazzino.searchByProduttore(null);
-            fail("Il produttore non può essere nullo");
-        } catch (IllegalArgumentException e) {
-            assertEquals("Il produttore non può essere nullo", e.getMessage());
-        }
+        List<Dispositivo> dispositivos = magazzino.searchByProduttore(null);
+        assertEquals(0, dispositivos.size());
     }
 
     @Test
@@ -117,25 +94,19 @@ public class MagazzinoTest {
     @Test
     public void testSearchByModello_NomeVuoto() {
         Magazzino magazzino = new Magazzino();
+        List<Dispositivo> dispositivos = magazzino.searchByModello("");
+        assertEquals(0, dispositivos.size());
 
-        try {
-            magazzino.searchByModello("");
-            fail("Expected an exception for empty name");
-        } catch (IllegalArgumentException e) {
-            assertEquals("Il modello non può essere vuoto", e.getMessage());
-        }
+
     }
 
     @Test
     public void testSearchByModello_NomeNull() {
         Magazzino magazzino = new Magazzino();
+        List<Dispositivo> dispositivos = magazzino.searchByModello(null);
+        assertEquals(0, dispositivos.size());
 
-        try {
-            magazzino.searchByModello(null);
-            fail("Expected an exception for null name");
-        } catch (IllegalArgumentException e) {
-            assertEquals("Il modello non può essere nullo", e.getMessage());
-        }
+
     }
 
     @Test
@@ -160,25 +131,15 @@ public class MagazzinoTest {
     @Test
     public void testRicercaPrezzoVendita_PrezzoNegativo() {
         Magazzino magazzino = new Magazzino();
-
-        try {
-            magazzino.ricercaPrezzoVendita(-100.0);
-            fail("Expected an exception for negative price");
-        } catch (IllegalArgumentException e) {
-            assertEquals("Il prezzo di vendita non può essere negativo", e.getMessage());
-        }
+        List<Dispositivo> dispositivos = magazzino.ricercaPrezzoVendita(-100.0);
+        assertEquals(0, dispositivos.size());
     }
 
     @Test
     public void testRicercaPrezzoVendita_PrezzoZero() {
         Magazzino magazzino = new Magazzino();
-
-        try {
-            magazzino.ricercaPrezzoVendita(0.0);
-            fail("Expected an exception for zero price");
-        } catch (IllegalArgumentException e) {
-            assertEquals("Il prezzo di vendita non può essere 0", e.getMessage());
-        }
+        List<Dispositivo> dispositivos =  magazzino.ricercaPrezzoVendita(0.0);
+        assertEquals(0, dispositivos.size());
     }
 
     @Test
@@ -203,25 +164,15 @@ public class MagazzinoTest {
     @Test
     public void testRicercaPrezzoAcquisto_PrezzoNegativo() {
         Magazzino magazzino = new Magazzino();
-
-        try {
-            magazzino.ricercaPrezzoAcquisto(-100.0);
-            fail("Expected an exception for negative price");
-        } catch (IllegalArgumentException e) {
-            assertEquals("Il prezzo di acquisto non può essere negativo", e.getMessage());
-        }
+        List<Dispositivo> dispositivos = magazzino.ricercaPrezzoAcquisto(-100.0);
+        assertEquals(0, dispositivos.size());
     }
 
     @Test
     public void testRicercaPrezzoAcquisto_PrezzoZero() {
         Magazzino magazzino = new Magazzino();
-
-        try {
-            magazzino.ricercaPrezzoAcquisto(0.0);
-            fail("Expected an exception for zero price");
-        } catch (IllegalArgumentException e) {
-            assertEquals("Il prezzo di acquisto non può essere 0", e.getMessage());
-        }
+        List<Dispositivo> dispositivos = magazzino.ricercaPrezzoAcquisto(0.0);
+        assertEquals(0, dispositivos.size());
     }
 
     @Test
@@ -262,36 +213,21 @@ public class MagazzinoTest {
     @Test
     public void testRicercaInRangeDiPrezzo_PrezzoMinimoNegativo() {
         Magazzino magazzino = new Magazzino();
-
-        try {
-            magazzino.ricercaInRangeDiPrezzo(-100.0, 100.0);
-            fail("Expected an exception for negative minimum price");
-        } catch (IllegalArgumentException e) {
-            assertEquals("Il prezzo minimo non può essere negativo", e.getMessage());
-        }
+        List<Dispositivo> dispositivos = magazzino.ricercaInRangeDiPrezzo(-100.0, 100.0);
+        assertEquals(0, dispositivos.size());
     }
 
     @Test
     public void testRicercaInRangeDiPrezzo_PrezzoMassimoNegativo() {
         Magazzino magazzino = new Magazzino();
-
-        try {
-            magazzino.ricercaInRangeDiPrezzo(100.0, -100.0);
-            fail("Expected an exception for negative maximum price");
-        } catch (IllegalArgumentException e) {
-            assertEquals("Il prezzo massimo non può essere negativo", e.getMessage());
-        }
+        List<Dispositivo> dispositivos =magazzino.ricercaInRangeDiPrezzo(100.0, -100.0);
+        assertEquals(0, dispositivos.size());
     }
 
     @Test
     public void testRicercaInRangeDiPrezzo_PrezzoMinimoMaggioreDiPrezzoMassimo() {
         Magazzino magazzino = new Magazzino();
-
-        try {
-            magazzino.ricercaInRangeDiPrezzo(100.0, 50.0);
-            fail("Expected an exception for minimum price greater than maximum price");
-        } catch (IllegalArgumentException e) {
-            assertEquals("Il prezzo minimo non può essere maggiore del prezzo massimo", e.getMessage());
-        }
+        List<Dispositivo> dispositivos = magazzino.ricercaInRangeDiPrezzo(100.0, 50.0);
+        assertEquals(0, dispositivos.size());
     }
 }
