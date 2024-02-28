@@ -145,8 +145,6 @@ public class Magazzino {
         }
         return dispositiviTrovati;
     }
-
-    //TODO spostare i messaggi nel main
     public double calcolaSpesaMediaAcquisto() throws Exception {
         if (dispositivi.isEmpty()) {
             throw new Exception("Non ci sono dispositivi nel magazzino.");
@@ -161,17 +159,17 @@ public class Magazzino {
     private static void listaMerce(Magazzino magazzino) {
 
         Dispositivo s1 = new Dispositivo("Samsung", "S21", "Grigio", "8.5", "16gb", 1299.99, 1400, Dispositivo.SMARTPHONE);
-        Dispositivo s2 = new Dispositivo("Samsung", "S21", "Grigio", "8.5", "16gb", 1299.99, 1400, Dispositivo.SMARTPHONE);
+        Dispositivo s2 = new Dispositivo("Apple", "iPhone 12", "Titanio", "6.1", "4gb", 200, 499.99, Dispositivo.SMARTPHONE);
         magazzino.addDispositivo(s1);
         magazzino.addDispositivo(s2);
 
-        Dispositivo t1 = new Dispositivo("Samsung", "S21", "Grigio", "8.5", "16gb", 1299.99, 1400, Dispositivo.TABLET);
-        Dispositivo t2 = new Dispositivo("Samsung", "S21", "Grigio", "8.5", "16gb", 1299.99, 1400, Dispositivo.TABLET);
+        Dispositivo t1 = new Dispositivo("Samsung", "Tab S9", "Nero", "11", "8gb", 700, 899.99, Dispositivo.TABLET);
+        Dispositivo t2 = new Dispositivo("Apple", "iPad Air 5", "Grigio", "10.9", "8gb", 400, 599.99, Dispositivo.TABLET);
         magazzino.addDispositivo(t1);
         magazzino.addDispositivo(t2);
 
-        Dispositivo n1 = new Dispositivo("Samsung", "S21", "Grigio", "8.5", "16gb", 1299.99, 1400, Dispositivo.NOTEBOOK);
-        Dispositivo n2 = new Dispositivo("Samsung", "S21", "Grigio", "8.5", "16gb", 1299.99, 1400, Dispositivo.NOTEBOOK);
+        Dispositivo n1 = new Dispositivo("Apple", "MacBook Air", "Grigio", "14", "16gb", 1800, 2000.99, Dispositivo.NOTEBOOK);
+        Dispositivo n2 = new Dispositivo("HP", "Pavilion", "Nero", "16", "32gb", 799.99, 1299.99, Dispositivo.NOTEBOOK);
         magazzino.addDispositivo(n1);
         magazzino.addDispositivo(n2);
     }

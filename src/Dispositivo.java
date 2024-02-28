@@ -2,9 +2,9 @@ import java.util.UUID;
 
 public class Dispositivo {
 
-    public static final String NOTEBOOK = "notebook";
-    public static final String TABLET = "tablet";
-    public static final String SMARTPHONE = "smartphone";
+    public static final String NOTEBOOK = "Notebook";
+    public static final String TABLET = "Tablet";
+    public static final String SMARTPHONE = "Smartphone";
 
     private String id;
     private String produttore;
