@@ -1,104 +1,100 @@
-import java.awt.*;
-import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        boolean continuaLoop = true;
+    public static void main(String[] args) {
         Magazzino magazzino = new Magazzino();
         Carrello carrello = new Carrello();
-
-        while(true) {
-            int scelta;
-            scelta = leggiRangeIntero(0, 2, "0. Esci.\n1. Per Admin.\n2. Per User.");
-            if(scelta == 0) {
+        MenuComandi.stampaMenuScelte();
+        Scanner scan = new Scanner(System.in);
+        int scelta = scan.nextInt();
+        switch (scelta) {
+            case 0:
                 break;
-            }
-            if (scelta == 1) {
-                MenuComandi.stampaMenuAdmin();
-                 leggiRangeIntero(0, 4, "Scelta-->");// sostituirlo con switch
-
-            }
-            if (scelta == 2) {
-                MenuComandi.stampaMenuUser();
-                leggiRangeIntero(0, 11, "Scelta-->"); // sostituirlo con switch
-
+            case 1:
+                menuAdmin(magazzino, scan);
+                break;
+            case 2:
+                menuUser(magazzino, carrello, scan);
+                break;
+        }
+    }
+    private static void menuAdmin(Magazzino magazzino, Scanner scan) {
+        while (true) {
+            MenuComandi.stampaMenuAdmin();
+            int sceltaAdmin = scan.nextInt();
+            switch (sceltaAdmin) {
+                case 0:
+                    return;
+                case 1:
+                    Dispositivo dispositivo = aggiungiMerce();
+                    magazzino.addDispositivo(dispositivo);
+                    break;
+                case 2:
+                    double prezzo = leggiDouble(0, 10000, "Inserisci il prezzo di Acquisto: ");
+                    magazzino.ricercaPrezzoAcquisto(prezzo);
+                    break;
+                case 3:
+                    try {
+                        System.out.println(magazzino.calcolaSpesaMediaAcquisto());
+                        System.out.println("Premere invio per tornare al menù");
+                        System.in.read();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
             }
         }
     }
 
-        while (continuaLoop) {
-            int scelta = schermoMenu();
-
-            switch (scelta) {
-                case 0: {
-                    continuaLoop = false;
-                    break;
-                }
-                case 1: {
-                    Dispositivo dispositivo = aggiungiMerce();
-                    magazzino.addDispositivo(dispositivo);
-                    break;
-                }
-                case 2: {
+    private static void menuUser(Magazzino magazzino, Carrello carrello, Scanner scan) {
+        while (true) {
+            MenuComandi.stampaMenuUser();
+            int sceltaUser = scan.nextInt();
+            switch (sceltaUser) {
+                case 0:
+                    return;
+                case 1:
                     if (magazzino.getDispositivi().isEmpty()) {
-                        System.out.println("Magazzino vuoto, aggiungi prima un prodotto.");
+                        System.out.println("Magazzino vuoto.");
                     } else {
                         for (Dispositivo dispositivo : magazzino.getDispositivi()) {
                             System.out.println(dispositivo);
                         }
                     }
                     break;
-                }
-                case 3: {
+                case 2: {
                     cercaTipologia(magazzino);
                     break;
                 }
-                case 4: {
+                case 3: {
                     cercaProduttorte(magazzino);
                     break;
                 }
-                case 5: {
+                case 4: {
                     cercaModello(magazzino);
                     break;
                 }
-                case 6: {
+                case 5: {
                     double prezzo = leggiDouble(0, 10000, "Inserisci il prezzo di Vendita: ");
                     magazzino.ricercaPrezzoVendita(prezzo);
                     break;
                 }
-                case 7: {
-                    double prezzo = leggiDouble(0, 10000, "Inserisci il prezzo di Acquisto: ");
-                    magazzino.ricercaPrezzoAcquisto(prezzo);
-                    break;
-                }
-                case 8: {
+                case 6: {
                     double min = leggiDouble(0, 10000, "Inserisci il prezzo minimo: ");
                     double max = leggiDouble(min, 10000, "Inserisci il prezzo massimo: ");
                     magazzino.ricercaInRangeDiPrezzo(min, max);
                     break;
                 }
-                case 9: {
-                    try {
-                        System.out.println(magazzino.calcolaSpesaMediaAcquisto());
-                        System.out.println("Premere invio per tornare al menù");
-                        System.in.read(); //serve per dare tempo all'utente di leggere la media
-
-                    } catch (Exception e) {
-                        throw new RuntimeException(e); //eccezione se il deposito è vuoto
-                    }
-                    break;
-                }
-                case 10: {
+                case 7: {
                     aggiungiAlCarrello(magazzino, carrello);
                     break;
                 }
-                case 11: {
+                case 8: {
                     rimuoviDalCarrello(magazzino, carrello);
                     break;
                 }
-                case 12: {
+                case 9: {
                     System.out.println("Prodotti nel carrello:");
                     for (Dispositivo dispositivo : carrello.getCarrello()) {
                         System.out.println("Prodotto: " + dispositivo.getModello() + ", Prezzo: " + dispositivo.getPrezzoVendita() + "€");
@@ -107,7 +103,7 @@ public class Main {
                     System.out.println("Totale del carrello: " + totale + "€");
                     break;
                 }
-                case 13: {
+                case 10: {
                     if (carrello.calcolaTotaleCarrello() == 0) {
                         System.out.println("il carrello è vuoto");
                         break;
@@ -135,6 +131,7 @@ public class Main {
             }
         }
     }
+
 
     public static int leggiRangeIntero(int min, int max, String messaggio) {
         Scanner scanner = new Scanner(System.in);
