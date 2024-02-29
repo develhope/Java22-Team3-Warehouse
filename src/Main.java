@@ -6,23 +6,24 @@ public class Main {
         Magazzino magazzino = new Magazzino();
         magazzino.aggiungiDispositivi();
         Carrello carrello = new Carrello();
-        MenuComandi.stampaMenuScelte();
+        MenuComandi menu = new MenuComandi();
+        menu.stampaMenuScelte();
         Scanner scan = new Scanner(System.in);
         int scelta = scan.nextInt();
         switch (scelta) {
             case 0:
                 break;
             case 1:
-                menuAdmin(magazzino, scan);
+                menuAdmin(magazzino, scan, menu);
                 break;
             case 2:
-                menuUser(magazzino, carrello, scan);
+                menuUser(magazzino, carrello, scan, menu);
                 break;
         }
     }
-    private static void menuAdmin(Magazzino magazzino, Scanner scan) {
+    private static void menuAdmin(Magazzino magazzino, Scanner scan, MenuComandi menu) {
         while (true) {
-            MenuComandi.stampaMenuAdmin();
+            menu.stampaMenuAdmin();
             int sceltaAdmin = scan.nextInt();
             switch (sceltaAdmin) {
                 case 0:
@@ -30,6 +31,7 @@ public class Main {
                 case 1:
                     Dispositivo dispositivo = aggiungiMerce();
                     magazzino.addDispositivo(dispositivo);
+                    System.out.println(dispositivo);
                     break;
                 case 2:
                     double prezzo = leggiDouble(0, 10000, "Inserisci il prezzo di Acquisto: ");
@@ -48,9 +50,9 @@ public class Main {
         }
     }
 
-    private static void menuUser(Magazzino magazzino, Carrello carrello, Scanner scan) {
+    private static void menuUser(Magazzino magazzino, Carrello carrello, Scanner scan, MenuComandi menu) {
         while (true) {
-            MenuComandi.stampaMenuUser();
+            menu.stampaMenuUser();
             int sceltaUser = scan.nextInt();
             switch (sceltaUser) {
                 case 0:
@@ -92,7 +94,7 @@ public class Main {
                     break;
                 }
                 case 8: {
-                    rimuoviDalCarrello(magazzino, carrello);
+                    rimuoviDalCarrello(carrello);
                     break;
                 }
                 case 9: {
@@ -111,7 +113,7 @@ public class Main {
                     } else {
                         Scanner scanner = new Scanner(System.in);
                         double totale = carrello.calcolaTotaleCarrello();
-                        double somma = 0;
+                        double somma;
                         while (true) {
                             System.out.println("Il totale è: " + totale + "€, inserire l'importo corretto");
                             somma = scanner.nextDouble();
@@ -136,7 +138,7 @@ public class Main {
 
     public static int leggiRangeIntero(int min, int max, String messaggio) {
         Scanner scanner = new Scanner(System.in);
-        int valore = 0;
+        int valore;
         while (true) {
             System.out.println(messaggio);
             if (scanner.hasNextInt()) {
@@ -244,7 +246,7 @@ public class Main {
         return new Dispositivo(produttore, modello, descrizione, pollici, spazioDiArchiviazione, prezzoAcquisto, prezzoVendita, tipoDispositivo);
     }
 
-    private static void aggiungiAlCarrello(Magazzino magazzinoDaControllare, Carrello carreloSuCuiAggProdotti) {
+    private static void aggiungiAlCarrello(Magazzino magazzino, Carrello carrello) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Inserisci l'ID del prodotto da aggiungere al carrello:");
@@ -254,7 +256,7 @@ public class Main {
                 scanner.nextLine();
             }
             id = scanner.nextLine();
-            Optional<Dispositivo> dispositivo = carreloSuCuiAggProdotti.aggiungiAlCarrello(String.valueOf(id), magazzinoDaControllare.getDispositivi());
+            Optional<Dispositivo> dispositivo = carrello.aggiungiAlCarrello(String.valueOf(id), magazzino.getDispositivi());
             if (dispositivo.isPresent()) {
                 System.out.println("Il prodotto con ID: " + id + " è stato aggiunto al carrello.");
             } else {
@@ -268,8 +270,9 @@ public class Main {
         }
     }
 
-    private static void rimuoviDalCarrello(Magazzino magazzinoDaControllare, Carrello carreloSuCuiAggProdotti) {
+    private static void rimuoviDalCarrello(Carrello carrello) {
         Scanner scanner = new Scanner(System.in);
+
         while (true) {
             System.out.println("Inserisci l'ID del prodotto da rimuovere dal carrello:");
             String id;
@@ -278,12 +281,16 @@ public class Main {
                 scanner.nextLine();
             }
             id = scanner.nextLine();
-            Optional<Dispositivo> dispositivo = carreloSuCuiAggProdotti.rimuoviDalCarrello(String.valueOf(id), magazzinoDaControllare.getDispositivi());
+            Optional<Dispositivo> dispositivo = carrello.rimuoviDalCarrello(String.valueOf(id), carrello.getCarrello());
             if (dispositivo.isPresent()) {
                 System.out.println("Il prodotto con ID: " + id + " è stato rimosso dal carrello.");
-                break;
             } else {
                 System.out.println("Nessun prodotto trovato con l'ID " + id + ". Riprova.");
+            }
+            System.out.println("Vuoi rimuovere un altro prodotto? (si/no)");
+            String risposta = scanner.nextLine();
+            if (risposta.equalsIgnoreCase("no")) {
+                break;
             }
         }
     }

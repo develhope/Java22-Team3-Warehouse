@@ -104,7 +104,6 @@ public class Magazzino {
         if (min < 0 || max < 0 || min > max) {
             return dispositiviTrovati;
         } else {
-
             for (Dispositivo dispositivo : dispositivi) {
                 if (dispositivo.getPrezzoVendita() >= min && dispositivo.getPrezzoVendita() <= max) {
                     System.out.println(dispositivo);
