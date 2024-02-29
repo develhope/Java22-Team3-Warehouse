@@ -29,6 +29,16 @@ public class Carrello {
         return Optional.empty();
     }
 
+    public Optional<Dispositivo> rimuoviDalCarrello(String id, List<Dispositivo> dispositivi) {
+        for (Dispositivo dispositivo : dispositivi) {
+            if (dispositivo.getId().equals(id)) {
+                this.carrello.remove(dispositivo);
+                return Optional.of(dispositivo);
+            }
+        }
+        return Optional.empty();
+    }
+
     public double calcolaTotaleCarrello() {
         double totale = 0;
         for (Dispositivo dispositivo : this.carrello) {
@@ -47,13 +57,4 @@ public class Carrello {
         }
     }
 
-    public Optional<Dispositivo> rimuoviDalCarrello(String id, List<Dispositivo> dispositivi) {
-        for (Dispositivo dispositivo : dispositivi) {
-            if (dispositivo.getId().equals(id)) {
-                this.carrello.remove(dispositivo);
-                return Optional.of(dispositivo);
-            }
-        }
-        return Optional.empty();
-    }
 }

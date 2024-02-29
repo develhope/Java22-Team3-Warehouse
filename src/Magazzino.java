@@ -66,6 +66,7 @@ public class Magazzino {
         } else {
             for (Dispositivo dispositivo : dispositivi) {
                 if (dispositivo.getPrezzoVendita() == prezzo) {
+                    //TODO spostare System.out.println(dispositivo)
                     System.out.println(dispositivo);
                     trovato = true;
                     dispositiviTrovati.add(dispositivo);
@@ -86,6 +87,7 @@ public class Magazzino {
         } else {
             for (Dispositivo dispositivo : dispositivi) {
                 if (dispositivo.getPrezzoAcquisto() == prezzo) {
+                    //TODO spostare System.out.println(dispositivo)
                     System.out.println(dispositivo);
                     trovato = true;
                     dispositiviTrovati.add(dispositivo);
@@ -104,9 +106,9 @@ public class Magazzino {
         if (min < 0 || max < 0 || min > max) {
             return dispositiviTrovati;
         } else {
-
             for (Dispositivo dispositivo : dispositivi) {
                 if (dispositivo.getPrezzoVendita() >= min && dispositivo.getPrezzoVendita() <= max) {
+                    //TODO spostare System.out.println(dispositivo)
                     System.out.println(dispositivo);
                     trovato = true;
                     dispositiviTrovati.add(dispositivo);
