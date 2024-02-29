@@ -262,13 +262,9 @@ public class MagazzinoTest {
     @Test
     public void testRicercaInRangeDiPrezzo_PrezzoMinimoNegativo() {
         Magazzino magazzino = new Magazzino();
+        List<Dispositivo> dispositivos = magazzino.ricercaInRangeDiPrezzo(-100.0, 100.0);
 
-        try {
-            magazzino.ricercaInRangeDiPrezzo(-100.0, 100.0);
-            fail("Expected an exception for negative minimum price");
-        } catch (IllegalArgumentException e) {
-            assertEquals("Il prezzo minimo non può essere negativo", e.getMessage());
-        }
+        assertEquals(0, dispositivos.size());
     }
 
     @Test

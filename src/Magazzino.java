@@ -124,27 +124,24 @@ public class Magazzino {
     public List<Dispositivo> ricercaInRangeDiPrezzo(double min, double max) {
         boolean trovato = false;
         List<Dispositivo> dispositiviTrovati = new ArrayList<>();
-        if (min < 0) {
-            throw new IllegalArgumentException("Il prezzo minimo non può essere negativo");
-        }
-        if (max < 0) {
-            throw new IllegalArgumentException("Il prezzo massimo non può essere negativo");
-        }
-        if (min > max) {
-            throw new IllegalArgumentException("Il prezzo minimo non può essere maggiore del prezzo massimo");
-        }
-        for (Dispositivo dispositivo : dispositivi) {
-            if (dispositivo.getPrezzoVendita() >= min && dispositivo.getPrezzoVendita() <= max) {
-                System.out.println(dispositivo);
-                trovato = true;
-                dispositiviTrovati.add(dispositivo);
+        if (min < 0 || max < 0 || min > max) {
+//            throw new IllegalArgumentException("Il prezzo minimo non può essere negativo");
+            return dispositiviTrovati;
+        } else {
+            for (Dispositivo dispositivo : dispositivi) {
+                if (dispositivo.getPrezzoVendita() >= min && dispositivo.getPrezzoVendita() <= max) {
+                    System.out.println(dispositivo);
+                    trovato = true;
+                    dispositiviTrovati.add(dispositivo);
+                }
             }
+            if (!trovato) {
+                System.out.println("\nNon abbiamo nessun oggetto in questo Range di Prezzo: " + min + " - " + max);
+            }
+            return dispositiviTrovati;
         }
-        if (!trovato) {
-            System.out.println("\nNon abbiamo nessun oggetto in questo Range di Prezzo: " + min + " - " + max);
-        }
-        return dispositiviTrovati;
     }
+
     public double calcolaSpesaMediaAcquisto() throws Exception {
         if (dispositivi.isEmpty()) {
             throw new Exception("Non ci sono dispositivi nel magazzino.");
