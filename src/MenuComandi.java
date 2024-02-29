@@ -19,7 +19,7 @@ public class MenuComandi {
         }
     }
 
-    private static void menuAdmin(Magazzino magazzino, Carrello carrello, Scanner scan) {
+    private void menuAdmin(Magazzino magazzino, Carrello carrello, Scanner scan) {
         while (true) {
             stampaMenuAdmin();
             int sceltaAdmin = scan.nextInt();
@@ -121,7 +121,7 @@ public class MenuComandi {
         }
     }
 
-    private static void menuUser(Magazzino magazzino, Carrello carrello, Scanner scan) {
+    private void menuUser(Magazzino magazzino, Carrello carrello, Scanner scan) {
         while (true) {
             stampaMenuUser();
             int sceltaUser = scan.nextInt();
@@ -206,7 +206,7 @@ public class MenuComandi {
         }
     }
 
-    public static int leggiRangeIntero(int min, int max, String messaggio) {
+    public int leggiRangeIntero(int min, int max, String messaggio) {
         Scanner scanner = new Scanner(System.in);
         int valore;
         while (true) {
@@ -226,7 +226,7 @@ public class MenuComandi {
         return valore;
     }
 
-    public static String leggiStringaNonVuota(String messaggio) {
+    public String leggiStringaNonVuota(String messaggio) {
         System.out.println(messaggio);
         Scanner scanner = new Scanner(System.in);
         String stringa = scanner.nextLine();
@@ -258,7 +258,7 @@ public class MenuComandi {
         return valore;
     }
 
-    private static void cercaTipologia(Magazzino magazzino) {
+    private void cercaTipologia(Magazzino magazzino) {
         String tipologia = leggiStringaNonVuota("Inserisci tipologia");
         List<Dispositivo> dispositivi = magazzino.searchByTipoDispositivo(tipologia);
         if (dispositivi.isEmpty()) {
@@ -270,7 +270,7 @@ public class MenuComandi {
         }
     }
 
-    private static void cercaModello(Magazzino magazzino) {
+    private void cercaModello(Magazzino magazzino) {
         String modello = leggiStringaNonVuota("Inserisci modello: ");
         List<Dispositivo> dispositivi = magazzino.searchByModello(modello);
         if (dispositivi.isEmpty()) {
@@ -282,7 +282,7 @@ public class MenuComandi {
         }
     }
 
-    private static void cercaProduttorte(Magazzino magazzino) {
+    private void cercaProduttorte(Magazzino magazzino) {
         String produttore = leggiStringaNonVuota("Inserisci produttore: ");
         List<Dispositivo> dispositivi = magazzino.searchByProduttore(produttore);
         if (dispositivi.isEmpty()) {
@@ -294,7 +294,7 @@ public class MenuComandi {
         }
     }
 
-    private static Dispositivo aggiungiMerce() {
+    private Dispositivo aggiungiMerce() {
         System.out.println("L'ID verrà aggiunto automaticamente");
         String produttore = leggiStringaNonVuota("Produttore: ");
         String modello = leggiStringaNonVuota("Modello: ");
