@@ -40,7 +40,6 @@ public class Main {
                 case 2:
                     Dispositivo dispositivo = aggiungiMerce();
                     magazzino.addDispositivo(dispositivo);
-                    System.out.println(dispositivo);
                     break;
                 case 3: {
                     cercaTipologia(magazzino);
