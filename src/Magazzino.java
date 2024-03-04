@@ -15,10 +15,8 @@ public class Magazzino {
         return dispositivi;
     }
 
-    public void setDispositivi(List<Dispositivo> dispositivi) {
-        this.dispositivi = dispositivi;
-    }
 
+    //stampa lista dispositivi
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Dispositivo dispositivo : dispositivi) {
@@ -28,6 +26,8 @@ public class Magazzino {
         return sb.toString().trim();
     }
 
+    //Questo metodo fa una ricerca per tipo di dispositivo, in caso il tipo di dispositivo scelto dall'utente non è prensente non troverà nulla.
+    // In caso dovesse essere trovato qualcosa ritorna il dispositivo tramite il suo tipo.
     public List<Dispositivo> searchByTipoDispositivo(String descrizione) {
         List<Dispositivo> listaFiltrata = new ArrayList<>();
         for (Dispositivo dispositivo : dispositivi) {
@@ -38,6 +38,8 @@ public class Magazzino {
         return listaFiltrata;
     }
 
+    //Questo metodo fa una ricerca per nome produttore, in caso il nome del produttore scelto dall'utente non è prensente non troverà nulla.
+    // In caso dovesse essere trovato qualcosa ritorna il dispositivo tramite il nome del produttore.
     public List<Dispositivo> searchByProduttore(String produttore) {
         List<Dispositivo> listaFiltrata = new ArrayList<>();
         for (Dispositivo dispositivo : dispositivi) {
@@ -48,6 +50,8 @@ public class Magazzino {
         return listaFiltrata;
     }
 
+    //Questo metodo fa una ricerca per nome modello, in caso il modello scelto dall'utente non è prensente non troverà nulla.
+    // In caso dovesse essere trovato qualcosa ritorna il dispositivo tramite il nome del modello.
     public List<Dispositivo> searchByModello(String modello) {
         List<Dispositivo> listaFiltrata = new ArrayList<>();
         for (Dispositivo dispositivo : dispositivi) {
@@ -58,6 +62,8 @@ public class Magazzino {
         return listaFiltrata;
     }
 
+    //Questo metodo fa una ricerca in base al prezzo di vendita scelto dall'utente.
+    // Se il prezzo è minore di 0 oppure uguale a 0 non ritornerà nulla all'utente, in caso contrario ritornerà un dispositivo con quel prezzo scelto.
     public List<Dispositivo> ricercaPrezzoVendita(double prezzo) {
         boolean trovato = false;
         List<Dispositivo> dispositiviTrovati = new ArrayList<>();
@@ -79,6 +85,8 @@ public class Magazzino {
         return dispositiviTrovati;
     }
 
+    //Questo metodo fa una ricerca in base al prezzo di acquisto scelto dall'utente.
+    // Se il prezzo è minore di 0 oppure uguale a 0 non ritornerà nulla all'utente, in caso contrario ritornerà un dispositivo con quel prezzo scelto.
     public List<Dispositivo> ricercaPrezzoAcquisto(double prezzo) {
         boolean trovato = false;
         List<Dispositivo> dispositiviTrovati = new ArrayList<>();
@@ -100,6 +108,9 @@ public class Magazzino {
         return dispositiviTrovati;
     }
 
+    //Questo metodo fa una ricerca in base a due numeri scelti dall'utente, di cui il primo è un valore minimo e il secondo è un valore massimo.
+    // In caso l'utente dovesse inserire il valore minimo maggiore del massimo oppure minore di 0 e il valore massimo minore di 0 il metodo non tornerebbe nulla.
+    // In caso contrario ritorna i dispotitivi in quel range di prezzo scelto dall'utente.
     public List<Dispositivo> ricercaInRangeDiPrezzo(double min, double max) {
         boolean trovato = false;
         List<Dispositivo> dispositiviTrovati = new ArrayList<>();
@@ -121,10 +132,8 @@ public class Magazzino {
         return dispositiviTrovati;
     }
 
-    public double calcolaSpesaMediaAcquisto() throws Exception {
-        if (dispositivi.isEmpty()) {
-            throw new Exception("Non ci sono dispositivi nel magazzino.");
-        }
+    //Questo metodo calcola la media di tutti i prodotti presenti nel magazzino
+    public double calcolaSpesaMediaAcquisto() {
         double somma = 0;
         for (Dispositivo dispositivo : dispositivi) {
             somma += dispositivo.getPrezzoAcquisto();
@@ -132,6 +141,7 @@ public class Magazzino {
         return somma / dispositivi.size();
     }
 
+    // Questo metodo riempe il magazzino di prodotti.
     public void aggiungiDispositivi() {
 
         Dispositivo s1 = new Dispositivo("Samsung", "S21", "Grigio", "8.5", "16gb", 1299.99, 1400, Dispositivo.SMARTPHONE);

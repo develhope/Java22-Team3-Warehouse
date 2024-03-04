@@ -2,23 +2,46 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Carrello.
+ */
 public class Carrello {
     private List<Dispositivo> carrello;
 
+    /**
+     * Instantiates a new Carrello.
+     */
     public Carrello() {
         this.carrello = new ArrayList<>();
     }
 
 
+    /**
+     * Gets carrello.
+     *
+     * @return the carrello
+     */
     public List<Dispositivo> getCarrello() {
         return carrello;
     }
 
 
+    /**
+     * Sets carrello.
+     *
+     * @param carrello the carrello
+     */
     public void setCarrello(List<Dispositivo> carrello) {
         this.carrello = carrello;
     }
 
+    /**
+     * Aggiungi al carrello optional.
+     *
+     * @param id           the id
+     * @param dispositivos the dispositivos
+     * @return the optional
+     */
     public Optional<Dispositivo> aggiungiAlCarrello(String id, List<Dispositivo> dispositivos) {
         for (Dispositivo dispositivo : dispositivos) {
             if (dispositivo.getId().equals(id)) {
@@ -29,6 +52,13 @@ public class Carrello {
         return Optional.empty();
     }
 
+    /**
+     * Rimuovi dal carrello optional.
+     *
+     * @param id          the id
+     * @param dispositivi the dispositivi
+     * @return the optional
+     */
     public Optional<Dispositivo> rimuoviDalCarrello(String id, List<Dispositivo> dispositivi) {
         for (Dispositivo dispositivo : dispositivi) {
             if (dispositivo.getId().equals(id)) {
@@ -39,6 +69,11 @@ public class Carrello {
         return Optional.empty();
     }
 
+    /**
+     * Calcola totale carrello double.
+     *
+     * @return the double
+     */
     public double calcolaTotaleCarrello() {
         double totale = 0;
         for (Dispositivo dispositivo : this.carrello) {
@@ -47,6 +82,12 @@ public class Carrello {
         return totale;
     }
 
+    /**
+     * Chiudi transazione double.
+     *
+     * @param somma the somma
+     * @return the double
+     */
     public double chiudiTransazione(double somma) {
         double totale = calcolaTotaleCarrello();
         if (somma >= totale) {
