@@ -117,6 +117,7 @@ public class MenuComandi {
                     }
                     break;
                 }
+                //TODO aggiungere case UNKNOWN
             }
         }
     }
@@ -202,6 +203,7 @@ public class MenuComandi {
                     }
                     break;
                 }
+                //TODO aggiungere case UNKNOWN
             }
         }
     }
@@ -240,7 +242,7 @@ public class MenuComandi {
 
     private static double leggiDouble(double min, double max, String messaggio) {
         Scanner scanner = new Scanner(System.in);
-        double valore = 0;
+        double valore;
         while (true) {
             System.out.println(messaggio);
             if (scanner.hasNextDouble()) {
@@ -372,14 +374,14 @@ public class MenuComandi {
         }
     }
 
-    private static void stampaMenuAdmin() {
+    private void stampaMenuAdmin() {
         System.out.println("Benvenuto nel menu amministratore:");
         for (ComandiAdmin comando : ComandiAdmin.values()) {
             System.out.println(comando.ordinal() + ". " + comando.getStringa());
         }
     }
 
-    private static void stampaMenuUser() {
+    private void stampaMenuUser() {
         System.out.println("Benvenuto nel magazzino:");
         for (ComandiUser comando : ComandiUser.values()) {
             System.out.println(comando.ordinal() + ". " + comando.getStringa());

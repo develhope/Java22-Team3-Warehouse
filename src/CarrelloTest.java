@@ -43,6 +43,45 @@ public class CarrelloTest {
     }
 
     @Test
+    public void testRimuoviDalCarrello_ConIdValido() {
+        // Preparazione
+        Carrello carrello = new Carrello();
+        List<Dispositivo> dispositivi = new ArrayList<>();
+        Dispositivo dispositivo1 = new Dispositivo("", "", "", "", "", 100, 100, "");
+        dispositivo1.setId("1");
+        dispositivo1.setPrezzoVendita(100.0);
+        dispositivi.add(dispositivo1);
+        carrello.aggiungiAlCarrello("1", dispositivi);
+
+        // Esecuzione
+        Optional<Dispositivo> dispositivoRimosso = carrello.rimuoviDalCarrello("1", dispositivi);
+
+        // Verifica
+        assertTrue(dispositivoRimosso.isPresent());
+        assertEquals("1", dispositivoRimosso.get().getId());
+        assertTrue(carrello.getCarrello().isEmpty());
+    }
+
+    @Test
+    public void testRimuoviDalCarrello_ConIdNonValido() {
+        // Preparazione
+        Carrello carrello = new Carrello();
+        List<Dispositivo> dispositivi = new ArrayList<>();
+        Dispositivo dispositivo1 = new Dispositivo("", "", "", "", "", 100, 100, "");
+        dispositivo1.setId("1");
+        dispositivo1.setPrezzoVendita(100.0);
+        dispositivi.add(dispositivo1);
+        carrello.aggiungiAlCarrello("1", dispositivi);
+
+        // Esecuzione
+        Optional<Dispositivo> dispositivoRimosso = carrello.rimuoviDalCarrello("2", dispositivi);
+
+        // Verifica
+        assertFalse(dispositivoRimosso.isPresent());
+        assertFalse(carrello.getCarrello().isEmpty());
+    }
+
+    @Test
     public void testCalcolaTotaleCarrello_ConCarrelloVuoto() {
         // Preparazione
         Carrello carrello = new Carrello();
@@ -131,42 +170,4 @@ public class CarrelloTest {
         assertFalse(carrello.getCarrello().isEmpty());
     }
 
-    @Test
-    public void testRimuoviDalCarrello_ConIdValido() {
-        // Preparazione
-        Carrello carrello = new Carrello();
-        List<Dispositivo> dispositivi = new ArrayList<>();
-        Dispositivo dispositivo1 = new Dispositivo("", "", "", "", "", 100, 100, "");
-        dispositivo1.setId("1");
-        dispositivo1.setPrezzoVendita(100.0);
-        dispositivi.add(dispositivo1);
-        carrello.aggiungiAlCarrello("1", dispositivi);
-
-        // Esecuzione
-        Optional<Dispositivo> dispositivoRimosso = carrello.rimuoviDalCarrello("1", dispositivi);
-
-        // Verifica
-        assertTrue(dispositivoRimosso.isPresent());
-        assertEquals("1", dispositivoRimosso.get().getId());
-        assertTrue(carrello.getCarrello().isEmpty());
-    }
-
-    @Test
-    public void testRimuoviDalCarrello_ConIdNonValido() {
-        // Preparazione
-        Carrello carrello = new Carrello();
-        List<Dispositivo> dispositivi = new ArrayList<>();
-        Dispositivo dispositivo1 = new Dispositivo("", "", "", "", "", 100, 100, "");
-        dispositivo1.setId("1");
-        dispositivo1.setPrezzoVendita(100.0);
-        dispositivi.add(dispositivo1);
-        carrello.aggiungiAlCarrello("1", dispositivi);
-
-        // Esecuzione
-        Optional<Dispositivo> dispositivoRimosso = carrello.rimuoviDalCarrello("2", dispositivi);
-
-        // Verifica
-        assertFalse(dispositivoRimosso.isPresent());
-        assertFalse(carrello.getCarrello().isEmpty());
-    }
 }
