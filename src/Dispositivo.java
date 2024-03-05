@@ -40,48 +40,12 @@ public class Dispositivo {
         return produttore;
     }
 
-    public void setProduttore(String produttore) {
-        this.produttore = produttore;
-    }
-
     public String getModello() {
         return modello;
     }
 
-    public void setModello(String modello) {
-        this.modello = modello;
-    }
-
-    public String getDescrizione() {
-        return descrizione;
-    }
-
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
-    }
-
-    public String getPollici() {
-        return pollici;
-    }
-
-    public void setPollici(String pollici) {
-        this.pollici = pollici;
-    }
-
-    public String getSpazioArchiviazione() {
-        return spazioArchiviazione;
-    }
-
-    public void setSpazioArchiviazione(String spazioArchiviazione) {
-        this.spazioArchiviazione = spazioArchiviazione;
-    }
-
     public double getPrezzoAcquisto() {
         return prezzoAcquisto;
-    }
-
-    public void setPrezzoAcquisto(double prezzoAcquisto) {
-        this.prezzoAcquisto = prezzoAcquisto;
     }
 
     public double getPrezzoVendita() {
@@ -94,10 +58,6 @@ public class Dispositivo {
 
     public String getTipoDispositivo() {
         return tipoDispositivo;
-    }
-
-    public void setTipoDispositivo(String tipoDispositivo) {
-        this.tipoDispositivo = tipoDispositivo;
     }
 
     @Override

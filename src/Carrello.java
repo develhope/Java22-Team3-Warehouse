@@ -15,28 +15,12 @@ public class Carrello {
         this.carrello = new ArrayList<>();
     }
 
-
-    /**
-     * Gets carrello.
-     *
-     * @return the carrello
-     */
     public List<Dispositivo> getCarrello() {
         return carrello;
     }
 
-
     /**
-     * Sets carrello.
-     *
-     * @param carrello the carrello
-     */
-    public void setCarrello(List<Dispositivo> carrello) {
-        this.carrello = carrello;
-    }
-
-    /**
-     * Aggiungi al carrello optional.
+     * Aggiungi al carrello tramite ID.
      *
      * @param id           the id
      * @param dispositivos the dispositivos
@@ -53,7 +37,7 @@ public class Carrello {
     }
 
     /**
-     * Rimuovi dal carrello optional.
+     * Rimuovi dal carrello tramite ID.
      *
      * @param id          the id
      * @param dispositivi the dispositivi
