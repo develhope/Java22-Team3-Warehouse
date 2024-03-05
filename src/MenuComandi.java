@@ -110,7 +110,6 @@ public class MenuComandi {
                         System.out.println("Il totale è: " + String.format("%.2f", totale) + "€");
                     }
                     break;
-                }
             }
         }
     }
@@ -181,7 +180,6 @@ public class MenuComandi {
                         System.out.println("Il totale è: " + String.format("%.2f", totale) + "€");
                     }
                     break;
-                }
             }
         }
     }
@@ -380,3 +378,4 @@ public class MenuComandi {
         }
     }
 }
+
