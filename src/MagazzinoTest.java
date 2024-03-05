@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 
@@ -27,17 +29,16 @@ public class MagazzinoTest {
     public void testSearchByTipoDispositivo_TipoVuoto() {
         Magazzino magazzino = new Magazzino();
         List<Dispositivo> dispositivos = magazzino.searchByTipoDispositivo("");
+
         assertEquals(0, dispositivos.size());
-
-
     }
 
     @Test
     public void testSearchByTipoDispositivo_TipoNull() {
         Magazzino magazzino = new Magazzino();
         List<Dispositivo> dispositivos = magazzino.searchByTipoDispositivo(null);
-        assertEquals(0, dispositivos.size());
 
+        assertEquals(0, dispositivos.size());
     }
 
     @Test
@@ -46,6 +47,7 @@ public class MagazzinoTest {
         Dispositivo dispositivoTest = new Dispositivo("HP", "s22", "telefono carino", "4,9'", "32 GB", 750, 999, Dispositivo.SMARTPHONE);
         magazzinoTest.addDispositivo(dispositivoTest);
         List<Dispositivo> dispositivi = magazzinoTest.searchByProduttore("HP");
+
         assertEquals("HP", dispositivi.getFirst().getProduttore());
     }
 
@@ -61,14 +63,15 @@ public class MagazzinoTest {
     public void testSearchByProduttore_NomeVuoto() {
         Magazzino magazzino = new Magazzino();
         List<Dispositivo> dispositivos = magazzino.searchByProduttore("");
-        assertEquals(0, dispositivos.size());
 
+        assertEquals(0, dispositivos.size());
     }
 
     @Test
     public void testSearchByProduttore_NomeNull() {
         Magazzino magazzino = new Magazzino();
         List<Dispositivo> dispositivos = magazzino.searchByProduttore(null);
+
         assertEquals(0, dispositivos.size());
     }
 
@@ -95,18 +98,16 @@ public class MagazzinoTest {
     public void testSearchByModello_NomeVuoto() {
         Magazzino magazzino = new Magazzino();
         List<Dispositivo> dispositivos = magazzino.searchByModello("");
+
         assertEquals(0, dispositivos.size());
-
-
     }
 
     @Test
     public void testSearchByModello_NomeNull() {
         Magazzino magazzino = new Magazzino();
         List<Dispositivo> dispositivos = magazzino.searchByModello(null);
+
         assertEquals(0, dispositivos.size());
-
-
     }
 
     @Test
@@ -132,6 +133,7 @@ public class MagazzinoTest {
     public void testRicercaPrezzoVendita_PrezzoNegativo() {
         Magazzino magazzino = new Magazzino();
         List<Dispositivo> dispositivos = magazzino.ricercaPrezzoVendita(-100.0);
+
         assertEquals(0, dispositivos.size());
     }
 
@@ -139,6 +141,7 @@ public class MagazzinoTest {
     public void testRicercaPrezzoVendita_PrezzoZero() {
         Magazzino magazzino = new Magazzino();
         List<Dispositivo> dispositivos =  magazzino.ricercaPrezzoVendita(0.0);
+
         assertEquals(0, dispositivos.size());
     }
 
@@ -165,6 +168,7 @@ public class MagazzinoTest {
     public void testRicercaPrezzoAcquisto_PrezzoNegativo() {
         Magazzino magazzino = new Magazzino();
         List<Dispositivo> dispositivos = magazzino.ricercaPrezzoAcquisto(-100.0);
+
         assertEquals(0, dispositivos.size());
     }
 
@@ -172,6 +176,7 @@ public class MagazzinoTest {
     public void testRicercaPrezzoAcquisto_PrezzoZero() {
         Magazzino magazzino = new Magazzino();
         List<Dispositivo> dispositivos = magazzino.ricercaPrezzoAcquisto(0.0);
+
         assertEquals(0, dispositivos.size());
     }
 
@@ -214,6 +219,7 @@ public class MagazzinoTest {
     public void testRicercaInRangeDiPrezzo_PrezzoMinimoNegativo() {
         Magazzino magazzino = new Magazzino();
         List<Dispositivo> dispositivos = magazzino.ricercaInRangeDiPrezzo(-100.0, 100.0);
+
         assertEquals(0, dispositivos.size());
     }
 
@@ -221,6 +227,7 @@ public class MagazzinoTest {
     public void testRicercaInRangeDiPrezzo_PrezzoMassimoNegativo() {
         Magazzino magazzino = new Magazzino();
         List<Dispositivo> dispositivos =magazzino.ricercaInRangeDiPrezzo(100.0, -100.0);
+
         assertEquals(0, dispositivos.size());
     }
 
@@ -228,6 +235,29 @@ public class MagazzinoTest {
     public void testRicercaInRangeDiPrezzo_PrezzoMinimoMaggioreDiPrezzoMassimo() {
         Magazzino magazzino = new Magazzino();
         List<Dispositivo> dispositivos = magazzino.ricercaInRangeDiPrezzo(100.0, 50.0);
+
         assertEquals(0, dispositivos.size());
+    }
+
+    @Test
+    public void testcalcolaSpesaMediaAcquisto_TestConUnDispositivo() throws Exception {
+        Magazzino magazzino = new Magazzino();
+        Dispositivo dispositivo = new Dispositivo("Samsung", "s22", "telefono carino", "4,9'", "32 GB", 750, 999, Dispositivo.SMARTPHONE);
+        magazzino.addDispositivo(dispositivo);
+        double spesaMedia = magazzino.calcolaSpesaMediaAcquisto();
+
+        assertEquals(750, spesaMedia, 0.01);
+    }
+
+    @Test
+    public void testCalcolaSpesaMediaAcquisto_TestPiuDispositivi() throws Exception {
+        Magazzino magazzino = new Magazzino();
+        Dispositivo dispositivo1 = new Dispositivo("Samsung", "s22", "telefono carino", "4,9'", "32 GB", 750, 999, Dispositivo.SMARTPHONE);
+        Dispositivo dispositivo2 = new Dispositivo("Apple", "iPhone 13", "telefono bellino", "6,1'", "128 GB", 850, 1199, Dispositivo.SMARTPHONE);
+        magazzino.addDispositivo(dispositivo1);
+        magazzino.addDispositivo(dispositivo2);
+        double spesaMedia = magazzino.calcolaSpesaMediaAcquisto();
+
+        assertEquals(800, spesaMedia, 0.01);
     }
 }

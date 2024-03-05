@@ -110,6 +110,7 @@ public class MenuComandi {
                         System.out.println("Il totale è: " + String.format("%.2f", totale) + "€");
                     }
                     break;
+                }
             }
         }
     }
@@ -180,6 +181,7 @@ public class MenuComandi {
                         System.out.println("Il totale è: " + String.format("%.2f", totale) + "€");
                     }
                     break;
+                }
             }
         }
     }
@@ -230,7 +232,7 @@ public class MenuComandi {
         return stringa;
     }
 
-    private static double leggiDouble(double min, double max, String messaggio) {
+    private double leggiDouble(double min, double max, String messaggio) {
         Scanner scanner = new Scanner(System.in);
         double valore;
         while (true) {
@@ -308,7 +310,7 @@ public class MenuComandi {
         return new Dispositivo(produttore, modello, descrizione, pollici, spazioDiArchiviazione, prezzoAcquisto, prezzoVendita, tipoDispositivo);
     }
 
-    private static void aggiungiAlCarrello(Magazzino magazzino, Carrello carrello) {
+    private void aggiungiAlCarrello(Magazzino magazzino, Carrello carrello) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Inserisci l'ID del prodotto da aggiungere al carrello:");
@@ -332,7 +334,7 @@ public class MenuComandi {
         }
     }
 
-    private static void rimuoviDalCarrello(Carrello carrello) {
+    private void rimuoviDalCarrello(Carrello carrello) {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -364,14 +366,14 @@ public class MenuComandi {
         }
     }
 
-    private static void stampaMenuAdmin() {
+    private void stampaMenuAdmin() {
         System.out.println("Benvenuto nel menu amministratore:");
         for (ComandiAdmin comando : ComandiAdmin.values()) {
             System.out.println(comando.ordinal() + ". " + comando.getStringa());
         }
     }
 
-    private static void stampaMenuUser() {
+    private void stampaMenuUser() {
         System.out.println("Benvenuto nel magazzino:");
         for (ComandiUser comando : ComandiUser.values()) {
             System.out.println(comando.ordinal() + ". " + comando.getStringa());
