@@ -132,6 +132,7 @@ public class MenuComandi {
                     }
                     break;
                 case 2:
+                    //metodo che stampa a schermo le ricerche fatte tramite la tipologia del dispositivo
                     cercaTipologia(magazzino);
                     break;
 
