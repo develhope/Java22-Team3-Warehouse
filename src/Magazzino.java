@@ -65,21 +65,10 @@ public class Magazzino {
     //Questo metodo fa una ricerca in base al prezzo di vendita scelto dall'utente.
     // Se il prezzo è minore di 0 oppure uguale a 0 non ritornerà nulla all'utente, in caso contrario ritornerà un dispositivo con quel prezzo scelto.
     public List<Dispositivo> ricercaPrezzoVendita(double prezzo) {
-        boolean trovato = false;
         List<Dispositivo> dispositiviTrovati = new ArrayList<>();
-        if (prezzo < 0 || prezzo == 0) {
-            return dispositiviTrovati;
-        } else {
-            for (Dispositivo dispositivo : dispositivi) {
-                if (dispositivo.getPrezzoVendita() == prezzo) {
-                    //TODO spostare System.out.println(dispositivo)
-                    System.out.println(dispositivo);
-                    trovato = true;
-                    dispositiviTrovati.add(dispositivo);
-                }
-            }
-            if (!trovato) {
-                System.out.println("\nNon abbiamo nessun oggetto con questo prezzo di Vendita: " + prezzo);
+        for (Dispositivo dispositivo : dispositivi) {
+            if (dispositivo.getPrezzoVendita() == prezzo) {
+                dispositiviTrovati.add(dispositivo);
             }
         }
         return dispositiviTrovati;
@@ -88,21 +77,10 @@ public class Magazzino {
     //Questo metodo fa una ricerca in base al prezzo di acquisto scelto dall'utente.
     // Se il prezzo è minore di 0 oppure uguale a 0 non ritornerà nulla all'utente, in caso contrario ritornerà un dispositivo con quel prezzo scelto.
     public List<Dispositivo> ricercaPrezzoAcquisto(double prezzo) {
-        boolean trovato = false;
         List<Dispositivo> dispositiviTrovati = new ArrayList<>();
-        if (prezzo < 0 || prezzo == 0) {
-            return dispositiviTrovati;
-        } else {
-            for (Dispositivo dispositivo : dispositivi) {
-                if (dispositivo.getPrezzoAcquisto() == prezzo) {
-                    //TODO spostare System.out.println(dispositivo)
-                    System.out.println(dispositivo);
-                    trovato = true;
-                    dispositiviTrovati.add(dispositivo);
-                }
-            }
-            if (!trovato) {
-                System.out.println("\nNon abbiamo nessun oggetto con questo prezzo di Acquisto: " + prezzo);
+        for (Dispositivo dispositivo : dispositivi) {
+            if (dispositivo.getPrezzoAcquisto() == prezzo) {
+                dispositiviTrovati.add(dispositivo);
             }
         }
         return dispositiviTrovati;
@@ -112,21 +90,10 @@ public class Magazzino {
     // In caso l'utente dovesse inserire il valore minimo maggiore del massimo oppure minore di 0 e il valore massimo minore di 0 il metodo non tornerebbe nulla.
     // In caso contrario ritorna i dispotitivi in quel range di prezzo scelto dall'utente.
     public List<Dispositivo> ricercaInRangeDiPrezzo(double min, double max) {
-        boolean trovato = false;
         List<Dispositivo> dispositiviTrovati = new ArrayList<>();
-        if (min < 0 || max < 0 || min > max) {
-            return dispositiviTrovati;
-        } else {
-            for (Dispositivo dispositivo : dispositivi) {
-                if (dispositivo.getPrezzoVendita() >= min && dispositivo.getPrezzoVendita() <= max) {
-                    //TODO spostare System.out.println(dispositivo)
-                    System.out.println(dispositivo);
-                    trovato = true;
-                    dispositiviTrovati.add(dispositivo);
-                }
-            }
-            if (!trovato) {
-                System.out.println("\nNon abbiamo nessun oggetto in questo Range di Prezzo: " + min + " - " + max);
+        for (Dispositivo dispositivo : dispositivi) {
+            if (dispositivo.getPrezzoVendita() >= min && dispositivo.getPrezzoVendita() <= max) {
+                dispositiviTrovati.add(dispositivo);
             }
         }
         return dispositiviTrovati;

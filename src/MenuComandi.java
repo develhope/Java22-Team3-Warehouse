@@ -63,18 +63,14 @@ public class MenuComandi {
                     break;
 
                 case 6: // Metodo che stampa la ricerca dei dispositivi per prezzo di acquisto.
-                    double prezzoAcquisto = leggiDouble(0, 10000, "Inserisci il prezzo di Acquisto: ");
-                    magazzino.ricercaPrezzoAcquisto(prezzoAcquisto);
+                    ricercaPerPrezzoAcquisto(magazzino);
                     break;
                 case 7: // Metodo che stempa la ricerca dei dispositivi per prezzo di vendita.
-                    double prezzoVendita = leggiDouble(0, 10000, "Inserisci il prezzo di Vendita: ");
-                    magazzino.ricercaPrezzoVendita(prezzoVendita);
+                    ricercaPerPrezzoVendita(magazzino);
                     break;
 
                 case 8: // Metodo che stampa la ricerca dei dispositivi in un range di prezzo.
-                    double min = leggiDouble(0, 10000, "Inserisci il prezzo minimo: ");
-                    double max = leggiDouble(min, 10000, "Inserisci il prezzo massimo: ");
-                    magazzino.ricercaInRangeDiPrezzo(min, max);
+                    ricercaPerRangeDiPrezzo(magazzino);
                     break;
 
                 case 9: // Metodo che stampa la spesa media di acquisto dei dispositivi.
@@ -144,15 +140,12 @@ public class MenuComandi {
                     cercaModello(magazzino);
                     break;
 
-                case 5: // Metodo che stempa la ricerca dei dispositivi per prezzo di vendita.
-                    double prezzo = leggiDouble(0, 10000, "Inserisci il prezzo di Vendita: ");
-                    magazzino.ricercaPrezzoVendita(prezzo);
+                case 5:// Metodo che stempa la ricerca dei dispositivi per prezzo di vendita.
+                    ricercaPerPrezzoVendita(magazzino);
                     break;
 
-                case 6: // Metodo che stampa la ricerca dei dispositivi in un range di prezzo.
-                    double min = leggiDouble(0, 10000, "Inserisci il prezzo minimo: ");
-                    double max = leggiDouble(min, 10000, "Inserisci il prezzo massimo: ");
-                    magazzino.ricercaInRangeDiPrezzo(min, max);
+                case 6:// Metodo che stampa la ricerca dei dispositivi in un range di prezzo.
+                    ricercaPerRangeDiPrezzo(magazzino);
                     break;
 
                 case 7: // Metodo che aggiunge al carrello i dispositivi tramite ID.
@@ -331,8 +324,15 @@ public class MenuComandi {
             } else {
                 System.out.println("Nessun prodotto trovato con l'ID " + id + ". Riprova.");
             }
-            System.out.println("Vuoi aggiungere un altro prodotto? (si/no)");
-            String risposta = scanner.nextLine();
+            String risposta;
+            while (true) {
+                risposta = leggiStringaNonVuota("Vuoi aggiungere un altro prodotto? (si/no)");
+                if (risposta.equalsIgnoreCase("si") || risposta.equalsIgnoreCase("no")) {
+                    break;
+                } else {
+                    System.out.println("Risposta non valida. Inserisci 'si' o 'no'.");
+                }
+            }
             if (risposta.equalsIgnoreCase("no")) {
                 break;
             }
@@ -342,7 +342,6 @@ public class MenuComandi {
     // Metodo che rimuove dal carrello i dispositivi.
     private void rimuoviDalCarrello(Carrello carrello) {
         Scanner scanner = new Scanner(System.in);
-
         while (true) {
             System.out.println("Inserisci l'ID del prodotto da rimuovere dal carrello:");
             String id;
@@ -357,10 +356,55 @@ public class MenuComandi {
             } else {
                 System.out.println("Nessun prodotto trovato con l'ID " + id + ". Riprova.");
             }
-            System.out.println("Vuoi rimuovere un altro prodotto? (si/no)");
-            String risposta = scanner.nextLine();
+            String risposta;
+            while (true) {
+                risposta = leggiStringaNonVuota("Vuoi rimuovere un altro prodotto? (si/no)");
+                if (risposta.equalsIgnoreCase("si") || risposta.equalsIgnoreCase("no")) {
+                    break;
+                } else {
+                    System.out.println("Risposta non valida. Inserisci 'si' o 'no'.");
+                }
+            }
             if (risposta.equalsIgnoreCase("no")) {
                 break;
+            }
+        }
+    }
+
+    public void ricercaPerPrezzoAcquisto(Magazzino magazzino) {
+        double prezzo = leggiDouble(0, 10000, "Inserisci il prezzo di Vendita: ");
+        List<Dispositivo> dispositivi = magazzino.ricercaPrezzoAcquisto(prezzo);
+        if (prezzo < 0 || prezzo == 0 || dispositivi.isEmpty()) {
+            System.out.println("Nessun dispositivo trovato");
+        } else {
+            for (Dispositivo d : dispositivi) {
+                System.out.println(d);
+            }
+        }
+    }
+
+    public void ricercaPerPrezzoVendita(Magazzino magazzino) {
+        double prezzo = leggiDouble(0, 10000, "Inserisci il prezzo di Vendita: ");
+        List<Dispositivo> dispositivi = magazzino.ricercaPrezzoVendita(prezzo);
+        if (prezzo < 0 || prezzo == 0 || dispositivi.isEmpty()) {
+            System.out.println("Nessun dispositivo trovato");
+        } else {
+            for (Dispositivo d : dispositivi) {
+                System.out.println(d);
+            }
+        }
+    }
+
+    public void ricercaPerRangeDiPrezzo(Magazzino magazzino) {
+        double min = leggiDouble(0, 10000, "Inserisci il prezzo minimo: ");
+        double max = leggiDouble(min, 10000, "Inserisci il prezzo massimo: ");
+        magazzino.ricercaInRangeDiPrezzo(min, max);
+        List<Dispositivo> dispositivi = magazzino.ricercaInRangeDiPrezzo(min, max);
+        if (min < 0 || max < 0 || min > max || dispositivi.isEmpty()) {
+            System.out.println("Nessun dispositivo trovato");
+        } else {
+            for (Dispositivo d : dispositivi) {
+                System.out.println(d);
             }
         }
     }
