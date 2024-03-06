@@ -15,14 +15,40 @@ public class MenuComandi {
      */
     public void avviaMenu(Magazzino magazzino, Carrello carrello) {
         stampaMenuScelte();
+        String password;
         int scelta = leggiRangeIntero(0, ComandiScelta.values().length - 1, "Scelta -->");
         switch (scelta) {
-            // Dopo aver avviato il programma l'utente tramite questo metodo può scegliere se aprire il menù admin o il menù user.
+            // Dopo aver avviato il programma l'utente tramite questo switch può scegliere se aprire il menù admin o il menù user.
             case 0:
                 break;
             case 1:
-                menuAdmin(magazzino, carrello);
-                break;
+                String risposta;
+                while (true) {
+                    password = leggiStringaNonVuota("Inserire la password");
+                    if (password.equalsIgnoreCase("Camelcase")) {
+                        break;
+                    } else {
+                        System.out.println("Password errata");
+                        while (true) {
+                            risposta = leggiStringaNonVuota("Vuoi uscire si / no");
+                            if (risposta.equalsIgnoreCase("si") || risposta.equalsIgnoreCase("no")) {
+                                break;
+                            } else {
+                                System.out.println("Risposta non valida. Inserisci 'si' o 'no'.");
+                            }
+                        }
+                        if(risposta.equalsIgnoreCase("no")) {
+
+                        }
+                        if(risposta.equalsIgnoreCase("si")) {
+                            return;
+                        }
+                    }
+                }
+                if (password.equalsIgnoreCase("camelcase")) {
+                    menuAdmin(magazzino, carrello);
+                    break;
+                }
             case 2:
                 menuUser(magazzino, carrello);
                 break;
@@ -32,80 +58,57 @@ public class MenuComandi {
     private void menuAdmin(Magazzino magazzino, Carrello carrello) {
         while (true) {
             stampaMenuAdmin();
-            double totale;
             int sceltaAdmin = leggiRangeIntero(0, ComandiAdmin.values().length - 1, "Scelta -->");
             switch (sceltaAdmin) {
                 case 0:
                     return;
-                case 1: // Questo metodo stampa a schermo la lista dispositivi.
-                    if (magazzino.getDispositivi().isEmpty()) {
-                        System.out.println("Magazzino vuoto.");
-                    } else {
-                        for (Dispositivo dispositivo : magazzino.getDispositivi()) {
-                            System.out.println(dispositivo);
-                        }
-                    }
+                case 1:
+                    stampaProdotti(magazzino);
                     break;
-                case 2: //Questo metodo permette all'admin di aggiungere nuovi dispositivi al magazzino.
+                case 2:
                     Dispositivo dispositivo = aggiungiMerce();
                     magazzino.addDispositivo(dispositivo);
                     break;
-                case 3: // Metodo che stampa a schermo le ricerche fatte tramite la tipologia del dispositivo.
+                case 3:
                     cercaTipologia(magazzino);
                     break;
 
-                case 4: // Metodo che stampa a schermo le ricerche fatte tramite il produttore del dispositivo.
+                case 4:
                     cercaProduttorte(magazzino);
                     break;
 
-                case 5: // Metodo che stampa a schermo le ricerche fatte tramite il modello del dispositivo.
+                case 5:
                     cercaModello(magazzino);
                     break;
 
-                case 6: // Metodo che stampa la ricerca dei dispositivi per prezzo di acquisto.
+                case 6:
                     ricercaPerPrezzoAcquisto(magazzino);
                     break;
-                case 7: // Metodo che stempa la ricerca dei dispositivi per prezzo di vendita.
+                case 7:
                     ricercaPerPrezzoVendita(magazzino);
                     break;
 
-                case 8: // Metodo che stampa la ricerca dei dispositivi in un range di prezzo.
+                case 8:
                     ricercaPerRangeDiPrezzo(magazzino);
                     break;
 
-                case 9: // Metodo che stampa la spesa media di acquisto dei dispositivi.
-                    if (magazzino.getDispositivi().isEmpty()) {
-                        System.out.println("Magazzino vuoto");
-                    } else {
-                        System.out.printf("%.2f", magazzino.calcolaSpesaMediaAcquisto());
-                        System.out.println();
-                    }
+                case 9:
+                    stampaSpesaMediaAcquisto(magazzino);
                     break;
-                case 10: // Metodo che aggiunge al carrello i dispositivi tramite ID.
+                case 10:
                     aggiungiAlCarrello(magazzino, carrello);
                     break;
 
-                case 11: // Metodo che rimuove dal carrello i dispositivi.
+                case 11:
                     rimuoviDalCarrello(carrello);
                     break;
 
-                case 12: // Metodo che stampa a schermo il totale dei dispositivi nel carrello.
-                    System.out.println("Prodotti nel carrello:");
-                    for (Dispositivo dispositivoCart : carrello.getCarrello()) {
-                        System.out.println("Prodotto: " + dispositivoCart.getModello() + ", Prezzo: " + dispositivoCart.getPrezzoVendita() + "€");
-                    }
-                    totale = carrello.calcolaTotaleCarrello();
-                    System.out.println("Totale del carrello: " + String.format("%.2f", totale) + "€");
+                case 12:
+                    stampaTotaleCarrello(carrello);
                     break;
 
-                case 13: // Metodo che stampa a schermo la spesa totale effettuata dall'utente.
-                    if (carrello.calcolaTotaleCarrello() == 0) {
-                        System.out.println("il carrello è vuoto");
-                        break;
-                    } else {
-                        totale = carrello.calcolaTotaleCarrello();
-                        System.out.println("Il totale è: " + String.format("%.2f", totale) + "€");
-                    }
+                case 13:
+                    stampaSpesaTotale(carrello);
                     break;
             }
         }
@@ -114,65 +117,47 @@ public class MenuComandi {
     private void menuUser(Magazzino magazzino, Carrello carrello) {
         while (true) {
             stampaMenuUser();
-            double totale;
             int sceltaUser = leggiRangeIntero(0, ComandiUser.values().length - 1, "Scelta -->");
             switch (sceltaUser) {
                 case 0:
                     return;
-                case 1: // Questo metodo stampa a schermo la lista dispositivi.
-                    if (magazzino.getDispositivi().isEmpty()) {
-                        System.out.println("Magazzino vuoto.");
-                    } else {
-                        for (Dispositivo dispositivo : magazzino.getDispositivi()) {
-                            System.out.println(dispositivo);
-                        }
-                    }
+                case 1:
+                    stampaProdotti(magazzino);
                     break;
-                case 2: // Metodo che stampa a schermo le ricerche fatte tramite la tipologia del dispositivo.
+                case 2:
                     cercaTipologia(magazzino);
                     break;
 
-                case 3: // Metodo che stampa a schermo le ricerche fatte tramite il produttore del dispositivo.
+                case 3:
                     cercaProduttorte(magazzino);
                     break;
 
-                case 4: // Metodo che stampa a schermo le ricerche fatte tramite il modello del dispositivo.
+                case 4:
                     cercaModello(magazzino);
                     break;
 
-                case 5:// Metodo che stempa la ricerca dei dispositivi per prezzo di vendita.
+                case 5:
                     ricercaPerPrezzoVendita(magazzino);
                     break;
 
-                case 6:// Metodo che stampa la ricerca dei dispositivi in un range di prezzo.
+                case 6:
                     ricercaPerRangeDiPrezzo(magazzino);
                     break;
 
-                case 7: // Metodo che aggiunge al carrello i dispositivi tramite ID.
+                case 7:
                     aggiungiAlCarrello(magazzino, carrello);
                     break;
 
-                case 8: // Metodo che rimuove dal carrello i dispositivi.
+                case 8:
                     rimuoviDalCarrello(carrello);
                     break;
 
-                case 9: // Metodo che stampa a schermo il totale dei dispositivi nel carrello.
-                    System.out.println("Prodotti nel carrello:");
-                    for (Dispositivo dispositivo : carrello.getCarrello()) {
-                        System.out.println("Prodotto: " + dispositivo.getModello() + ", Prezzo: " + dispositivo.getPrezzoVendita() + "€");
-                    }
-                    totale = carrello.calcolaTotaleCarrello();
-                    System.out.println("Totale del carrello: " + String.format("%.2f", totale) + "€");
+                case 9:
+                    stampaTotaleCarrello(carrello);
                     break;
 
-                case 10: // Metodo che stampa a schermo la spesa totale effettuata dall'utente.
-                    if (carrello.calcolaTotaleCarrello() == 0) {
-                        System.out.println("il carrello è vuoto");
-                        break;
-                    } else {
-                        totale = carrello.calcolaTotaleCarrello();
-                        System.out.println("Il totale è: " + String.format("%.2f", totale) + "€");
-                    }
+                case 10:
+                    stampaSpesaTotale(carrello);
                     break;
             }
         }
@@ -307,6 +292,27 @@ public class MenuComandi {
         return new Dispositivo(produttore, modello, descrizione, pollici, spazioDiArchiviazione, prezzoAcquisto, prezzoVendita, tipoDispositivo);
     }
 
+    // Questo metodo stampa a schermo la lista dispositivi.
+    private void stampaProdotti(Magazzino magazzino) {
+        if (magazzino.getDispositivi().isEmpty()) {
+            System.out.println("Magazzino vuoto.");
+        } else {
+            for (Dispositivo dispositivo : magazzino.getDispositivi()) {
+                System.out.println(dispositivo);
+            }
+        }
+    }
+
+    // Metodo che stampa la spesa media di acquisto dei dispositivi.
+    private void stampaSpesaMediaAcquisto(Magazzino magazzino) {
+        if (magazzino.getDispositivi().isEmpty()) {
+            System.out.println("Magazzino vuoto");
+        } else {
+            System.out.printf("%.2f", magazzino.calcolaSpesaMediaAcquisto());
+            System.out.println();
+        }
+    }
+
     // Metodo che aggiunge al carrello i dispositivi.
     private void aggiungiAlCarrello(Magazzino magazzino, Carrello carrello) {
         Scanner scanner = new Scanner(System.in);
@@ -371,6 +377,7 @@ public class MenuComandi {
         }
     }
 
+    // Metodo che stampa la ricerca dei dispositivi per prezzo di acquisto.
     public void ricercaPerPrezzoAcquisto(Magazzino magazzino) {
         double prezzo = leggiDouble(0, 10000, "Inserisci il prezzo di Vendita: ");
         List<Dispositivo> dispositivi = magazzino.ricercaPrezzoAcquisto(prezzo);
@@ -383,6 +390,7 @@ public class MenuComandi {
         }
     }
 
+    // Metodo che stempa la ricerca dei dispositivi per prezzo di vendita.
     public void ricercaPerPrezzoVendita(Magazzino magazzino) {
         double prezzo = leggiDouble(0, 10000, "Inserisci il prezzo di Vendita: ");
         List<Dispositivo> dispositivi = magazzino.ricercaPrezzoVendita(prezzo);
@@ -395,6 +403,7 @@ public class MenuComandi {
         }
     }
 
+    // Metodo che stampa la ricerca dei dispositivi in un range di prezzo.
     public void ricercaPerRangeDiPrezzo(Magazzino magazzino) {
         double min = leggiDouble(0, 10000, "Inserisci il prezzo minimo: ");
         double max = leggiDouble(min, 10000, "Inserisci il prezzo massimo: ");
@@ -407,6 +416,26 @@ public class MenuComandi {
                 System.out.println(d);
             }
         }
+    }
+
+    // Metodo che stampa a schermo la spesa totale effettuata dall'utente.
+    public void stampaSpesaTotale(Carrello carrello) {
+        if (carrello.calcolaTotaleCarrello() == 0) {
+            System.out.println("il carrello è vuoto");
+        } else {
+            double totale = carrello.calcolaTotaleCarrello();
+            System.out.println("Il totale è: " + String.format("%.2f", totale) + "€");
+        }
+    }
+
+    // Metodo che stampa a schermo il totale dei dispositivi nel carrello.
+    public void stampaTotaleCarrello(Carrello carrello) {
+        System.out.println("Prodotti nel carrello:");
+        for (Dispositivo dispositivo : carrello.getCarrello()) {
+            System.out.println("Prodotto: " + dispositivo.getModello() + ", Prezzo: " + dispositivo.getPrezzoVendita() + "€");
+        }
+        double totale = carrello.calcolaTotaleCarrello();
+        System.out.println("Totale del carrello: " + String.format("%.2f", totale) + "€");
     }
 
     // Stampa a schermo il menù principale.
