@@ -7,6 +7,10 @@ import java.util.Scanner;
  */
 public class MenuComandi {
 
+
+    public MenuComandi() {
+    }
+
     /**
      * Avvia menu.
      *
@@ -14,41 +18,17 @@ public class MenuComandi {
      * @param carrello  the carrello
      */
     public void avviaMenu(Magazzino magazzino, Carrello carrello) {
+        magazzino.riempiMagazzino();
         stampaMenuScelte();
-        String password;
         int scelta = leggiRangeIntero(0, ComandiScelta.values().length - 1, "Scelta -->");
         switch (scelta) {
             // Dopo aver avviato il programma l'utente tramite questo switch può scegliere se aprire il menù admin o il menù user.
             case 0:
                 break;
             case 1:
-                String risposta;
-                while (true) {
-                    password = leggiStringaNonVuota("Inserire la password");
-                    if (password.equalsIgnoreCase("Camelcase")) {
-                        break;
-                    } else {
-                        System.out.println("Password errata");
-                        while (true) {
-                            risposta = leggiStringaNonVuota("Vuoi uscire si / no");
-                            if (risposta.equalsIgnoreCase("si") || risposta.equalsIgnoreCase("no")) {
-                                break;
-                            } else {
-                                System.out.println("Risposta non valida. Inserisci 'si' o 'no'.");
-                            }
-                        }
-                        if(risposta.equalsIgnoreCase("no")) {
+                menuPassword(magazzino, carrello);
 
-                        }
-                        if(risposta.equalsIgnoreCase("si")) {
-                            return;
-                        }
-                    }
-                }
-                if (password.equalsIgnoreCase("camelcase")) {
-                    menuAdmin(magazzino, carrello);
-                    break;
-                }
+                break;
             case 2:
                 menuUser(magazzino, carrello);
                 break;
@@ -232,7 +212,7 @@ public class MenuComandi {
 
     // Metodo che stampa la ricerca tramite tipologia.
     private void cercaTipologia(Magazzino magazzino) {
-        String tipologia = leggiStringaNonVuota("Inserisci tipologia");
+        String tipologia = leggiStringaNonVuota("Inserisci tipologia, scegli tra smartphone, notebook o tablet: ");
         List<Dispositivo> dispositivi = magazzino.searchByTipoDispositivo(tipologia);
         if (dispositivi.isEmpty()) {
             System.out.println("Nessun dispositivo di questo tipo");
@@ -461,5 +441,30 @@ public class MenuComandi {
             System.out.println(comando.ordinal() + ". " + comando.getStringa());
         }
     }
-}
 
+    public void menuPassword(Magazzino magazzino, Carrello carrello) {
+        String password;
+        String risposta;
+        boolean continua = true;
+        while (continua) {
+            password = leggiStringaNonVuota("Inserire la password");
+            if (password.equalsIgnoreCase("ciao")) {
+                menuAdmin(magazzino, carrello);
+                break;
+            } else {
+                System.out.println("Password errata");
+                while (true) {
+                    risposta = leggiStringaNonVuota("Vuoi uscire si / no");
+                    if (risposta.equalsIgnoreCase("si") || risposta.equalsIgnoreCase("no")) {
+                        break;
+                    } else {
+                        System.out.println("Risposta non valida. Inserisci 'si' o 'no'.");
+                    }
+                }
+                if (risposta.equalsIgnoreCase("si")) {
+                    continua = false;
+                }
+            }
+        }
+    }
+}

@@ -1,7 +1,7 @@
 public enum ComandiScelta {
-    ESCI("Esci"),
-    ADMIN("Menu admin"),
-    USER("Menu user");
+    ESCI("Esci."),
+    ADMIN("Menu admin."),
+    USER("Menu user.");
 
     private String stringa;
 
