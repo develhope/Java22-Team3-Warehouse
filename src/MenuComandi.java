@@ -5,8 +5,8 @@ import java.util.Scanner;
 /**
  * The type Menu comandi.
  */
-public class MenuComandi {
 
+public class MenuComandi {
 
     public MenuComandi() {
     }
@@ -17,18 +17,21 @@ public class MenuComandi {
      * @param magazzino the magazzino
      * @param carrello  the carrello
      */
+
     public void avviaMenu(Magazzino magazzino, Carrello carrello) {
         magazzino.riempiMagazzino();
         stampaMenuScelte();
         int scelta = leggiRangeIntero(0, ComandiScelta.values().length - 1, "Scelta -->");
+
         switch (scelta) {
             // Dopo aver avviato il programma l'utente tramite questo switch può scegliere se aprire il menù admin o il menù user.
             case 0:
                 break;
+
             case 1:
                 menuPassword(magazzino, carrello);
-
                 break;
+
             case 2:
                 menuUser(magazzino, carrello);
                 break;
@@ -36,19 +39,24 @@ public class MenuComandi {
     }
 
     private void menuAdmin(Magazzino magazzino, Carrello carrello) {
+
         while (true) {
             stampaMenuAdmin();
             int sceltaAdmin = leggiRangeIntero(0, ComandiAdmin.values().length - 1, "Scelta -->");
+
             switch (sceltaAdmin) {
                 case 0:
                     return;
+
                 case 1:
                     stampaProdotti(magazzino);
                     break;
+
                 case 2:
                     Dispositivo dispositivo = aggiungiMerce();
                     magazzino.addDispositivo(dispositivo);
                     break;
+
                 case 3:
                     cercaTipologia(magazzino);
                     break;
@@ -64,6 +72,7 @@ public class MenuComandi {
                 case 6:
                     ricercaPerPrezzoAcquisto(magazzino);
                     break;
+
                 case 7:
                     ricercaPerPrezzoVendita(magazzino);
                     break;
@@ -75,6 +84,7 @@ public class MenuComandi {
                 case 9:
                     stampaSpesaMediaAcquisto(magazzino);
                     break;
+
                 case 10:
                     aggiungiAlCarrello(magazzino, carrello);
                     break;
@@ -95,15 +105,19 @@ public class MenuComandi {
     }
 
     private void menuUser(Magazzino magazzino, Carrello carrello) {
+
         while (true) {
             stampaMenuUser();
             int sceltaUser = leggiRangeIntero(0, ComandiUser.values().length - 1, "Scelta -->");
+
             switch (sceltaUser) {
                 case 0:
                     return;
+
                 case 1:
                     stampaProdotti(magazzino);
                     break;
+
                 case 2:
                     cercaTipologia(magazzino);
                     break;
@@ -151,6 +165,7 @@ public class MenuComandi {
      * @param messaggio the messaggio
      * @return the int
      */
+
     public int leggiRangeIntero(int min, int max, String messaggio) {
         Scanner scanner = new Scanner(System.in);
         int valore;
@@ -177,6 +192,7 @@ public class MenuComandi {
      * @param messaggio the messaggio
      * @return the string
      */
+
     public String leggiStringaNonVuota(String messaggio) {
         System.out.println(messaggio);
         Scanner scanner = new Scanner(System.in);

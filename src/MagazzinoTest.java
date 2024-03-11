@@ -1,12 +1,11 @@
 import org.junit.Test;
-
-import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 
-
 public class MagazzinoTest {
 
+    // Verifica che searchByTipoDispositivo() funzioni con un dispositivo esistente. Crea un magazzino e un dispositivo di tipo SMARTPHONE.
+    // Aggiungi il dispositivo al magazzino. Cerca dispositivi di tipo SMARTPHONE nel magazzino. Assicura che il primo dispositivo nella lista trovata sia uguale a quello creato.
     @Test
     public void testSearchByTipoDispositivo_DispositivoEsistente() {
         Magazzino magazzino = new Magazzino();
@@ -17,6 +16,8 @@ public class MagazzinoTest {
         assertEquals(dispositivo, dispositivi.getFirst());
     }
 
+    // Verifica che searchByTipoDispositivo() gestisca un tipo di dispositivo non esistente. Crea un magazzino vuoto.
+    // Cerca dispositivi con un tipo non esistente. Assicura che la lista di dispositivi trovati sia vuota.
     @Test
     public void testSearchByTipoDispositivo_DispositivoNonEsistente() {
         Magazzino magazzino = new Magazzino();
@@ -25,6 +26,8 @@ public class MagazzinoTest {
         assertEquals(0, dispositivi.size());
     }
 
+    // Verifica che searchByTipoDispositivo() gestisca un tipo di dispositivo vuoto. Crea un magazzino vuoto.
+    // Cerca dispositivi con un tipo vuoto. Assicura che la lista di dispositivi trovati sia vuota.
     @Test
     public void testSearchByTipoDispositivo_TipoVuoto() {
         Magazzino magazzino = new Magazzino();
@@ -33,6 +36,8 @@ public class MagazzinoTest {
         assertEquals(0, dispositivos.size());
     }
 
+    // Verifica che searchByTipoDispositivo() gestisca un tipo di dispositivo nullo. Crea un magazzino vuoto.
+    // Cerca dispositivi con un tipo nullo. Assicura che la lista di dispositivi trovati sia vuota.
     @Test
     public void testSearchByTipoDispositivo_TipoNull() {
         Magazzino magazzino = new Magazzino();
@@ -41,6 +46,9 @@ public class MagazzinoTest {
         assertEquals(0, dispositivos.size());
     }
 
+
+    // Verifica che searchByProduttore() funzioni con un produttore esistente. Crea un magazzino e un dispositivo con un produttore specifico ("HP").
+    // Aggiungi il dispositivo al magazzino. Cerca dispositivi con lo stesso produttore ("HP"). Assicura che il primo dispositivo nella lista trovata abbia lo stesso produttore specificato.
     @Test
     public void testSearchByProduttore_ProduttoreEsistente() {
         Magazzino magazzinoTest = new Magazzino();
@@ -51,6 +59,8 @@ public class MagazzinoTest {
         assertEquals("HP", dispositivi.getFirst().getProduttore());
     }
 
+    // Verifica che searchByProduttore() gestisca un produttore non esistente. Crea un magazzino vuoto.
+    // Cerca dispositivi con un produttore non esistente. Assicura che la lista di dispositivi trovati sia vuota.
     @Test
     public void testSearchByProduttore_ProduttoreNonEsistente() {
         Magazzino magazzino = new Magazzino();
@@ -59,6 +69,8 @@ public class MagazzinoTest {
         assertEquals(0, dispositivi.size());
     }
 
+    // Verifica che searchByProduttore() gestisca un nome di produttore vuoto. Crea un magazzino vuoto.
+    // Cerca dispositivi con un nome di produttore vuoto. Assicura che la lista di dispositivi trovati sia vuota.
     @Test
     public void testSearchByProduttore_NomeVuoto() {
         Magazzino magazzino = new Magazzino();
@@ -67,6 +79,8 @@ public class MagazzinoTest {
         assertEquals(0, dispositivos.size());
     }
 
+    // Verifica che searchByProduttore() gestisca un nome di produttore nullo. Crea un magazzino vuoto.
+    // Cerca dispositivi con un nome di produttore nullo. Assicura che la lista di dispositivi trovati sia vuota.
     @Test
     public void testSearchByProduttore_NomeNull() {
         Magazzino magazzino = new Magazzino();
@@ -75,6 +89,8 @@ public class MagazzinoTest {
         assertEquals(0, dispositivos.size());
     }
 
+    // Verifica che searchByModello() trovi un dispositivo con modello "s22". Crea un magazzino con un dispositivo "s22".
+    // Cerca "s22". Assicura che la lista abbia un solo dispositivo "s22".
     @Test
     public void testSearchByModello_ModelloEsistente() {
         Magazzino magazzino = new Magazzino();
@@ -86,6 +102,7 @@ public class MagazzinoTest {
         assertEquals("s22", dispositivi.getFirst().getModello());
     }
 
+    // Verifica che searchByModello() non trovi un modello inesistente. Cerca "modelloNonEsistente" in un magazzino vuoto. Assicura che la lista sia vuota.
     @Test
     public void testSearchByModello_ModelloNonEsistente() {
         Magazzino magazzino = new Magazzino();
@@ -94,6 +111,7 @@ public class MagazzinoTest {
         assertEquals(0, dispositivi.size());
     }
 
+    // Verifica che searchByModello() gestisca un nome di modello vuoto. Cerca "" in un magazzino vuoto. Assicura che la lista sia vuota.
     @Test
     public void testSearchByModello_NomeVuoto() {
         Magazzino magazzino = new Magazzino();
@@ -102,6 +120,7 @@ public class MagazzinoTest {
         assertEquals(0, dispositivos.size());
     }
 
+    // Verifica che searchByModello() gestisca un nome di modello nullo. Cerca null in un magazzino vuoto. Assicura che la lista sia vuota.
     @Test
     public void testSearchByModello_NomeNull() {
         Magazzino magazzino = new Magazzino();
@@ -110,6 +129,8 @@ public class MagazzinoTest {
         assertEquals(0, dispositivos.size());
     }
 
+    // Verifica che ricercaPrezzoVendita() trovi un dispositivo con prezzo di vendita 999. Crea un magazzino con un dispositivo con prezzo di vendita 999.
+    // Cerca dispositivi con prezzo di vendita 999. Assicura che la lista abbia un solo dispositivo con prezzo di vendita 999.
     @Test
     public void testRicercaPrezzoVendita_PrezzoValido() {
         Magazzino magazzino = new Magazzino();
@@ -121,6 +142,7 @@ public class MagazzinoTest {
         assertEquals(999, dispositivi.getFirst().getPrezzoVendita(), 0.01);
     }
 
+    // Verifica che ricercaPrezzoVendita() non trovi un prezzo di vendita inesistente. Cerca 43628746 in un magazzino vuoto. Assicura che la lista sia vuota.
     @Test
     public void testRicercaPrezzoVendita_PrezzoNonEsistente() {
         Magazzino magazzino = new Magazzino();
@@ -129,6 +151,7 @@ public class MagazzinoTest {
         assertEquals(0, dispositivi.size());
     }
 
+    // Verifica che ricercaPrezzoVendita() gestisca un prezzo di vendita negativo. Cerca -100.0 in un magazzino vuoto. Assicura che la lista sia vuota.
     @Test
     public void testRicercaPrezzoVendita_PrezzoNegativo() {
         Magazzino magazzino = new Magazzino();
@@ -137,6 +160,7 @@ public class MagazzinoTest {
         assertEquals(0, dispositivos.size());
     }
 
+    // Verifica che ricercaPrezzoVendita() gestisca un prezzo di vendita uguale a zero. Cerca 0.0 in un magazzino vuoto. Assicura che la lista sia vuota.
     @Test
     public void testRicercaPrezzoVendita_PrezzoZero() {
         Magazzino magazzino = new Magazzino();
@@ -145,6 +169,8 @@ public class MagazzinoTest {
         assertEquals(0, dispositivos.size());
     }
 
+    // Verifica che ricercaPrezzoAcquisto() trovi un dispositivo con prezzo di acquisto 750. Crea un magazzino con un dispositivo con prezzo di acquisto 750.
+    // Cerca dispositivi con prezzo di acquisto 750. Assicura che la lista abbia un solo dispositivo con prezzo di acquisto 750.
     @Test
     public void testRicercaPrezzoAcquisto_PrezzoValido() {
         Magazzino magazzino = new Magazzino();
@@ -156,6 +182,7 @@ public class MagazzinoTest {
         assertEquals(750, dispositivi.getFirst().getPrezzoAcquisto(), 0.01);
     }
 
+    // Verifica che ricercaPrezzoAcquisto() non trovi un prezzo di acquisto inesistente. Cerca 43628746 in un magazzino vuoto. Assicura che la lista sia vuota.
     @Test
     public void testRicercaPrezzoAcquisto_PrezzoNonEsistente() {
         Magazzino magazzino = new Magazzino();
@@ -164,6 +191,7 @@ public class MagazzinoTest {
         assertEquals(0, dispositivi.size());
     }
 
+    // Verifica che ricercaPrezzoAcquisto() gestisca un prezzo di acquisto negativo. Cerca -100.0 in un magazzino vuoto. Assicura che la lista sia vuota.
     @Test
     public void testRicercaPrezzoAcquisto_PrezzoNegativo() {
         Magazzino magazzino = new Magazzino();
@@ -172,6 +200,7 @@ public class MagazzinoTest {
         assertEquals(0, dispositivos.size());
     }
 
+    // Verifica che ricercaPrezzoAcquisto() gestisca un prezzo di acquisto uguale a zero. Cerca 0.0 in un magazzino vuoto. Assicura che la lista sia vuota.
     @Test
     public void testRicercaPrezzoAcquisto_PrezzoZero() {
         Magazzino magazzino = new Magazzino();
@@ -180,6 +209,8 @@ public class MagazzinoTest {
         assertEquals(0, dispositivos.size());
     }
 
+    // Verifica che ricercaInRangeDiPrezzo() trovi un dispositivo con prezzo di vendita uguale a 999. Crea un magazzino con un dispositivo con prezzo di vendita 999.
+    // Cerca dispositivi con prezzo di vendita compreso tra 999 e 999 (intervallo di un solo valore). Assicura che la lista abbia un solo dispositivo con prezzo di vendita 999.
     @Test
     public void testRicercaInRangeDiPrezzo_PrezzoMinimoEMassimoUguali() {
         Magazzino magazzino = new Magazzino();
@@ -191,6 +222,8 @@ public class MagazzinoTest {
         assertEquals(999, dispositivi.getFirst().getPrezzoVendita(), 0.01);
     }
 
+    // Verifica che ricercaInRangeDiPrezzo() non trovi dispositivi con prezzi di vendita fuori dall'intervallo. Crea un magazzino con un dispositivo con prezzo di vendita 999.
+    // Cerca dispositivi con prezzo di vendita compreso tra 1000 e 2000. Assicura che la lista sia vuota.
     @Test
     public void testRicercaInRangeDiPrezzo_PrezzoMinimoEMassimoNonPresenti() {
         Magazzino magazzino = new Magazzino();
@@ -201,6 +234,8 @@ public class MagazzinoTest {
         assertEquals(0, dispositivi.size());
     }
 
+    // Verifica che ricercaInRangeDiPrezzo() trovi due dispositivi con prezzi di vendita tra 999 e 1199. Crea un magazzino con due dispositivi con prezzi di vendita 999 e 1199.
+    // Cerca dispositivi con prezzo di vendita compreso tra 999 e 1199. Assicura che la lista abbia due dispositivi con prezzi di vendita 999 e 1199.
     @Test
     public void testRicercaInRangeDiPrezzo_PrezzoMinimoEMassimoConPiùDispositivi() {
         Magazzino magazzino = new Magazzino();
@@ -215,6 +250,8 @@ public class MagazzinoTest {
         assertEquals(1199, dispositivi.get(1).getPrezzoVendita(), 0.01);
     }
 
+    // Verifica che ricercaInRangeDiPrezzo() gestisca un prezzo minimo negativo.
+    // Cerca dispositivi con prezzo di vendita compreso tra -100.0 e 100.0 in un magazzino vuoto. Assicura che la lista sia vuota.
     @Test
     public void testRicercaInRangeDiPrezzo_PrezzoMinimoNegativo() {
         Magazzino magazzino = new Magazzino();
@@ -223,6 +260,8 @@ public class MagazzinoTest {
         assertEquals(0, dispositivos.size());
     }
 
+    // Verifica che ricercaInRangeDiPrezzo() gestisca un prezzo massimo negativo.
+    // Cerca dispositivi con prezzo di vendita compreso tra 100.0 e -100.0 in un magazzino vuoto. Assicura che la lista sia vuota.
     @Test
     public void testRicercaInRangeDiPrezzo_PrezzoMassimoNegativo() {
         Magazzino magazzino = new Magazzino();
@@ -231,6 +270,8 @@ public class MagazzinoTest {
         assertEquals(0, dispositivos.size());
     }
 
+    // Verifica che ricercaInRangeDiPrezzo() gestisca un prezzo minimo maggiore del prezzo massimo.
+    // Cerca dispositivi con prezzo di vendita compreso tra 100.0 e 50.0 in un magazzino vuoto. Assicura che la lista sia vuota.
     @Test
     public void testRicercaInRangeDiPrezzo_PrezzoMinimoMaggioreDiPrezzoMassimo() {
         Magazzino magazzino = new Magazzino();
@@ -239,6 +280,8 @@ public class MagazzinoTest {
         assertEquals(0, dispositivos.size());
     }
 
+    // Verifica che calcolaSpesaMediaAcquisto() calcoli correttamente la spesa media con un solo dispositivo. Crea un magazzino con un dispositivo con prezzo di acquisto 750.
+    // Calcola la spesa media di acquisto. Assicura che la spesa media sia 750.
     @Test
     public void testcalcolaSpesaMediaAcquisto_TestConUnDispositivo() throws Exception {
         Magazzino magazzino = new Magazzino();
@@ -249,6 +292,8 @@ public class MagazzinoTest {
         assertEquals(750, spesaMedia, 0.01);
     }
 
+    // Verifica che calcolaSpesaMediaAcquisto() calcoli correttamente la spesa media con due dispositivi. Crea un magazzino con due dispositivi con prezzi di acquisto 750 e 850.
+    // Calcola la spesa media di acquisto. Assicura che la spesa media sia 800.
     @Test
     public void testCalcolaSpesaMediaAcquisto_TestPiuDispositivi() throws Exception {
         Magazzino magazzino = new Magazzino();
