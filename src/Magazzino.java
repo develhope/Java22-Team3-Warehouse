@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class Magazzino {
+
     private List<Dispositivo> dispositivi;
 
 
@@ -15,7 +16,6 @@ public class Magazzino {
     public List<Dispositivo> getDispositivi() {
         return dispositivi;
     }
-
 
     //stampa lista dispositivi
     public String toString() {
