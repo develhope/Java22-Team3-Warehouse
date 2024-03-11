@@ -60,6 +60,7 @@ public class Dispositivo {
         return tipoDispositivo;
     }
 
+    // Questo Override fornisce una rappresentazione di stringa dettagliata dell'oggetto Dispositivo.
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
