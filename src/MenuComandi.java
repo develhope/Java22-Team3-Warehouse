@@ -19,7 +19,6 @@ public class MenuComandi {
      */
 
     public void avviaMenu(Magazzino magazzino, Carrello carrello) {
-        magazzino.riempiMagazzino();
         stampaMenuScelte();
         int scelta = leggiRangeIntero(0, ComandiScelta.values().length - 1, "Scelta -->");
 
