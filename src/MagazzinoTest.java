@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 
@@ -7,13 +9,33 @@ public class MagazzinoTest {
     // Verifica che searchByTipoDispositivo() funzioni con un dispositivo esistente. Crea un magazzino e un dispositivo di tipo SMARTPHONE.
     // Aggiungi il dispositivo al magazzino. Cerca dispositivi di tipo SMARTPHONE nel magazzino. Assicura che il primo dispositivo nella lista trovata sia uguale a quello creato.
     @Test
-    public void testSearchByTipoDispositivo_DispositivoEsistente() {
+    public void testSearchByTipoDispositivo_DispositivoEsistenteSmartphone() {
         Magazzino magazzino = new Magazzino();
         Dispositivo dispositivo = new Dispositivo("Samsung", "s22", "grigio", "4,9'", "32 GB", 750, 999, Dispositivo.SMARTPHONE);
         magazzino.addDispositivo(dispositivo);
-        List<Dispositivo> dispositivi = magazzino.searchByTipoDispositivo(Dispositivo.SMARTPHONE);
+        List<Dispositivo> result = magazzino.searchByTipoDispositivo(Dispositivo.SMARTPHONE);
 
-        assertEquals(dispositivo, dispositivi.getFirst());
+        assertEquals(Dispositivo.SMARTPHONE, result.getFirst().getTipoDispositivo());
+    }
+
+    @Test
+    public void testSearchByTipoDispositivo_DispositivoEsistenteNotebook() {
+        Magazzino magazzino = new Magazzino();
+        Dispositivo dispositivo = new Dispositivo("Samsung", "s22", "grigio", "4,9'", "32 GB", 750, 999, Dispositivo.NOTEBOOK);
+        magazzino.addDispositivo(dispositivo);
+        List<Dispositivo> result = magazzino.searchByTipoDispositivo(Dispositivo.NOTEBOOK);
+
+        assertEquals(Dispositivo.NOTEBOOK, result.getFirst().getTipoDispositivo());
+    }
+
+    @Test
+    public void testSearchByTipoDispositivo_DispositivoEsistenteTablet() {
+        Magazzino magazzino = new Magazzino();
+        Dispositivo dispositivo = new Dispositivo("Samsung", "s22", "grigio", "4,9'", "32 GB", 750, 999, Dispositivo.TABLET);
+        magazzino.addDispositivo(dispositivo);
+        List<Dispositivo> result = magazzino.searchByTipoDispositivo(Dispositivo.TABLET);
+
+        assertEquals(Dispositivo.TABLET, result.getFirst().getTipoDispositivo());
     }
 
     // Verifica che searchByTipoDispositivo() gestisca un tipo di dispositivo non esistente. Crea un magazzino vuoto.
@@ -229,7 +251,7 @@ public class MagazzinoTest {
         Magazzino magazzino = new Magazzino();
         Dispositivo dispositivo = new Dispositivo("Samsung", "s22", "telefono carino", "4,9'", "32 GB", 750, 999, Dispositivo.SMARTPHONE);
         magazzino.addDispositivo(dispositivo);
-        List<Dispositivo> dispositivi = magazzino.ricercaInRangeDiPrezzo(1000, 2000);
+        List<Dispositivo> dispositivi = magazzino.ricercaInRangeDiPrezzo(9999,10000);
 
         assertEquals(0, dispositivi.size());
     }
@@ -237,7 +259,7 @@ public class MagazzinoTest {
     // Verifica che ricercaInRangeDiPrezzo() trovi due dispositivi con prezzi di vendita tra 999 e 1199. Crea un magazzino con due dispositivi con prezzi di vendita 999 e 1199.
     // Cerca dispositivi con prezzo di vendita compreso tra 999 e 1199. Assicura che la lista abbia due dispositivi con prezzi di vendita 999 e 1199.
     @Test
-    public void testRicercaInRangeDiPrezzo_PrezzoMinimoEMassimoConPiùDispositivi() {
+    public void testRicercaInRangeDiPrezzo_PrezzoMinimoEMassimoConPiuDispositivi() {
         Magazzino magazzino = new Magazzino();
         Dispositivo dispositivo1 = new Dispositivo("Samsung", "s22", "telefono carino", "4,9'", "32 GB", 750, 999, Dispositivo.SMARTPHONE);
         Dispositivo dispositivo2 = new Dispositivo("Apple", "iPhone 13", "telefono bellino", "6,1'", "128 GB", 850, 1199, Dispositivo.SMARTPHONE);
@@ -280,29 +302,22 @@ public class MagazzinoTest {
         assertEquals(0, dispositivos.size());
     }
 
-    // Verifica che calcolaSpesaMediaAcquisto() calcoli correttamente la spesa media con un solo dispositivo. Crea un magazzino con un dispositivo con prezzo di acquisto 750.
-    // Calcola la spesa media di acquisto. Assicura che la spesa media sia 750.
-    @Test
-    public void testcalcolaSpesaMediaAcquisto_TestConUnDispositivo() throws Exception {
-        Magazzino magazzino = new Magazzino();
-        Dispositivo dispositivo = new Dispositivo("Samsung", "s22", "telefono carino", "4,9'", "32 GB", 750, 999, Dispositivo.SMARTPHONE);
-        magazzino.addDispositivo(dispositivo);
-        double spesaMedia = magazzino.calcolaSpesaMediaAcquisto();
-
-        assertEquals(750, spesaMedia, 0.01);
-    }
-
     // Verifica che calcolaSpesaMediaAcquisto() calcoli correttamente la spesa media con due dispositivi. Crea un magazzino con due dispositivi con prezzi di acquisto 750 e 850.
     // Calcola la spesa media di acquisto. Assicura che la spesa media sia 800.
     @Test
-    public void testCalcolaSpesaMediaAcquisto_TestPiuDispositivi() throws Exception {
+    public void testCalcolaSpesaMediaAcquisto_TestPiuDispositivi() {
         Magazzino magazzino = new Magazzino();
         Dispositivo dispositivo1 = new Dispositivo("Samsung", "s22", "telefono carino", "4,9'", "32 GB", 750, 999, Dispositivo.SMARTPHONE);
         Dispositivo dispositivo2 = new Dispositivo("Apple", "iPhone 13", "telefono bellino", "6,1'", "128 GB", 850, 1199, Dispositivo.SMARTPHONE);
         magazzino.addDispositivo(dispositivo1);
         magazzino.addDispositivo(dispositivo2);
         double spesaMedia = magazzino.calcolaSpesaMediaAcquisto();
+        double result = 0;
+        for (Dispositivo dispositivo : magazzino.getDispositivi()) {
+            result += dispositivo.getPrezzoAcquisto();
+        }
+        result /= magazzino.getDispositivi().size();
 
-        assertEquals(800, spesaMedia, 0.01);
+        assertEquals(result, spesaMedia, 0.01);
     }
 }

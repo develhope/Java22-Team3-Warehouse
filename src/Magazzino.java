@@ -2,11 +2,11 @@ import java.util.*;
 
 public class Magazzino {
 
-    private List<Dispositivo> dispositivi;
+    private List<Dispositivo> dispositivi = new ArrayList<>();
 
 
     public Magazzino() {
-        this.dispositivi = new ArrayList<>();
+        aggiungiDispositivi();
     }
 
     public void addDispositivo(Dispositivo dispositivo) {
@@ -109,15 +109,10 @@ public class Magazzino {
         return somma / dispositivi.size();
     }
 
-    public void riempiMagazzino() {
-        aggiungiDispositivi();
-    }
-
-
     // Questo metodo riempe il magazzino di prodotti.
     private void aggiungiDispositivi() {
 
-        Dispositivo s1 = new Dispositivo("Samsung", "S21", "Grigio", "8.5", "16gb", 1299.99, 1400, Dispositivo.SMARTPHONE);
+        Dispositivo s1 = new Dispositivo("Samsung", "S21", "Grigio", "8.5", "16gb", 1300, 1400, Dispositivo.SMARTPHONE);
         Dispositivo s2 = new Dispositivo("Apple", "iPhone 12", "Titanio", "6.1", "4gb", 200, 499.99, Dispositivo.SMARTPHONE);
         addDispositivo(s1);
         addDispositivo(s2);
@@ -128,7 +123,7 @@ public class Magazzino {
         addDispositivo(t2);
 
         Dispositivo n1 = new Dispositivo("Apple", "MacBook Air", "Grigio", "14", "16gb", 1800, 2000.99, Dispositivo.NOTEBOOK);
-        Dispositivo n2 = new Dispositivo("HP", "Pavilion", "Nero", "16", "32gb", 799.99, 1299.99, Dispositivo.NOTEBOOK);
+        Dispositivo n2 = new Dispositivo("HP", "Pavilion", "Nero", "16", "32gb", 800, 1299.99, Dispositivo.NOTEBOOK);
         addDispositivo(n1);
         addDispositivo(n2);
     }
