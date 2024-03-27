@@ -76,4 +76,3 @@ public class Dispositivo {
         return sb.toString();
     }
 }
-
