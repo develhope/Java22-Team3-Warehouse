@@ -117,8 +117,8 @@ public class Magazzino {
         addDispositivo(s1);
         addDispositivo(s2);
 
-        Dispositivo t1 = new Dispositivo("Samsung", "Tab S9", "Nero", "11", "8gb", 700, 899.99, TipoDispositivo.Tablete);
-        Dispositivo t2 = new Dispositivo("Apple", "iPad Air 5", "Grigio", "10.9", "8gb", 400, 599.99, TipoDispositivo.Tablete);
+        Dispositivo t1 = new Dispositivo("Samsung", "Tab S9", "Nero", "11", "8gb", 700, 899.99, TipoDispositivo.Tablet);
+        Dispositivo t2 = new Dispositivo("Apple", "iPad Air 5", "Grigio", "10.9", "8gb", 400, 599.99, TipoDispositivo.Tablet);
         addDispositivo(t1);
         addDispositivo(t2);
 

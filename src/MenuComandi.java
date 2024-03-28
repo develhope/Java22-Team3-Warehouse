@@ -489,7 +489,7 @@ public class MenuComandi {
                         tipoDispositivo = TipoDispositivo.Smartphone;
                         break;
                     case 2:
-                        tipoDispositivo = TipoDispositivo.Tablete;
+                        tipoDispositivo = TipoDispositivo.Tablet;
                         break;
                     case 3:
                         tipoDispositivo = TipoDispositivo.Notebook;

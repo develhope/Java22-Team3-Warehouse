@@ -1,3 +1,3 @@
 public enum TipoDispositivo {
-    Smartphone, Tablete, Notebook
+    Smartphone, Tablet, Notebook
 }
