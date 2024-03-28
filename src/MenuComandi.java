@@ -18,7 +18,7 @@ public class MenuComandi {
      * @param carrello  the carrello
      */
 
-    public void avviaMenu(Magazzino magazzino, Carrello carrello) {
+    public void avviaMenu(Magazzino magazzino, Carrello carrello) throws Exception {
         stampaMenuScelte();
         int scelta = leggiRangeIntero(0, ComandiScelta.values().length - 1, "Scelta -->");
 
@@ -37,7 +37,7 @@ public class MenuComandi {
         }
     }
 
-    private void menuAdmin(Magazzino magazzino, Carrello carrello) {
+    private void menuAdmin(Magazzino magazzino, Carrello carrello) throws Exception {
 
         while (true) {
             stampaMenuAdmin();
@@ -103,7 +103,7 @@ public class MenuComandi {
         }
     }
 
-    private void menuUser(Magazzino magazzino, Carrello carrello) {
+    private void menuUser(Magazzino magazzino, Carrello carrello) throws Exception {
 
         while (true) {
             stampaMenuUser();
@@ -226,9 +226,9 @@ public class MenuComandi {
     }
 
     // Metodo che stampa la ricerca tramite tipologia.
-    private void cercaTipologia(Magazzino magazzino) {
-        String tipologia = leggiStringaNonVuota("Inserisci tipologia, scegli tra smartphone, notebook o tablet: ");
-        List<Dispositivo> dispositivi = magazzino.searchByTipoDispositivo(tipologia);
+    private void cercaTipologia(Magazzino magazzino) throws Exception {
+        TipoDispositivo TipoDispositivo = impostaDispositivo();
+        List<Dispositivo> dispositivi = magazzino.searchByTipoDispositivo(TipoDispositivo);
         if (dispositivi.isEmpty()) {
             System.out.println("Nessun dispositivo di questo tipo");
         } else {
@@ -265,7 +265,7 @@ public class MenuComandi {
     }
 
     // Metodo che permette di aggiungere nuovi dispositivi al magazzino.
-    private Dispositivo aggiungiMerce() {
+    private Dispositivo aggiungiMerce() throws Exception {
         System.out.println("L'ID verrà aggiunto automaticamente");
         String produttore = leggiStringaNonVuota("Produttore: ");
         String modello = leggiStringaNonVuota("Modello: ");
@@ -274,14 +274,8 @@ public class MenuComandi {
         String spazioDiArchiviazione = leggiStringaNonVuota("Spazio di archiviazione:");
         double prezzoAcquisto = leggiDouble(0.99, 999999.99, "Prezzo d'acquisto: ");
         double prezzoVendita = leggiDouble(0.99, 999999.99, "Prezzo di vendita: ");
-        int scelta = leggiRangeIntero(1, 3, "Tipologia:\n1. Tablet\n2. Smartphone\n3. Notebook\nScelta --> ");
-        String tipoDispositivo = Dispositivo.NOTEBOOK;
-        if (scelta == 1) {
-            tipoDispositivo = Dispositivo.TABLET;
-        }
-        if (scelta == 2) {
-            tipoDispositivo = Dispositivo.SMARTPHONE;
-        }
+//        int scelta = leggiRangeIntero(1, 3, "Tipologia:\n1. Tablet\n2. Smartphone\n3. Notebook\nScelta --> ");
+        TipoDispositivo tipoDispositivo = impostaDispositivo();
         System.out.println("Dispositivo aggiunto correttamente.");
 
         return new Dispositivo(produttore, modello, descrizione, pollici, spazioDiArchiviazione, prezzoAcquisto, prezzoVendita, tipoDispositivo);
@@ -457,7 +451,7 @@ public class MenuComandi {
         }
     }
 
-    public void menuPassword(Magazzino magazzino, Carrello carrello) {
+    public void menuPassword(Magazzino magazzino, Carrello carrello) throws Exception {
         String password;
         String risposta;
         boolean continua = true;
@@ -482,4 +476,34 @@ public class MenuComandi {
             }
         }
     }
+
+    public TipoDispositivo impostaDispositivo() throws Exception {
+        Scanner scanner = new Scanner(System.in);
+        TipoDispositivo tipoDispositivo = null;
+        System.out.println("Inserisci il tipo di dispositivo (1 per Smartphone, 2 per Tablete, 3 per Notebook):");
+        while (tipoDispositivo == null) {
+            try {
+                int input = scanner.nextInt();
+                switch (input) {
+                    case 1:
+                        tipoDispositivo = TipoDispositivo.Smartphone;
+                        break;
+                    case 2:
+                        tipoDispositivo = TipoDispositivo.Tablete;
+                        break;
+                    case 3:
+                        tipoDispositivo = TipoDispositivo.Notebook;
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Scelta non valida. Riprova.");
+                }
+            } catch (Exception e) {
+                System.out.println("Scelta non valida. Riprova.");
+                scanner.nextLine(); // pulisce l'input errato
+            }
+        }
+
+        return tipoDispositivo;
+    }
+
 }

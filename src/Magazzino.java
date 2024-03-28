@@ -29,10 +29,10 @@ public class Magazzino {
 
     //Questo metodo fa una ricerca per tipo di dispositivo, in caso il tipo di dispositivo scelto dall'utente non è prensente non troverà nulla.
     // In caso dovesse essere trovato qualcosa ritorna il dispositivo tramite il suo tipo.
-    public List<Dispositivo> searchByTipoDispositivo(String descrizione) {
+    public List<Dispositivo> searchByTipoDispositivo(TipoDispositivo tipoDispositivo) {
         List<Dispositivo> listaFiltrata = new ArrayList<>();
         for (Dispositivo dispositivo : dispositivi) {
-            if (dispositivo.getTipoDispositivo().equalsIgnoreCase(descrizione)) {
+            if (dispositivo.getTipoDispositivo() == tipoDispositivo){
                 listaFiltrata.add(dispositivo);
             }
         }
@@ -112,18 +112,18 @@ public class Magazzino {
     // Questo metodo riempe il magazzino di prodotti.
     private void aggiungiDispositivi() {
 
-        Dispositivo s1 = new Dispositivo("Samsung", "S21", "Grigio", "8.5", "16gb", 1300, 1400, Dispositivo.SMARTPHONE);
-        Dispositivo s2 = new Dispositivo("Apple", "iPhone 12", "Titanio", "6.1", "4gb", 200, 499.99, Dispositivo.SMARTPHONE);
+        Dispositivo s1 = new Dispositivo("Samsung", "S21", "Grigio", "8.5", "16gb", 1300, 1400, TipoDispositivo.Smartphone);
+        Dispositivo s2 = new Dispositivo("Apple", "iPhone 12", "Titanio", "6.1", "4gb", 200, 499.99, TipoDispositivo.Smartphone);
         addDispositivo(s1);
         addDispositivo(s2);
 
-        Dispositivo t1 = new Dispositivo("Samsung", "Tab S9", "Nero", "11", "8gb", 700, 899.99, Dispositivo.TABLET);
-        Dispositivo t2 = new Dispositivo("Apple", "iPad Air 5", "Grigio", "10.9", "8gb", 400, 599.99, Dispositivo.TABLET);
+        Dispositivo t1 = new Dispositivo("Samsung", "Tab S9", "Nero", "11", "8gb", 700, 899.99, TipoDispositivo.Tablete);
+        Dispositivo t2 = new Dispositivo("Apple", "iPad Air 5", "Grigio", "10.9", "8gb", 400, 599.99, TipoDispositivo.Tablete);
         addDispositivo(t1);
         addDispositivo(t2);
 
-        Dispositivo n1 = new Dispositivo("Apple", "MacBook Air", "Grigio", "14", "16gb", 1800, 2000.99, Dispositivo.NOTEBOOK);
-        Dispositivo n2 = new Dispositivo("HP", "Pavilion", "Nero", "16", "32gb", 800, 1299.99, Dispositivo.NOTEBOOK);
+        Dispositivo n1 = new Dispositivo("Apple", "MacBook Air", "Grigio", "14", "16gb", 1800, 2000.99, TipoDispositivo.Notebook);
+        Dispositivo n2 = new Dispositivo("HP", "Pavilion", "Nero", "16", "32gb", 800, 1299.99, TipoDispositivo.Notebook);
         addDispositivo(n1);
         addDispositivo(n2);
     }

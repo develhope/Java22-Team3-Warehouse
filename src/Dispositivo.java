@@ -1,14 +1,9 @@
 import java.util.UUID;
 
 public class Dispositivo {
-
-    public static final String NOTEBOOK = "Notebook";
-    public static final String TABLET = "Tablet";
-    public static final String SMARTPHONE = "Smartphone";
-
+    private TipoDispositivo tipoDispositivo;
     private String id;
     private String produttore;
-    private String tipoDispositivo;
     private String modello;
     private String descrizione;
     private String spazioArchiviazione;
@@ -16,7 +11,7 @@ public class Dispositivo {
     private double prezzoAcquisto;
     private double prezzoVendita;
 
-    public Dispositivo(String produttore, String modello, String descrizione, String pollici, String spazioArchiviazione, double prezzoAcquisto, double prezzoVendita, String tipoDispositivo) {
+    public Dispositivo(String produttore, String modello, String descrizione, String pollici, String spazioArchiviazione, double prezzoAcquisto, double prezzoVendita, TipoDispositivo tipoDispositivo) {
         this.id = UUID.randomUUID().toString();
         this.produttore = produttore;
         this.modello = modello;
@@ -56,8 +51,12 @@ public class Dispositivo {
         this.prezzoVendita = prezzoVendita;
     }
 
-    public String getTipoDispositivo() {
+    public TipoDispositivo getTipoDispositivo() {
         return tipoDispositivo;
+    }
+
+    public void setTipoDispositivo(TipoDispositivo tipoDispositivo) {
+        this.tipoDispositivo = tipoDispositivo;
     }
 
     // Questo Override fornisce una rappresentazione di stringa dettagliata dell'oggetto Dispositivo.
@@ -75,5 +74,6 @@ public class Dispositivo {
         sb.append("ID: ").append(this.id).append("\n");
         return sb.toString();
     }
+
 }
 
