@@ -19,7 +19,13 @@ public class MagazzinoTest {
         assertEquals(Dispositivo.SMARTPHONE, result.getFirst().getTipoDispositivo());
     }*/
 
+
 /*    @Test
+
+    // Verifica che searchByTipoDispositivo() funzioni con un dispositivo esistente. Crea un magazzino e un dispositivo di tipo NOTEBOOK.
+    // Aggiungi il dispositivo al magazzino. Cerca dispositivi di tipo NOTEBOOK nel magazzino. Assicura che il primo dispositivo nella lista trovata sia uguale a quello creato.
+    @Test
+
     public void testSearchByTipoDispositivo_DispositivoEsistenteNotebook() {
         Magazzino magazzino = new Magazzino();
         Dispositivo dispositivo = new Dispositivo("Samsung", "s22", "grigio", "4,9'", "32 GB", 750, 999, Dispositivo.NOTEBOOK);
@@ -29,7 +35,13 @@ public class MagazzinoTest {
         assertEquals(Dispositivo.NOTEBOOK, result.getFirst().getTipoDispositivo());
     }*/
 
+
 /*    @Test
+
+    // Verifica che searchByTipoDispositivo() funzioni con un dispositivo esistente. Crea un magazzino e un dispositivo di tipo TABLET.
+    // Aggiungi il dispositivo al magazzino. Cerca dispositivi di tipo TABLET nel magazzino. Assicura che il primo dispositivo nella lista trovata sia uguale a quello creato.
+    @Test
+
     public void testSearchByTipoDispositivo_DispositivoEsistenteTablet() {
         Magazzino magazzino = new Magazzino();
         Dispositivo dispositivo = new Dispositivo("Samsung", "s22", "grigio", "4,9'", "32 GB", 750, 999, Dispositivo.TABLET);

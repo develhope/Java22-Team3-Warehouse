@@ -5,5 +5,4 @@ public class Main {
         MenuComandi menu = new MenuComandi(); //inizializza menù
         menu.avviaMenu(magazzino, carrello); //avvia il menù
     }
-
 }

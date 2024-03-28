@@ -412,7 +412,7 @@ public class MenuComandi {
         if (carrello.calcolaTotaleCarrello() == 0) {
             System.out.println("il carrello è vuoto");
         } else {
-            double totale = carrello.calcolaTotaleCarrello();
+            double totale = carrello.chiudiTransazione(carrello.calcolaTotaleCarrello());
             System.out.println("Il totale è: " + String.format("%.2f", totale) + "€");
         }
     }

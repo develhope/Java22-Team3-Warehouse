@@ -74,6 +74,4 @@ public class Dispositivo {
         sb.append("ID: ").append(this.id).append("\n");
         return sb.toString();
     }
-
 }
-
