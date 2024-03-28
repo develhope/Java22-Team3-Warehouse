@@ -480,7 +480,7 @@ public class MenuComandi {
     public TipoDispositivo impostaDispositivo() throws Exception {
         Scanner scanner = new Scanner(System.in);
         TipoDispositivo tipoDispositivo = null;
-        System.out.println("Inserisci il tipo di dispositivo (1 per Smartphone, 2 per Tablete, 3 per Notebook):");
+        System.out.println("Inserisci il tipo di dispositivo (1 per Smartphone, 2 per Tablet, 3 per Notebook):");
         while (tipoDispositivo == null) {
             try {
                 int input = scanner.nextInt();
@@ -505,5 +505,4 @@ public class MenuComandi {
 
         return tipoDispositivo;
     }
-
 }
