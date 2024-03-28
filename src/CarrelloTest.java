@@ -12,7 +12,7 @@ public class CarrelloTest {
     public void testAggiungiAlCarrello_ConIdValido() {
         Carrello carrelloTest = new Carrello();
         List<Dispositivo> dispositivi = new ArrayList<>();
-        Dispositivo dispositivoTest = new Dispositivo("apple", "iphone", "S21", "Grigio", "8.5", 400, 1000, "usato");
+        Dispositivo dispositivoTest = new Dispositivo("apple", "iphone", "S21", "Grigio", "8.5", 400, 1000, TipoDispositivo.Smartphone);
         dispositivoTest.setId("1");
         dispositivoTest.setPrezzoVendita(1000.0);
         dispositivi.add(dispositivoTest);
@@ -28,7 +28,7 @@ public class CarrelloTest {
     public void testAggiungiAlCarrello_ConIdNonValido() {
         Carrello carrelloTest = new Carrello();
         List<Dispositivo> dispositivi = new ArrayList<>();
-        dispositivi.add(new Dispositivo("apple", "iphone", "S21", "Grigio", "8.5", 400, 1000, "usato"));
+        dispositivi.add(new Dispositivo("apple", "iphone", "S21", "Grigio", "8.5", 400, 1000, TipoDispositivo.Smartphone));
         Optional<Dispositivo> dispositivo = carrelloTest.aggiungiAlCarrello("999", dispositivi);
 
         assertFalse(dispositivo.isPresent());
@@ -41,7 +41,7 @@ public class CarrelloTest {
     public void testRimuoviDalCarrello_ConIdValido() {
         Carrello carrello = new Carrello();
         List<Dispositivo> dispositivi = new ArrayList<>();
-        Dispositivo dispositivo1 = new Dispositivo("", "", "", "", "", 100, 100, "");
+        Dispositivo dispositivo1 = new Dispositivo("", "", "", "", "", 100, 100, TipoDispositivo.Smartphone);
         dispositivo1.setId("1");
         dispositivo1.setPrezzoVendita(100.0);
         dispositivi.add(dispositivo1);
@@ -60,7 +60,7 @@ public class CarrelloTest {
     public void testRimuoviDalCarrello_ConIdNonValido() {
         Carrello carrello = new Carrello();
         List<Dispositivo> dispositivi = new ArrayList<>();
-        Dispositivo dispositivo1 = new Dispositivo("", "", "", "", "", 100, 100, "");
+        Dispositivo dispositivo1 = new Dispositivo("", "", "", "", "", 100, 100, TipoDispositivo.Smartphone);
         dispositivo1.setId("1");
         dispositivo1.setPrezzoVendita(100.0);
         dispositivi.add(dispositivo1);
@@ -86,9 +86,9 @@ public class CarrelloTest {
     public void testCalcolaTotaleCarrello_ConPiuDispositivi() {
         Carrello carrello = new Carrello();
         List<Dispositivo> dispositivos = new ArrayList<>();
-        Dispositivo dispositivo1 = new Dispositivo("apple", "iphone", "", "", "", 100, 100, "");
+        Dispositivo dispositivo1 = new Dispositivo("apple", "iphone", "", "", "", 100, 100, TipoDispositivo.Smartphone);
         dispositivo1.setId("1");
-        Dispositivo dispositivo2 = new Dispositivo("samsung", "s20", "", "", "", 100, 200, "");
+        Dispositivo dispositivo2 = new Dispositivo("samsung", "s20", "", "", "", 100, 200, TipoDispositivo.Smartphone);
         dispositivo2.setId("2");
         dispositivos.add(dispositivo1);
         dispositivos.add(dispositivo2);
@@ -106,7 +106,7 @@ public class CarrelloTest {
     public void testChiudiTransazione_ConSommaMaggioreDelTotale() {
         Carrello carrello = new Carrello();
         List<Dispositivo> dispositivos = new ArrayList<>();
-        Dispositivo dispositivo1 = new Dispositivo("", "", "", "", "", 100, 100, "");
+        Dispositivo dispositivo1 = new Dispositivo("", "", "", "", "", 100, 100, TipoDispositivo.Smartphone);
         dispositivo1.setId("1");
         dispositivos.add(dispositivo1);
         carrello.aggiungiAlCarrello("1", dispositivos);
@@ -122,7 +122,7 @@ public class CarrelloTest {
     public void testChiudiTransazione_ConSommaEsatta() {
         Carrello carrello = new Carrello();
         List<Dispositivo> dispositivos = new ArrayList<>();
-        Dispositivo dispositivo1 = new Dispositivo("", "", "", "", "", 100, 100, "");
+        Dispositivo dispositivo1 = new Dispositivo("", "", "", "", "", 100, 100, TipoDispositivo.Smartphone);
         dispositivo1.setId("1");
         dispositivo1.setPrezzoVendita(100.0);
         dispositivos.add(dispositivo1);
@@ -139,7 +139,7 @@ public class CarrelloTest {
     public void testChiudiTransazione_ConSommaMinoreDelTotale() {
         Carrello carrello = new Carrello();
         List<Dispositivo> dispositivos = new ArrayList<>();
-        Dispositivo dispositivo1 = new Dispositivo("", "", "", "", "", 100, 100, "");
+        Dispositivo dispositivo1 = new Dispositivo("", "", "", "", "", 100, 100, TipoDispositivo.Smartphone);
         dispositivo1.setId("1");
         dispositivo1.setPrezzoVendita(100.0);
         dispositivos.add(dispositivo1);
