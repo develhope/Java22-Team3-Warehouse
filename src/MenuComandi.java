@@ -1,3 +1,4 @@
+import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -18,7 +19,7 @@ public class MenuComandi {
      * @param carrello  the carrello
      */
 
-    public void avviaMenu(Magazzino magazzino, Carrello carrello) throws Exception {
+    public void avviaMenu(Magazzino magazzino, Carrello carrello) {
         stampaMenuScelte();
         int scelta = leggiRangeIntero(0, ComandiScelta.values().length - 1, "Scelta -->");
 
@@ -37,7 +38,7 @@ public class MenuComandi {
         }
     }
 
-    private void menuAdmin(Magazzino magazzino, Carrello carrello) throws Exception {
+    private void menuAdmin(Magazzino magazzino, Carrello carrello) {
 
         while (true) {
             stampaMenuAdmin();
@@ -103,7 +104,7 @@ public class MenuComandi {
         }
     }
 
-    private void menuUser(Magazzino magazzino, Carrello carrello) throws Exception {
+    private void menuUser(Magazzino magazzino, Carrello carrello) {
 
         while (true) {
             stampaMenuUser();
@@ -165,21 +166,22 @@ public class MenuComandi {
      * @return the int
      */
 
-    public int leggiRangeIntero(int min, int max, String messaggio) {
+    public static int leggiRangeIntero(int min, int max, String messaggio) {
         Scanner scanner = new Scanner(System.in);
         int valore;
         while (true) {
             System.out.println(messaggio);
-            if (scanner.hasNextInt()) {
-                valore = scanner.nextInt();
+            try {
+                valore = Integer.parseInt(scanner.nextLine());
                 if (valore >= min && valore <= max) {
                     break;
                 } else {
-                    System.out.println("Errore, inserire un valore compreso tra " + min + " e " + max);
+                    throw new IllegalArgumentException("Valore non compreso tra " + min + " e " + max);
                 }
-            } else {
+            } catch (NumberFormatException e) {
                 System.out.println("Inserire un numero intero valido");
-                scanner.next();
+            } catch (IllegalArgumentException e) {
+                System.out.println("Errore: " + e.getMessage());
             }
         }
         return valore;
@@ -192,14 +194,22 @@ public class MenuComandi {
      * @return the string
      */
 
+
+    //TODO da controllare
     public String leggiStringaNonVuota(String messaggio) {
         System.out.println(messaggio);
         Scanner scanner = new Scanner(System.in);
         String stringa = scanner.nextLine();
-        while (stringa.isEmpty()) {
-            System.out.println("Inserire una stringa piena");
-            System.out.println(messaggio);
-            stringa = scanner.nextLine();
+        boolean ok = true;
+
+        while (ok) {
+            if(stringa.isEmpty()) {
+                throw new IllegalArgumentException("Inserire una stringa piena");
+            } else {
+                System.out.println(messaggio);
+                stringa = scanner.nextLine();
+                ok = false;
+            }
         }
         return stringa;
     }
@@ -210,27 +220,32 @@ public class MenuComandi {
         double valore;
         while (true) {
             System.out.println(messaggio);
-            if (scanner.hasNextDouble()) {
-                valore = scanner.nextDouble();
+            try {
+                valore = Integer.parseInt(scanner.nextLine());
                 if (valore >= min && valore <= max) {
                     break;
                 } else {
-                    System.out.println("Errore, inserire un valore compreso tra " + min + " e " + max);
+                    throw new Exception("Valore non compreso tra " + min + " e " + max);
                 }
-            } else {
-                System.out.println("Inserire un numero con virgola.");
-                scanner.next();
+            } catch (NumberFormatException e) {
+                System.out.println("Inserire un numero intero valido");
+            } catch (Exception e) {
+                System.out.println("Errore: " + e.getMessage());
             }
         }
         return valore;
     }
 
     // Metodo che stampa la ricerca tramite tipologia.
-    private void cercaTipologia(Magazzino magazzino) throws Exception {
+    private void cercaTipologia(Magazzino magazzino) {
         TipoDispositivo TipoDispositivo = impostaDispositivo();
         List<Dispositivo> dispositivi = magazzino.searchByTipoDispositivo(TipoDispositivo);
         if (dispositivi.isEmpty()) {
-            System.out.println("Nessun dispositivo di questo tipo");
+            try {
+                throw new Exception("Nessun dispositivo di questo tipo");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         } else {
             for (Dispositivo d : dispositivi) {
                 System.out.println(d);
@@ -243,7 +258,11 @@ public class MenuComandi {
         String modello = leggiStringaNonVuota("Inserisci modello: ");
         List<Dispositivo> dispositivi = magazzino.searchByModello(modello);
         if (dispositivi.isEmpty()) {
-            System.out.println("Nessun dispositivo con questo nome");
+            try {
+                throw new Exception("Nessun dispositivo con questo nome");
+            } catch (Exception e) {
+                System.out.println("Errore: " + e.getMessage());
+            }
         } else {
             for (Dispositivo d : dispositivi) {
                 System.out.println(d);
@@ -251,21 +270,43 @@ public class MenuComandi {
         }
     }
 
+    //TODO da controllare
     // Metodo che stampa la ricerca tramite produttore.
     private void cercaProduttorte(Magazzino magazzino) {
         String produttore = leggiStringaNonVuota("Inserisci produttore: ");
         List<Dispositivo> dispositivi = magazzino.searchByProduttore(produttore);
         if (dispositivi.isEmpty()) {
-            System.out.println("Nessun dispositivo appartentente a questo produttore");
+            try {
+                throw new Exception("Nessun dispositivo appartentente a questo produttore");
+            } catch (Exception e) {
+                System.out.println("Errore: " + e.getMessage());
+            }
+            String risposta;
+            while (true) {
+                risposta = leggiStringaNonVuota("Vuoi cercare ancora? (si/no)");
+                if (risposta.equalsIgnoreCase("si") || risposta.equalsIgnoreCase("no")) {
+                    break;
+                } else {
+                    try {
+                        throw new Exception("Risposta non valida. Inserisci 'si' o 'no'.");
+                    } catch (Exception e) {
+                        System.out.println("Errore: " + e.getMessage());
+                    }
+                }
+                if (risposta.equalsIgnoreCase("no")) {
+                    break;
+                }
+            }
         } else {
             for (Dispositivo d : dispositivi) {
                 System.out.println(d);
             }
         }
+
     }
 
     // Metodo che permette di aggiungere nuovi dispositivi al magazzino.
-    private Dispositivo aggiungiMerce() throws Exception {
+    private Dispositivo aggiungiMerce() {
         System.out.println("L'ID verrà aggiunto automaticamente");
         String produttore = leggiStringaNonVuota("Produttore: ");
         String modello = leggiStringaNonVuota("Modello: ");
@@ -284,7 +325,11 @@ public class MenuComandi {
     // Questo metodo stampa a schermo la lista dispositivi.
     private void stampaProdotti(Magazzino magazzino) {
         if (magazzino.getDispositivi().isEmpty()) {
-            System.out.println("Magazzino vuoto.");
+            try {
+                throw new Exception("Magazzino vuoto.");
+            } catch (Exception e) {
+                System.out.println("Errore: " + e.getMessage());
+            }
         } else {
             for (Dispositivo dispositivo : magazzino.getDispositivi()) {
                 System.out.println(dispositivo);
@@ -295,7 +340,11 @@ public class MenuComandi {
     // Metodo che stampa la spesa media di acquisto dei dispositivi.
     private void stampaSpesaMediaAcquisto(Magazzino magazzino) {
         if (magazzino.getDispositivi().isEmpty()) {
-            System.out.println("Magazzino vuoto");
+            try {
+                throw new Exception("Magazzino vuoto.");
+            } catch (Exception e) {
+                System.out.println("Errore: " + e.getMessage());
+            }
         } else {
             System.out.printf("%.2f", magazzino.calcolaSpesaMediaAcquisto());
             System.out.println();
@@ -309,7 +358,11 @@ public class MenuComandi {
             System.out.println("Inserisci l'ID del prodotto da aggiungere al carrello:");
             String id;
             while (!scanner.hasNextLine()) {
-                System.out.println("Inserimento non valido. Per favore, inserisci un ID valido.");
+                try {
+                    throw new Exception("Inserimento non valido. Per favore, inserisci un ID valido.");
+                } catch (Exception e) {
+                    System.out.println("Errore: " + e.getMessage());
+                }
                 scanner.nextLine();
             }
             id = scanner.nextLine();
@@ -317,7 +370,11 @@ public class MenuComandi {
             if (dispositivo.isPresent()) {
                 System.out.println("Il prodotto con ID: " + id + " è stato aggiunto al carrello.");
             } else {
-                System.out.println("Nessun prodotto trovato con l'ID " + id + ". Riprova.");
+                try {
+                    throw new Exception("Nessun prodotto trovato con l'ID " + id + ". Riprova.");
+                } catch (Exception e) {
+                    System.out.println("Errore: " + e.getMessage());
+                }
             }
             String risposta;
             while (true) {
@@ -325,7 +382,11 @@ public class MenuComandi {
                 if (risposta.equalsIgnoreCase("si") || risposta.equalsIgnoreCase("no")) {
                     break;
                 } else {
-                    System.out.println("Risposta non valida. Inserisci 'si' o 'no'.");
+                    try {
+                        throw new Exception("Risposta non valida. Inserisci 'si' o 'no'.");
+                    } catch (Exception e) {
+                        System.out.println("Errore: " + e.getMessage());
+                    }
                 }
             }
             if (risposta.equalsIgnoreCase("no")) {
@@ -341,7 +402,11 @@ public class MenuComandi {
             System.out.println("Inserisci l'ID del prodotto da rimuovere dal carrello:");
             String id;
             while (!scanner.hasNextLine()) {
-                System.out.println("Inserimento non valido. Per favore, inserisci un ID valido.");
+                try {
+                    throw new Exception("Inserimento non valido. Per favore, inserisci un ID valido.");
+                } catch (Exception e) {
+                    System.out.println("Errore: " + e.getMessage());
+                }
                 scanner.nextLine();
             }
             id = scanner.nextLine();
@@ -349,7 +414,11 @@ public class MenuComandi {
             if (dispositivo.isPresent()) {
                 System.out.println("Il prodotto con ID: " + id + " è stato rimosso dal carrello.");
             } else {
-                System.out.println("Nessun prodotto trovato con l'ID " + id + ". Riprova.");
+                try {
+                    throw new Exception("Nessun prodotto trovato con l'ID " + id + ". Riprova.");
+                } catch (Exception e) {
+                    System.out.println("Errore: " + e.getMessage());;
+                }
             }
             String risposta;
             while (true) {
@@ -357,7 +426,11 @@ public class MenuComandi {
                 if (risposta.equalsIgnoreCase("si") || risposta.equalsIgnoreCase("no")) {
                     break;
                 } else {
-                    System.out.println("Risposta non valida. Inserisci 'si' o 'no'.");
+                    try {
+                        throw new Exception("Risposta non valida. Inserisci 'si' o 'no'.");
+                    } catch (Exception e) {
+                        System.out.println("Errore: " + e.getMessage());
+                    }
                 }
             }
             if (risposta.equalsIgnoreCase("no")) {
@@ -371,7 +444,11 @@ public class MenuComandi {
         double prezzo = leggiDouble(0, 10000, "Inserisci il prezzo di Vendita: ");
         List<Dispositivo> dispositivi = magazzino.ricercaPrezzoAcquisto(prezzo);
         if (prezzo < 0 || prezzo == 0 || dispositivi.isEmpty()) {
-            System.out.println("Nessun dispositivo trovato");
+            try {
+                throw new Exception("Nessun dispositivo trovato");
+            } catch (Exception e) {
+                System.out.println("Errore: " + e.getMessage());
+            }
         } else {
             for (Dispositivo d : dispositivi) {
                 System.out.println(d);
@@ -384,7 +461,11 @@ public class MenuComandi {
         double prezzo = leggiDouble(0, 10000, "Inserisci il prezzo di Vendita: ");
         List<Dispositivo> dispositivi = magazzino.ricercaPrezzoVendita(prezzo);
         if (prezzo < 0 || prezzo == 0 || dispositivi.isEmpty()) {
-            System.out.println("Nessun dispositivo trovato");
+            try {
+                throw new Exception("Nessun dispositivo trovato");
+            } catch (Exception e) {
+                System.out.println("Errore: " + e.getMessage());
+            }
         } else {
             for (Dispositivo d : dispositivi) {
                 System.out.println(d);
@@ -399,7 +480,11 @@ public class MenuComandi {
         magazzino.ricercaInRangeDiPrezzo(min, max);
         List<Dispositivo> dispositivi = magazzino.ricercaInRangeDiPrezzo(min, max);
         if (min < 0 || max < 0 || min > max || dispositivi.isEmpty()) {
-            System.out.println("Nessun dispositivo trovato");
+            try {
+                throw new Exception("Nessun dispositivo trovato");
+            } catch (Exception e) {
+                System.out.println("Errore: " + e.getMessage());
+            }
         } else {
             for (Dispositivo d : dispositivi) {
                 System.out.println(d);
@@ -410,7 +495,11 @@ public class MenuComandi {
     // Metodo che stampa a schermo la spesa totale effettuata dall'utente.
     public void stampaSpesaTotale(Carrello carrello) {
         if (carrello.calcolaTotaleCarrello() == 0) {
-            System.out.println("il carrello è vuoto");
+            try {
+                throw new Exception("Il carrello è vuoto");
+            } catch (Exception e) {
+                System.out.println("Errore: " + e.getMessage());
+            }
         } else {
             double totale = carrello.chiudiTransazione(carrello.calcolaTotaleCarrello());
             System.out.println("Il totale è: " + String.format("%.2f", totale) + "€");
@@ -451,7 +540,7 @@ public class MenuComandi {
         }
     }
 
-    public void menuPassword(Magazzino magazzino, Carrello carrello) throws Exception {
+    public void menuPassword(Magazzino magazzino, Carrello carrello) {
         String password;
         String risposta;
         boolean continua = true;
@@ -461,13 +550,21 @@ public class MenuComandi {
                 menuAdmin(magazzino, carrello);
                 break;
             } else {
-                System.out.println("Password errata");
+                try {
+                    throw new Exception("Password errata");
+                } catch (Exception e) {
+                    System.out.println("Errore: " + e.getMessage());
+                }
                 while (true) {
                     risposta = leggiStringaNonVuota("Vuoi uscire si / no");
                     if (risposta.equalsIgnoreCase("si") || risposta.equalsIgnoreCase("no")) {
                         break;
                     } else {
-                        System.out.println("Risposta non valida. Inserisci 'si' o 'no'.");
+                        try {
+                            throw new Exception("Risposta non valida. Inserisci 'si' o 'no'.");
+                        } catch (Exception e) {
+                            System.out.println("Errore: " + e.getMessage());
+                        }
                     }
                 }
                 if (risposta.equalsIgnoreCase("si")) {
@@ -477,7 +574,7 @@ public class MenuComandi {
         }
     }
 
-    public TipoDispositivo impostaDispositivo() throws Exception {
+    public TipoDispositivo impostaDispositivo() {
         Scanner scanner = new Scanner(System.in);
         TipoDispositivo tipoDispositivo = null;
         System.out.println("Inserisci il tipo di dispositivo (1 per Smartphone, 2 per Tablet, 3 per Notebook):");
